@@ -1,13 +1,18 @@
 @charset "UTF-8";
 
-// 2. Abstracts and variables
+// 1. Abstracts and variables
 @import 'abstracts/all';
 
-// 3. All the basic UI-Kit
+// 2. All the basic UI-Kit
 @import 'ui-kit/all';
 
-// 4. Structure pages
+// 3. Structure pages
 @import 'structures/all';
 
-// 5. Font Awesome 6 Pro
+// 4. Font Awesome 6 Pro
 @import 'font-awesome/all';
+
+// 5. Tailwind CSS
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';

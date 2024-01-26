@@ -20,6 +20,14 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
+    "paths": {
+      "@app/*": ["./src/app/*"],
+      "@environments/*": ["./src/environments/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@interfaces/*": ["./src/shared/interfaces/*"],
+
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
