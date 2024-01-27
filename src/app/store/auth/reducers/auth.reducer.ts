@@ -1,29 +1,29 @@
 import { createReducer, on } from "@ngrx/store";
 import { EntityDataState } from "@shared/interfaces/store/common/EntityDataState";
 import { User } from "@shared/interfaces/user/User";
-import { login, onLoginError, onLoginSuccess } from "../actions/user.actions";
+import { login, onLoginError, onLoginSuccess } from "../actions/auth.actions";
 
-export const initialUserState: EntityDataState<User> = {}
+export const initialAuthState: EntityDataState<User> = {}
 
-export const userReducer = createReducer<EntityDataState<User>>(
-  { ...initialUserState },
+export const authReducer = createReducer<EntityDataState<User>>(
+  { ...initialAuthState },
   on(login, (state) => {
     return {
       ...state,
-      token: '',
       error: '',
+      entity: undefined,
       loading: true,
     }
   }),
   on(onLoginSuccess, (state, {userData}) => {
     return {
       ...state,
-      ...userData,
+      entity: userData,
       loading: false,
       error: ''
     }
   }),
   on(onLoginError, (state, action) => {
-    return initialUserState
+    return initialAuthState
   })
 )

@@ -3,8 +3,8 @@ import { LoginRequestBody } from "@interfaces/backend/login/LoginRequest";
 import { LoginResponseBody } from "@shared/interfaces/backend/login/LoginResponse";
 import { User } from "@shared/interfaces/user/User";
 
-const featureName = 'User';
-const featureModule = 'Auth';
+const featureName = 'Auth';
+const featureModule = 'User';
 
 export const login = createAction(
   `[${featureName}] [${featureModule}]: Login`,

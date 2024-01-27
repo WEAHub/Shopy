@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { UserStoreModule } from "./user/user-store.module";
+import { AuthStoreModule } from "./auth/auth-store.module";
 
 export const featureStores = [
-  UserStoreModule,
+  AuthStoreModule,
 ]
 
 @NgModule({

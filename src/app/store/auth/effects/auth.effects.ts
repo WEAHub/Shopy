@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { login, onLoginError, onLoginSuccess } from "../actions/user.actions";
+import { login, onLoginError, onLoginSuccess } from "../actions/auth.actions";
 import { catchError, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { AuthService } from "../../../../shared/services/auth/auth.service";
 import { UserService } from "@shared/services/user.service";
@@ -8,7 +8,7 @@ import { decodeToken } from "@shared/utils/token.util";
 
 
 @Injectable()
-export class UserEffects {
+export class AuthEffects {
 
   constructor(
     private actions$: Actions,
@@ -24,9 +24,7 @@ export class UserEffects {
           this.authService.login(loginData)
             .pipe(
               switchMap(response => {
-                const token = decodeToken(response.token)
-                const userId = token.sub;
-                
+                const { sub: userId } = decodeToken(response.token)
                 return this.userService.getUser(userId)
                   .pipe(
                     map(user => ({
