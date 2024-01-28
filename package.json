@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:dev": "set \"NG_APP_ENV=dev\" && npm start",
+    "start:dev": "npm start",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -14,6 +14,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.1.0",
+    "@angular/cdk": "^17.1.1",
     "@angular/common": "^17.1.0",
     "@angular/compiler": "^17.1.0",
     "@angular/core": "^17.1.0",
@@ -24,6 +25,7 @@
     "@angular/router": "^17.1.0",
     "@angular/ssr": "^17.1.1",
     "@ngrx/effects": "^17.1.0",
+    "@ngrx/signals": "^17.1.0",
     "@ngrx/store": "^17.1.0",
     "@ngrx/store-devtools": "^17.1.0",
     "express": "^4.18.2",
@@ -41,6 +43,7 @@
     "@angular-eslint/template-parser": "17.2.1",
     "@angular/cli": "^17.1.1",
     "@angular/compiler-cli": "^17.1.0",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",

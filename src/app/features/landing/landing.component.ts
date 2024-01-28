@@ -3,6 +3,7 @@ import { LandingRoutingModule } from './landing.routes';
 
 import { AuthFacade } from '@app/store/auth';
 import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
+import { LandingFeaturedComponent } from './components/landing-featured/landing-featured.component';
 
 
 @Component({
@@ -11,7 +12,8 @@ import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',
   imports: [
-    LandingRoutingModule
+    LandingRoutingModule,
+    LandingFeaturedComponent
   ]
 })
 export class LandingComponent implements OnInit {
@@ -24,7 +26,7 @@ export class LandingComponent implements OnInit {
  
     const loginBody: LoginRequestBody = {
       username: 'mor_2314',
-      password: '83r5^'
+      password: '83r5^_'
     }
 
     this.authFacade.login(loginBody)

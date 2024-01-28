@@ -1,0 +1,21 @@
+<div class="landing-title">
+  <span>Featured products</span>
+</div>
+
+<div class="landing-featured">
+  @if(!store.loading()) {
+
+    @for (product of store.products(); track product.id) {
+      <app-landing-featured-product [product]="product"/>
+    } 
+    @empty {
+      <h1>No products...</h1>
+    }
+  
+  }
+  @else {
+    <i class="lni lni-spinner-solid animate-spin"></i>
+  }
+</div>
+
+

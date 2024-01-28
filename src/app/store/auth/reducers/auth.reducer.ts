@@ -10,7 +10,7 @@ export const authReducer = createReducer<EntityDataState<User>>(
   on(login, (state) => {
     return {
       ...state,
-      error: '',
+      error: null,
       entity: undefined,
       loading: true,
     }
@@ -20,13 +20,14 @@ export const authReducer = createReducer<EntityDataState<User>>(
       ...state,
       entity: userData,
       loading: false,
-      error: ''
+      error: null,
     }
   }),
   on(onLoginError, (state, action) => {
     return {
       ...initialAuthState,
-      error: action.error
+      error: action.error,
+      entity: undefined
     }
   })
 )

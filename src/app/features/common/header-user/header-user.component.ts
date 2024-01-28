@@ -2,12 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AuthFacade } from '@app/store/auth';
 import { User } from '@shared/interfaces/user/User';
+import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { Observable } from 'rxjs';
+import { HeaderUserButtonComponent } from '../header-user-button/header-user-button.component';
 
 @Component({
   selector: 'app-header-user',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    PrimeNGModule,
+    HeaderUserButtonComponent
+  ],
   templateUrl: './header-user.component.html',
   styleUrl: './header-user.component.scss'
 })

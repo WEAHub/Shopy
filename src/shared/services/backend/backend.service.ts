@@ -18,7 +18,7 @@ export class BackendService {
     if(queryParamsLen) {
       const queryParams = Object.entries(params)
         .map(pair => pair.map(encodeURIComponent).join('='))
-        .join('=');
+        .join('&');
       
       endPoint += `?${queryParams}`
     }

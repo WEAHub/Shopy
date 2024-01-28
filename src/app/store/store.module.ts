@@ -4,9 +4,11 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { AuthStoreModule } from "./auth/auth-store.module";
+import { categoriesStoreModule } from './categories/categories-store.module';
 
 export const featureStores = [
   AuthStoreModule,
+  categoriesStoreModule
 ]
 
 @NgModule({

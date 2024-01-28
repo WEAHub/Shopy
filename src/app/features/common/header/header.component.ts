@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderUserComponent } from '../header-user/header-user.component';
+import { HeaderCategoriesComponent } from '../header-categories/header-categories.component';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,8 @@ import { HeaderUserComponent } from '../header-user/header-user.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   imports: [
-    HeaderUserComponent
+    HeaderUserComponent,
+    HeaderCategoriesComponent
   ]
 })
 export class HeaderComponent {
