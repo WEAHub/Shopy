@@ -1,22 +1,37 @@
 import { Injectable } from "@angular/core";
-import { LoginRequestBody } from "@interfaces/backend/login/LoginRequest";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { login } from '../actions/auth.actions'
-import { getUser, isAuthenticated } from "../selectors/auth.selectors";
+
+// Interfaces
+import { LoginRequestBody } from "@interfaces/backend/login/LoginRequest";
 import { User } from "@shared/interfaces/user/User";
+
+// Actions
+import { login } from '../actions/auth.actions'
+
+// Selectors
+import { getError, getUser, isAuthenticated, isLoading } from "../selectors/auth.selectors";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable()
 export class AuthFacade {
 
   constructor(private store: Store) {}
 
-  public isAuthenticated(): Observable<boolean> {
+  public isAuthenticated$(): Observable<boolean> {
     return this.store.select(isAuthenticated)
   }
 
-  public getUser(): Observable<User | undefined> {
-    return this.store.select(getUser);
+  public isLoading$(): Observable<boolean> {
+    return this.store.select(isLoading)
+  }
+
+  public getUser$(): Observable<User> {
+    return this.store.select(getUser)
+  }
+
+  public getError$(): Observable<HttpErrorResponse> {
+    return this.store.select(getError)
   }
 
   public login(loginData: LoginRequestBody): void {

@@ -1,4 +1,10 @@
-<div class="header-user"> 
-  <span>Welcome</span>
-  <span>test</span>
+<div class="header-user">
+  <i class="lni lni-spray"></i>
+  @if (isAuth$ | async) {
+    <span>Welcome</span>
+    <span>{{ (user$ | async)?.name?.firstname }}</span>
+  }
+  @else {
+    <span>Login</span>
+  }
 </div>

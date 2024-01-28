@@ -8,15 +8,20 @@ export const isAuthenticated = createSelector(
 
 export const isLoading = createSelector(
   getAuthFeature,
-  state => state.loading
+  state => state.loading!
 )
 
 export const getUser = createSelector(
   getAuthFeature,
-  state => state.entity
+  state => state.entity!
 )
 
 export const getToken = createSelector(
   getAuthFeature,
   state => state.entity?.token
+)
+
+export const getError = createSelector(
+  getAuthFeature,
+  state => state.error
 )

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LandingRoutingModule } from './landing.routes';
+
 import { AuthFacade } from '@app/store/auth';
-import { LoginRequestBody } from '@shared/interfaces/backend/login/LoginRequest';
-/*
-import { UserFacade } from '@app/store/user/facades/user.facade';
 import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
-*/
+
 
 @Component({
   selector: 'app-landing',
@@ -26,7 +24,7 @@ export class LandingComponent implements OnInit {
  
     const loginBody: LoginRequestBody = {
       username: 'mor_2314',
-      password: '83r5^_'
+      password: '83r5^'
     }
 
     this.authFacade.login(loginBody)

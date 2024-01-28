@@ -24,6 +24,9 @@ export const authReducer = createReducer<EntityDataState<User>>(
     }
   }),
   on(onLoginError, (state, action) => {
-    return initialAuthState
+    return {
+      ...initialAuthState,
+      error: action.error
+    }
   })
 )
