@@ -63,7 +63,7 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "dev": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -83,11 +83,11 @@
             "production": {
               "buildTarget": "Shopy-Front:build:production"
             },
-            "development": {
-              "buildTarget": "Shopy-Front:build:development"
+            "dev": {
+              "buildTarget": "Shopy-Front:build:dev"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "dev"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

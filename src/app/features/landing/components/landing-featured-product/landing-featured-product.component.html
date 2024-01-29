@@ -1,1 +1,46 @@
-<p>landing-featured-product works!</p>
+<div class="lf-product">
+  <img class="lf-product__image" [src]="product.image">
+  <div class="grid">
+
+    <div class="lf-product__title truncate mb-2">
+      <span>{{ product.title }}</span>
+    </div>
+
+    <div class="flex gap-3">
+      <span class="lf-product__price">{{ product.modifiers.finalPrice }}€</span>
+      <span class="lf-product__last-price">{{ product.price }}€</span>
+      <span class="lf-product__dicount-percent">{{ product.modifiers.discountPercent }}%</span>
+    </div>
+
+    <div class="lf-product__stars flex gap-2 items-center">
+      <app-stars [filledStars]="product.modifiers.stars"></app-stars>
+      <span class="text-sm text-[color:--gray-500]">
+        {{ product.modifiers.stockTotal - product.modifiers.stock }} vendidos
+      </span>
+    </div>
+
+    <div class="lf-product__stock flex gap-2 items-center mb-2">
+
+      <div class="flex-none w-32">
+        <p-progressBar
+          [styleClass]="'h-4'"
+          [showValue]="false" 
+          [value]="product.modifiers.stockPercent"
+        ></p-progressBar>
+      </div>
+
+      <span class="text-sm text-[color:--gray-500]">
+        Quedan {{ product.modifiers.stock }}
+      </span>
+
+    </div>
+
+    <div class="flex items-center gap-2">
+      <img class="lf-product__days-image" src="assets/images/choice.webp">
+      <span class="text-sm text-[color:--gray-500]">
+        Entrega en {{ product.modifiers.estimatedDays }} días
+      </span>
+    </div>
+
+  </div>
+</div>

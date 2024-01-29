@@ -1,0 +1,51 @@
+.lf-product {
+
+  max-width: 20rem;
+  max-height: 40rem;
+  height: 100%;
+  border: 1px solid rgb(var(--border-gray));
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  display: grid;
+  row-gap: 1rem;
+  position: relative;
+  cursor: pointer;
+
+  &__image {
+    height: 20rem;
+    justify-self: center;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    max-width: 16rem;
+    font-weight: 500;
+  }
+
+  &__price {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  &__last-price {
+    font-size: 1.3rem;  
+    color: gray;
+    text-decoration: line-through;
+  }
+
+  &__dicount-percent {
+    font-size: 1.4rem;
+    padding: .3rem;
+    background: rgba(255, 0, 0, 0.137);
+    color: red;
+    font-weight: 600;
+    border-radius: .5rem;
+    max-height: 2.7rem;
+  }
+
+  &__days-image {
+    max-width: 6rem;
+    max-height: 2rem;
+  }
+
+}

@@ -1,0 +1,6 @@
+@for(star of [].constructor(maxStars); track star; let index = $index) {
+  <i 
+    class="lni lni-star-fill text-lg"
+    [ngClass]="index <= filledStars ? 'text-[color:rgb(var(--star))]' : 'text-[color:--gray-300]'"
+  ></i>
+}

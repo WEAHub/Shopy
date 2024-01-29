@@ -6,6 +6,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
 import { ProductsParameters, ProductsSorts } from '@shared/interfaces/backend/product/ProductsRequest';
 import { tapResponse } from '@ngrx/operators';
+import { randomizeProduct } from '@shared/utils/productRandomizer';
 
 interface LandingFeaturedState {
   products: Products
@@ -36,6 +37,7 @@ export const LandingFeaturedStore = signalStore(
             .pipe(
               tapResponse({
                 next: (products) => {
+                  products = products.map(randomizeProduct);
                   patchState(store, { products, loading: false })
                 },
                 error: () => {
