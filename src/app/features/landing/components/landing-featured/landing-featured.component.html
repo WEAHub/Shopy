@@ -2,17 +2,17 @@
   <span>Featured products</span>
 </div>
 
-<div class="flex justify-center">
-  <div class="landing-featured gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-    @if(!store.loading()) {
+<div class="flex justify-center" *ngVar="(products | async) as _products">
+  <div class="landing-featured gap-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+    @if(!(loading | async)) {
   
-      @for (product of store.products(); track product.id) {
-        <app-landing-featured-product [product]="product"/>
+      @for (product of _products; track product.id) {
+        <app-product-preview [product]="product"/>
       } 
       @empty {
         <h1>No products...</h1>
       }
-    
+
     }
     @else {
       <i class="lni lni-spinner-solid animate-spin"></i>

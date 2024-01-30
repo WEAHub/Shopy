@@ -1,0 +1,26 @@
+<div class="search-bar">
+
+  <form [formGroup]="searchForm" >
+    <div class="p-inputgroup w-full">
+      <span class="search-bar__group p-inputgroup-addon">
+        <i class="pi pi-search"></i>
+      </span>
+
+      <p-autoComplete 
+        [suggestions]="filteredProducts" 
+        (completeMethod)="filterProducts($event)"
+        (onSelect)="selectProduct($event)"
+        styleClass="search-bar__input"
+        formControlName="search" 
+        placeholder="Mens casual..."
+      >
+        <ng-template let-product pTemplate="item">
+          <app-search-result [product]="product"></app-search-result>
+        </ng-template>
+      </p-autoComplete>
+
+    </div>
+  </form>
+
+
+</div>

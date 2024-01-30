@@ -1,6 +1,6 @@
 import { Product, ProductModifiers } from "@shared/interfaces/products/Product";
 
-export function randomizeProduct(product: Product) {
+export function randomizeProduct(product: Product, forceChoice: boolean = false) {
 
   const discountPercent: number = 100 - (100 - rndNumberRange(50, 100));
   const discountPrice: number = getPercentagePrice(
@@ -14,9 +14,9 @@ export function randomizeProduct(product: Product) {
   const stock: number = rndNumberRange(0, stockTotal)
   const stockPercent: number = percentage(stock, stockTotal)
 
-  const stars: number = rndNumberRange(0, 5);
-  
+  const stars: number = rndNumberRange(0, 5);  
   const estimatedDays = rndNumberRange(3, 10)
+  const hasChoice = forceChoice || Math.random() < 0.4
 
   const modifiers: ProductModifiers = {
     discountPercent,
@@ -26,7 +26,8 @@ export function randomizeProduct(product: Product) {
     stockPercent,
     stock,
     stars,
-    estimatedDays
+    estimatedDays,
+    hasChoice
   }
 
   return {

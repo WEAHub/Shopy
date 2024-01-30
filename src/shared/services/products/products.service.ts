@@ -16,7 +16,7 @@ export class ProductsService {
     private httpClient: HttpClient
   ) {}
 
-  public getProducts(options: ProductsParameters): Observable<ProductsResponseBody> {
+  public getProducts(options: Partial<ProductsParameters> = {}): Observable<ProductsResponseBody> {
     const endpoint = this.backendService.generateUrl(
       ProductsEndpoints.GET_PRODUCTS, 
       options

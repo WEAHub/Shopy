@@ -2,28 +2,37 @@
   @if (isAuth$ | async) {
 
     <app-header-user-button>
-      <i class="lni lni-cart text-4xl" pBadge value="1"></i>
+      <i class="lni lni-cart text-3xl" pBadge value="1"></i>
     </app-header-user-button>
-
     
     <app-header-user-button>
-      <i class="lni lni-user text-4xl"></i>
+
+      <p-avatar 
+        [label]="(user$ | async)?.name?.firstname! | getFirstLetter | uppercase" 
+        [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
+        size="large"
+      ></p-avatar>
+
       <div class="flex flex-col">
         <span class="text-sm font-medium">Welcome</span>
         <span class="text-base font-semibold capitalize">
           {{ (user$ | async)?.name?.firstname }}
         </span>
       </div>
+
     </app-header-user-button>
 
   }
   @else {
     <app-header-user-button>
+
       <i class="lni lni-user text-4xl"></i>
+
       <div class="flex flex-col">
         <span class="text-sm font-medium">Hello, sign in</span>
         <span class="text-base font-semibold">Account</span>
       </div>
+
     </app-header-user-button>
   }
 

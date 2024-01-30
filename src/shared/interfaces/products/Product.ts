@@ -25,4 +25,5 @@ export interface ProductModifiers {
   stockPercent: number
   stars: number
   estimatedDays: number
+  hasChoice: boolean
 }

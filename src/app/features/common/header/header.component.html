@@ -3,14 +3,20 @@
     
     <div class="header">
 
+      <div 
+        class="cursor-pointer flex gap-8 items-center"
+        [routerLink]="'/'"
+      >
+        <img class="header__logo" src="assets/images/logo-no-background.svg"/>
+        
+        <div class="hidden md:block">
+          <app-search-bar></app-search-bar>
+        </div>
 
-      <div class="header__logo">
-        <img src="assets/images/logo-no-background.svg"/>
       </div>    
 
-      <div class="header__user">
-        <app-header-user></app-header-user>
-      </div>
+
+      <app-header-user></app-header-user>
       
     </div>
 

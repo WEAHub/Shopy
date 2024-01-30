@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LandingRoutingModule } from './landing.routes';
 
 import { AuthFacade } from '@app/store/auth';
 import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
@@ -12,7 +11,6 @@ import { LandingFeaturedComponent } from './components/landing-featured/landing-
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',
   imports: [
-    LandingRoutingModule,
     LandingFeaturedComponent
   ]
 })

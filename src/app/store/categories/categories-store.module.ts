@@ -20,4 +20,4 @@ import { CategoriesServiceModule } from '@shared/services/categories/categories.
     EffectsModule.forFeature(categoriesFeatureEffects)
   ]
 })
-export class categoriesStoreModule { }
+export class CategoriesStoreModule { }

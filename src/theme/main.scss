@@ -12,7 +12,16 @@
 // 4. Lineicons
 @import 'lineicons/icons';
 
-// 5. Tailwind CSS
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+// 5. Primeicons
+@import "primeicons/primeicons.css";
+
+// 6. Tailwind CSS
+@import 'tailwindcss/base' layer(tailwindcss);
+@import 'tailwindcss/components' ;
+@import 'tailwindcss/utilities' ;
+
+// 7. Red Zoom Angular
+@import 'ngx-red-zoom/styles/base.scss';
+@import 'ngx-red-zoom/styles/style-overlay.scss';
+@import 'ngx-red-zoom/styles/mixins/common.scss';
+@include red-zoom-max-scale-factor(1, 'lens-image');

@@ -5,6 +5,7 @@ import { User } from '@shared/interfaces/user/User';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { Observable } from 'rxjs';
 import { HeaderUserButtonComponent } from '../header-user-button/header-user-button.component';
+import { PipesModule } from '@shared/pipes';
 
 @Component({
   selector: 'app-header-user',
@@ -12,7 +13,8 @@ import { HeaderUserButtonComponent } from '../header-user-button/header-user-but
   imports: [
     CommonModule,
     PrimeNGModule,
-    HeaderUserButtonComponent
+    HeaderUserButtonComponent,
+    PipesModule
   ],
   templateUrl: './header-user.component.html',
   styleUrl: './header-user.component.scss'
