@@ -18,7 +18,7 @@ export const categoryReducer = createReducer<EntityDataState<Products>>(
       ...state,
       loading: false,
       entity: [],
-      error: null,
+      error: undefined,
     };
   }),
   on(onGetProducts, (state, action) => {

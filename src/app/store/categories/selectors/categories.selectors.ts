@@ -13,5 +13,5 @@ export const getCategories = createSelector(
 
 export const getError = createSelector(
   getCategoriesFeature,
-  state => state.error
+  state => state.error!
 );

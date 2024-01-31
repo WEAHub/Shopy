@@ -13,7 +13,7 @@ export const getProducts = createSelector(
 
 export const getError = createSelector(
   getProductsFeature,
-  state => state.error
+  state => state.error!
 );
 
 export const getProductById = (id: number) =>

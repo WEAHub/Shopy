@@ -18,4 +18,4 @@ export const getToken = createSelector(
   state => state.entity?.token
 );
 
-export const getError = createSelector(getAuthFeature, state => state.error);
+export const getError = createSelector(getAuthFeature, state => state.error!);
