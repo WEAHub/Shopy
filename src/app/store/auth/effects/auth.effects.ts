@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { login, onLoginError, onLoginSuccess } from "../actions/auth.actions";
 import { catchError, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { AuthService } from "../../../../shared/services/auth/auth.service";
-import { UserService } from "@shared/services/user.service";
+import { UserService } from "@shared/services/user/user.service";
 import { decodeToken } from "@shared/utils/token.util";
 
 

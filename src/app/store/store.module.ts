@@ -6,11 +6,13 @@ import { EffectsModule } from "@ngrx/effects";
 import { AuthStoreModule } from "./auth/auth-store.module";
 import { CategoriesStoreModule } from './categories/categories-store.module';
 import { ProductsStoreModule } from './products/products-store.module';
+import { CartStoreModule } from './cart/cart-store.module';
 
 export const featureStores = [
   AuthStoreModule,
   CategoriesStoreModule,
-  ProductsStoreModule
+  ProductsStoreModule,
+  CartStoreModule
 ]
 
 @NgModule({

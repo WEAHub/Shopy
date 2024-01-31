@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendService } from './backend/backend.service';
+import { BackendService } from '../backend/backend.service';
 import { AllUsersResponse, UserResponse } from '@shared/interfaces/backend/users/UsersResponse';
 import { UsersEndpoints } from '@shared/interfaces/backend/users';
 import { UsersParameters } from '@shared/interfaces/backend/users/UsersRequest';

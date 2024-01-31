@@ -5,8 +5,9 @@ export const environment = {
   apiURL: 'https://fakestoreapi.com',
   apiEndpoints: {
     AUTH: 'auth/login',
-    GET_USERS: 'users/',
-    GET_CATEGORIES: 'products/categories/',
-    GET_PRODUCTS: 'products/'
+    USERS: 'users/',
+    CATEGORIES: 'products/categories/',
+    PRODUCTS: 'products/',
+    CARTS: 'carts/'
   }
 };
