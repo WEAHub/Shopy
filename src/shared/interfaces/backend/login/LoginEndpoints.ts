@@ -1,3 +1,3 @@
 export enum LoginEndpoints {
-  LOGIN = 'AUTH'
+  LOGIN = 'AUTH',
 }

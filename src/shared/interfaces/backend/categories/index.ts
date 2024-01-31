@@ -1,1 +1,1 @@
-export * from './CategoriesEndpoints'
+export * from './CategoriesEndpoints';

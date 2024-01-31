@@ -1,1 +1,1 @@
-export * from './UsersEndpoints'
+export * from './UsersEndpoints';

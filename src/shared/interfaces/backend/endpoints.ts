@@ -1,3 +1,3 @@
-export interface Endpoints  {
-  [key: string]: string
+export interface Endpoints {
+  [key: string]: string;
 }

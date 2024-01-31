@@ -1,9 +1,5 @@
-import { CategoriesFacade } from "./categories.facade";
+import { CategoriesFacade } from './categories.facade';
 
-export const categoriesFeatureFacades = [
-  CategoriesFacade
-];
+export const categoriesFeatureFacades = [CategoriesFacade];
 
-export {
-  CategoriesFacade
-}
+export { CategoriesFacade };

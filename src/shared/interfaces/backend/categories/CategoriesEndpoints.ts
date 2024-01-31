@@ -1,3 +1,3 @@
 export enum CategoriesEndpoints {
-  GET_CATEGORIES = 'CATEGORIES'
+  GET_CATEGORIES = 'CATEGORIES',
 }

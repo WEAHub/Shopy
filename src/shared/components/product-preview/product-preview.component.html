@@ -1,8 +1,9 @@
 <div
   (click)="goToProduct()"
+  (keydown.enter)="goToProduct()"
   class="pv-product"
 >
-  <img class="pv-product__image" [src]="product.image">
+  <img class="pv-product__image" [src]="product.image" alt="Product image">
   <div class="grid">
 
     <div class="pv-product__title truncate mb-2">

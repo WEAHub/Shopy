@@ -5,5 +5,5 @@ export interface CartsParameters {
 
 export enum CartsSorts {
   DESC = 'desc',
-  ASC = 'asc'
+  ASC = 'asc',
 }

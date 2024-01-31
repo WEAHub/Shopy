@@ -1,5 +1,10 @@
-import { AutoComplete, AutoCompleteCompleteEvent, AutoCompleteSelectEvent } from 'primeng/autocomplete';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Observable, lastValueFrom, map } from 'rxjs';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -16,17 +21,17 @@ import { ProductsFacade } from '@app/store/products';
     PrimeNGModule,
     FormsModule,
     ReactiveFormsModule,
-    SearchResultComponent
+    SearchResultComponent,
   ],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss'
+  styleUrl: './search-bar.component.scss',
 })
 export class SearchBarComponent {
   @ViewChild('autocomplete') autocomplete!: AutoComplete;
-  
-  filteredProducts!: Products
+
+  filteredProducts!: Products;
   searchForm!: FormGroup;
-  products$: Observable<Products> = this.productsFacade.getProducts$()
+  products$: Observable<Products> = this.productsFacade.getProducts$();
 
   constructor(
     private fb: FormBuilder,
@@ -38,14 +43,15 @@ export class SearchBarComponent {
 
   private prepareForm(): void {
     this.searchForm = this.fb.group({
-      search: [null]
-    })
+      search: [null],
+    });
   }
 
   public async filterProducts(event: AutoCompleteCompleteEvent): Promise<void> {
-    const query  = event.query.toLowerCase()
+    const query = event.query.toLowerCase();
     this.filteredProducts = await lastValueFrom(
-      this.productsFacade.findProductsByWord$(query)
+      this.productsFacade
+        .findProductsByWord$(query)
         .pipe(map(this.truncateNames))
     );
   }
@@ -53,16 +59,16 @@ export class SearchBarComponent {
   public truncateNames(products: Products): Products {
     return products.map(p => ({
       ...p,
-      title: p.title.substring(0, 50)
-    }))
+      title: p.title.substring(0, 50),
+    }));
   }
 
-  public selectProduct(event: AutoCompleteSelectEvent): void {
+  public selectProduct(): void {
     this.onSearchSubmit();
   }
 
   public clearInput(): void {
-    this.searchForm.get('search')?.setValue(null)
+    this.searchForm.get('search')?.setValue(null);
   }
 
   public onSearchSubmit(): void {
@@ -72,8 +78,7 @@ export class SearchBarComponent {
     this.autocomplete.hide();
     this.searchForm.reset();
 
-    console.log({id})
-    this.router.navigateByUrl(`/products/${id}`)
+    console.log({ id });
+    this.router.navigateByUrl(`/products/${id}`);
   }
-
 }

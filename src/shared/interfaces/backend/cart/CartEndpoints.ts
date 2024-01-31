@@ -1,3 +1,3 @@
 export enum CartsEndpoints {
-  CARTS = 'CARTS'
+  CARTS = 'CARTS',
 }

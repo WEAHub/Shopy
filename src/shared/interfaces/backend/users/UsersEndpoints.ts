@@ -1,3 +1,3 @@
 export enum UsersEndpoints {
-  GET_USERS = 'USERS'
+  GET_USERS = 'USERS',
 }

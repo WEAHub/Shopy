@@ -6,8 +6,8 @@ import { Product } from '@shared/interfaces/products/Product';
   standalone: true,
   imports: [],
   templateUrl: './search-result.component.html',
-  styleUrl: './search-result.component.scss'
+  styleUrl: './search-result.component.scss',
 })
 export class SearchResultComponent {
- @Input() product!: Product;
+  @Input() product!: Product;
 }

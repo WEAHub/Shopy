@@ -6,17 +6,18 @@ import { CategoriesResponseBody } from '@shared/interfaces/backend/categories/Ca
 import { CategoriesEndpoints } from '@shared/interfaces/backend/categories';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoriesService {
-
   constructor(
     private backendService: BackendService,
     private httpClient: HttpClient
   ) {}
 
   public getCategories(): Observable<CategoriesResponseBody> {
-    const endpoint = this.backendService.generateUrl(CategoriesEndpoints.GET_CATEGORIES)
+    const endpoint = this.backendService.generateUrl(
+      CategoriesEndpoints.GET_CATEGORIES
+    );
     return this.httpClient.get<CategoriesResponseBody>(endpoint);
   }
 }

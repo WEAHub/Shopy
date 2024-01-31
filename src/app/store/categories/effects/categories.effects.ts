@@ -1,10 +1,14 @@
-import { Injectable } from "@angular/core";
-import { Actions, OnInitEffects, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap, tap } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, of, switchMap } from 'rxjs';
 
-import { onGetCategories, onGetCategoriesError, onInitCategories } from "../actions/categories.actions";
-import { Action } from "@ngrx/store";
-import { CategoriesService } from "@shared/services/categories/categories.service";
+import {
+  onGetCategories,
+  onGetCategoriesError,
+  onInitCategories,
+} from '../actions/categories.actions';
+import { Action } from '@ngrx/store';
+import { CategoriesService } from '@shared/services/categories/categories.service';
 
 @Injectable()
 export class CategoriesEffects implements OnInitEffects {
@@ -17,16 +21,15 @@ export class CategoriesEffects implements OnInitEffects {
     return onInitCategories();
   }
 
-  init$ = createEffect(() => 
+  init$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onInitCategories),
-      switchMap(() => this.categoriesService.getCategories()
-        .pipe(
+      switchMap(() =>
+        this.categoriesService.getCategories().pipe(
           map(categories => onGetCategories({ categories })),
-          catchError(error => of(onGetCategoriesError({ error }))),
+          catchError(error => of(onGetCategoriesError({ error })))
         )
       )
     )
-  )
-
+  );
 }

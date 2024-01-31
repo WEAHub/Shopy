@@ -1,4 +1,4 @@
-import { Cart } from "@shared/interfaces/carts/Cart";
+import { Cart } from '@shared/interfaces/carts/Cart';
 
-export type CartsResponse = Cart[]
-export type CartResponse = Cart
+export type CartsResponse = Cart[];
+export type CartResponse = Cart;

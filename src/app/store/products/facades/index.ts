@@ -1,9 +1,5 @@
-import { ProductsFacade } from "./products.facade";
+import { ProductsFacade } from './products.facade';
 
-export const productsFeatureFacades = [
-  ProductsFacade
-];
+export const productsFeatureFacades = [ProductsFacade];
 
-export {
-  ProductsFacade
-}
+export { ProductsFacade };

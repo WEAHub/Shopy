@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderUserComponent } from '../header-user/header-user.component';
 import { HeaderCategoriesComponent } from '../header-categories/header-categories.component';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from '@shared/components/search-bar/search-bar.component';
 
@@ -14,9 +13,7 @@ import { SearchBarComponent } from '@shared/components/search-bar/search-bar.com
     RouterModule,
     HeaderUserComponent,
     HeaderCategoriesComponent,
-    SearchBarComponent
-  ]
+    SearchBarComponent,
+  ],
 })
-export class HeaderComponent {
-
-}
+export class HeaderComponent {}

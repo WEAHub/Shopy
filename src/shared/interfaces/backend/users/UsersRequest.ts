@@ -5,5 +5,5 @@ export interface UsersParameters {
 
 export enum UsersSorts {
   DESC = 'desc',
-  ASC = 'asc'
+  ASC = 'asc',
 }

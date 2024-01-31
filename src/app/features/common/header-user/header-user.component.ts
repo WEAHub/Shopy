@@ -14,17 +14,15 @@ import { PipesModule } from '@shared/pipes';
     CommonModule,
     PrimeNGModule,
     HeaderUserButtonComponent,
-    PipesModule
+    PipesModule,
   ],
   templateUrl: './header-user.component.html',
-  styleUrl: './header-user.component.scss'
+  styleUrl: './header-user.component.scss',
 })
 export class HeaderUserComponent {
-
-  isAuth$: Observable<boolean> = this.authFacade.isAuthenticated$()
-  isLoading$: Observable<boolean> = this.authFacade.isLoading$()
-  user$: Observable<User> = this.authFacade.getUser$()
+  isAuth$: Observable<boolean> = this.authFacade.isAuthenticated$();
+  isLoading$: Observable<boolean> = this.authFacade.isLoading$();
+  user$: Observable<User> = this.authFacade.getUser$();
 
   constructor(private authFacade: AuthFacade) {}
-
 }

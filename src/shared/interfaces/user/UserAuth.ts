@@ -3,7 +3,7 @@ export interface UserAuth {
 }
 
 export interface Token {
-  sub: number
+  sub: number;
   user: string;
-  iat: number
+  iat: number;
 }

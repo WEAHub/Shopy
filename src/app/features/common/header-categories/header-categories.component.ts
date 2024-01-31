@@ -8,15 +8,11 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [],
   templateUrl: './header-categories.component.html',
-  styleUrl: './header-categories.component.scss'
+  styleUrl: './header-categories.component.scss',
 })
 export class HeaderCategoriesComponent {
+  isLoading$: Observable<boolean> = this.categoriesFacade.isLoading$();
+  categories$: Observable<Categories> = this.categoriesFacade.getCategories$();
 
-  isLoading$: Observable<boolean> = this.categoriesFacade.isLoading$()
-  categories$: Observable<Categories> = this.categoriesFacade.getCategories$()
-
-  constructor(
-    private categoriesFacade: CategoriesFacade
-  ) {}
-
+  constructor(private categoriesFacade: CategoriesFacade) {}
 }

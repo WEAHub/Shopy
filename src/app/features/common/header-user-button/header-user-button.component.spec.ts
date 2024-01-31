@@ -8,10 +8,9 @@ describe('HeaderUserButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderUserButtonComponent]
-    })
-    .compileComponents();
-    
+      imports: [HeaderUserButtonComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(HeaderUserButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

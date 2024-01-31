@@ -8,6 +8,6 @@ export const environment = {
     USERS: 'users/',
     CATEGORIES: 'products/categories/',
     PRODUCTS: 'products/',
-    CARTS: 'carts/'
-  }
+    CARTS: 'carts/',
+  },
 };

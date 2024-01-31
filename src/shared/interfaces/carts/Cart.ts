@@ -2,7 +2,7 @@ export interface Cart {
   id: number;
   userId: number;
   date: Date;
-  products: CartProducts[]
+  products: CartProducts[];
 }
 
 export interface CartProducts {

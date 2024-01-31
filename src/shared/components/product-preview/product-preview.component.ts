@@ -7,22 +7,18 @@ import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 @Component({
   selector: 'app-product-preview',
   standalone: true,
-  imports: [
-    StarsComponent,
-    PrimeNGModule
-  ],
+  imports: [StarsComponent, PrimeNGModule],
   templateUrl: './product-preview.component.html',
-  styleUrl: './product-preview.component.scss'
+  styleUrl: './product-preview.component.scss',
 })
 export class ProductPreviewComponent {
-  @Input() product!: Product
+  @Input() product!: Product;
 
   constructor(private router: Router) {}
 
   public goToProduct(): void {
-    this.router.navigateByUrl(
-      `/products/${this.product.id}`,
-      {state: this.product}
-    )
+    this.router.navigateByUrl(`/products/${this.product.id}`, {
+      state: this.product,
+    });
   }
 }

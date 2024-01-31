@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from "@ngrx/effects";
-import { AuthStoreModule } from "./auth/auth-store.module";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthStoreModule } from './auth/auth-store.module';
 import { CategoriesStoreModule } from './categories/categories-store.module';
 import { ProductsStoreModule } from './products/products-store.module';
 import { CartStoreModule } from './cart/cart-store.module';
@@ -12,8 +12,8 @@ export const featureStores = [
   AuthStoreModule,
   CategoriesStoreModule,
   ProductsStoreModule,
-  CartStoreModule
-]
+  CartStoreModule,
+];
 
 @NgModule({
   declarations: [],
@@ -22,7 +22,7 @@ export const featureStores = [
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
-    ...featureStores
-  ]
+    ...featureStores,
+  ],
 })
-export class AppStoreModule { }
+export class AppStoreModule {}

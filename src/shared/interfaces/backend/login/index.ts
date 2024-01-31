@@ -1,1 +1,1 @@
-export * from './LoginEndpoints'
+export * from './LoginEndpoints';

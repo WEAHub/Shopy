@@ -8,10 +8,9 @@ describe('LandingFeaturedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LandingFeaturedComponent]
-    })
-    .compileComponents();
-    
+      imports: [LandingFeaturedComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LandingFeaturedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

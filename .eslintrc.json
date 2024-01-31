@@ -12,14 +12,8 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
+        "no-unsafe-optional-chaining": "off",
+        "@angular-eslint/directive-selector":  "off",
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -36,14 +30,25 @@
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility"
       ],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/interactive-supports-focus": "off",
+        "@angular-eslint/template/alt-text": "off",
+        "@angular-eslint/template/click-events-have-key-events": "off"
+      }
     },
     {
       "files": ["*.html"],
       "excludedFiles": ["*inline-template-*.component.html"],
       "extends": ["plugin:prettier/recommended"],
       "rules": {
-        "prettier/prettier": ["error", { "parser": "angular" }]
+        "prettier/prettier": 
+          [
+            "off", 
+            { 
+              "endOfLine": "auto",
+              "parser": "angular" 
+            }
+          ]
       }
     }
   ]

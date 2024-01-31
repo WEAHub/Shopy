@@ -1,3 +1,3 @@
 export enum ProductsEndpoints {
-  GET_PRODUCTS = 'PRODUCTS'
+  GET_PRODUCTS = 'PRODUCTS',
 }

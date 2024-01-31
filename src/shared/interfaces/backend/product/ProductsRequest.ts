@@ -5,5 +5,5 @@ export interface ProductsParameters {
 
 export enum ProductsSorts {
   DESC = 'desc',
-  ASC = 'asc'
+  ASC = 'asc',
 }

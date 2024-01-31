@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-import { productsFeatureKey } from "./feature-key";
-import { productsFeatureReducer } from "./reducers";
+import { productsFeatureKey } from './feature-key';
+import { productsFeatureReducer } from './reducers';
 import { productsFeatureFacades } from './facades';
 import { productsFeatureEffects } from './effects';
 import { ProductsServiceModule } from '@shared/services/products/products.service.module';
@@ -15,9 +15,9 @@ import { ProductsServiceModule } from '@shared/services/products/products.servic
   providers: [...productsFeatureFacades],
   imports: [
     CommonModule,
-    ProductsServiceModule,    
+    ProductsServiceModule,
     StoreModule.forFeature(productsFeatureKey, productsFeatureReducer),
-    EffectsModule.forFeature(productsFeatureEffects)
-  ]
+    EffectsModule.forFeature(productsFeatureEffects),
+  ],
 })
-export class ProductsStoreModule { }
+export class ProductsStoreModule {}

@@ -3,9 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { CartsService } from './carts.service';
 
 @NgModule({
-  providers: [
-    HttpClient,
-    CartsService
-  ],
+  providers: [HttpClient, CartsService],
 })
-export class CartsServiceModule { }
+export class CartsServiceModule {}

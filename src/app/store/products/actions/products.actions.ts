@@ -1,17 +1,12 @@
-import {createAction, props} from "@ngrx/store";
-import { LoginRequestBody } from "@interfaces/backend/login/LoginRequest";
-import { User } from "@shared/interfaces/user/User";
-import { HttpErrorResponse } from "@angular/common/http";
-import { Products } from "@shared/interfaces/products/Product";
+import { createAction, props } from '@ngrx/store';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Products } from '@shared/interfaces/products/Product';
 
 const featureName = 'Products';
 const featureModule = 'List';
-const featureHeader = `[${featureName}] [${featureModule}]`
+const featureHeader = `[${featureName}] [${featureModule}]`;
 
-
-export const onInitProducts = createAction(
-  `${featureHeader}: INIT`
-);
+export const onInitProducts = createAction(`${featureHeader}: INIT`);
 
 export const onGetProducts = createAction(
   `${featureHeader}: Get Products`,

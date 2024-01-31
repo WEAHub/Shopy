@@ -9,17 +9,14 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-landing-featured',
   standalone: true,
-  imports: [
-    ProductPreviewComponent, 
-    DirectivesModule, 
-    CommonModule
-  ],
+  imports: [ProductPreviewComponent, DirectivesModule, CommonModule],
   templateUrl: './landing-featured.component.html',
   styleUrl: './landing-featured.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingFeaturedComponent {
-  products: Observable<Products | undefined> = this.productsFacade.getFeaturedProducts$();
+  products: Observable<Products | undefined> =
+    this.productsFacade.getFeaturedProducts$();
   loading: Observable<boolean> = this.productsFacade.isLoading$();
   constructor(private productsFacade: ProductsFacade) {}
 }

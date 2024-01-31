@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-import { cartFeatureKey } from "./feature-key";
-import { cartFeatureReducer } from "./reducers";
+import { cartFeatureKey } from './feature-key';
+import { cartFeatureReducer } from './reducers';
 import { cartFeatureFacades } from './facades';
 import { cartFeatureEffects } from './effects';
 import { CartsServiceModule } from '@shared/services/carts/carts.service.module';
@@ -15,9 +15,9 @@ import { CartsServiceModule } from '@shared/services/carts/carts.service.module'
   providers: [...cartFeatureFacades],
   imports: [
     CommonModule,
-    CartsServiceModule,    
+    CartsServiceModule,
     StoreModule.forFeature(cartFeatureKey, cartFeatureReducer),
-    EffectsModule.forFeature(cartFeatureEffects)
-  ]
+    EffectsModule.forFeature(cartFeatureEffects),
+  ],
 })
-export class CartStoreModule { }
+export class CartStoreModule {}

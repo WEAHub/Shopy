@@ -1,9 +1,5 @@
-import { AuthFacade } from "./auth.facade";
+import { AuthFacade } from './auth.facade';
 
-export const authFeatureFacades = [
-  AuthFacade
-];
+export const authFeatureFacades = [AuthFacade];
 
-export {
-  AuthFacade
-}
+export { AuthFacade };

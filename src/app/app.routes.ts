@@ -10,14 +10,14 @@ export const routes: Routes = [
     path: 'landing',
     loadComponent: () =>
       import('./features/landing/landing.component').then(
-        (m) => m.LandingComponent
+        m => m.LandingComponent
       ),
   },
   {
     path: 'products',
     loadChildren: () =>
       import('./features/products/product.routes').then(
-        (m) => m.ProductsRoutingModule
+        m => m.ProductsRoutingModule
       ),
-  }
+  },
 ];
