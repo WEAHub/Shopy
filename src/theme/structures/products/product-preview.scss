@@ -10,10 +10,12 @@
   row-gap: 1rem;
   position: relative;
   cursor: pointer;
+  grid-template-rows: 20rem auto;
 
   &__image {
-    height: 20rem;
+    max-height: 20rem;
     justify-self: center;
+    align-self: center;
   }
 
   &__title {

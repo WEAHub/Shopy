@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@app/store/auth';
 import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
 import { LandingFeaturedComponent } from './components/landing-featured/landing-featured.component';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -21,13 +22,22 @@ export class LandingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
- 
-    const loginBody: LoginRequestBody = {
-      username: 'mor_2314',
-      password: '83r5^_'
-    }
+    
+    this.authFacade.isAuthenticated$().pipe(
+      take(1)
+    )
+    .subscribe(isAuth => {
 
-    this.authFacade.login(loginBody)
+      if(isAuth) return;
+
+      const loginBody: LoginRequestBody = {
+        username: 'mor_2314',
+        password: '83r5^_'
+      }
+  
+      this.authFacade.login(loginBody)
+      
+    })
     
   }
 }

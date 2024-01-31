@@ -1,11 +1,13 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { AutoComplete, AutoCompleteCompleteEvent, AutoCompleteSelectEvent } from 'primeng/autocomplete';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
-import { ProductsFacade } from '@app/store/products';
-import { Products } from '@shared/interfaces/products/Product';
-import { AutoCompleteCompleteEvent, AutoCompleteSelectEvent } from 'primeng/autocomplete';
 import { Observable, lastValueFrom, map } from 'rxjs';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { SearchResultComponent } from '../search-result/search-result.component';
+import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
+import { Products } from '@shared/interfaces/products/Product';
+import { ProductsFacade } from '@app/store/products';
 
 @Component({
   selector: 'app-search-bar',
@@ -20,21 +22,23 @@ import { SearchResultComponent } from '../search-result/search-result.component'
   styleUrl: './search-bar.component.scss'
 })
 export class SearchBarComponent {
-
+  @ViewChild('autocomplete') autocomplete!: AutoComplete;
+  
   filteredProducts!: Products
   searchForm!: FormGroup;
   products$: Observable<Products> = this.productsFacade.getProducts$()
 
   constructor(
     private fb: FormBuilder,
-    private productsFacade: ProductsFacade
+    private productsFacade: ProductsFacade,
+    private router: Router
   ) {
     this.prepareForm();
   }
 
   private prepareForm(): void {
     this.searchForm = this.fb.group({
-      search: ['']
+      search: [null]
     })
   }
 
@@ -54,8 +58,22 @@ export class SearchBarComponent {
   }
 
   public selectProduct(event: AutoCompleteSelectEvent): void {
-    const { value: product } = event;
-    navigate
+    this.onSearchSubmit();
+  }
+
+  public clearInput(): void {
+    this.searchForm.get('search')?.setValue(null)
+  }
+
+  public onSearchSubmit(): void {
+    const { id } = this.searchForm.get('search')?.value;
+
+    this.filteredProducts = [];
+    this.autocomplete.hide();
+    this.searchForm.reset();
+
+    console.log({id})
+    this.router.navigateByUrl(`/products/${id}`)
   }
 
 }
