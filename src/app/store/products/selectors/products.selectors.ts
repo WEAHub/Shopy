@@ -8,7 +8,7 @@ export const isLoading = createSelector(
 
 export const getProducts = createSelector(
   getProductsFeature,
-  state => state.entity!
+  state => state.entity! || []
 );
 
 export const getError = createSelector(
@@ -19,4 +19,10 @@ export const getError = createSelector(
 export const getProductById = (id: number) =>
   createSelector(getProductsFeature, state =>
     state.entity?.find(p => p.id === id)
+  );
+
+export const getProductByCategory = (category: string) =>
+  createSelector(
+    getProductsFeature,
+    state => state.entity?.filter(p => p.category === category) || []
   );

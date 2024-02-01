@@ -87,9 +87,11 @@ import { AnimateModule } from 'primeng/animate';
 import { CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AnimateOnScrollModule } from 'primeng/animateonscroll';
 
 @NgModule({
   exports: [
+    AnimateOnScrollModule,
     AvatarModule,
     AccordionModule,
     AutoCompleteModule,

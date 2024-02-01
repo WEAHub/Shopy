@@ -5,6 +5,7 @@ import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { UserService } from '@shared/services/user/user.service';
 import { decodeToken } from '@shared/utils/token.util';
+import { onCartInit } from '@app/store/cart/actions/cart.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -26,7 +27,9 @@ export class AuthEffects {
                 ...user,
                 ...response,
               })),
-              map(userData => onLoginSuccess({ userData }))
+              switchMap(userData =>
+                of(onLoginSuccess({ userData }), onCartInit())
+              )
             );
           }),
           catchError(error => of(onLoginError({ error })))

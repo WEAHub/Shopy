@@ -2,12 +2,19 @@
   class="sub-input"
   [formGroup]="subForm"
 >
-  <span class="p-input-icon-left">
-    <i class="pi pi-envelope"></i>
-    <input 
-      pInputText
-      type="text" 
-      placeholder="Correo electrónico"
-    />
-  </span>
+  <div class="sub-input__container flex">
+    <span class="p-input-icon-left w-full">
+      <i class="pi pi-envelope pl-[.5rem]"></i>
+      <input 
+        pInputText
+        class="sub-input__email p-inputtext-lg"
+        type="text" 
+        placeholder="Correo electrónico"
+      />
+    </span>
+    <p-button
+      styleClass="sub-input__sub-button" 
+      label="Subscribirse"
+    ></p-button>
+  </div>
 </form>

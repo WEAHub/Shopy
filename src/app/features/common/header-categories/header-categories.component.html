@@ -1,1 +1,34 @@
-<p>header-categories works!</p>
+
+
+<div class="base-layout">
+  <div class="base-layout__body">
+
+    <div class="header-categories" *ngVar="(isLoading$ | async) as _loading">
+      @if(_loading) {
+        <i class="lni lni-spinner-solid animate-spin"></i>
+      }
+      @else {
+        <div class="flex gap-5" *ngVar="(categories$ | async) as _categories">
+          @for(category of _categories; track $index) {
+            <div 
+              [routerLink]="['/products']"
+              [queryParams]="{category}"
+              class="header-categories__category"
+              [ngClass]="{
+                'header-categories__category--active': category === (activeCategory$ | async)
+              }"
+            >
+              <span class="header-categories__category-title">
+                {{ category }}
+              </span>
+            </div>
+          }
+          @empty {
+            <span>No categories...</span>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

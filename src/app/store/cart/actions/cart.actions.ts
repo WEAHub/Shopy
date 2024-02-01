@@ -1,19 +1,19 @@
 import { createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CartsResponse } from '@shared/interfaces/backend/cart/CartResponse';
+import { CartResponse } from '@shared/interfaces/backend/cart/CartResponse';
 
 const featureName = 'Cart';
 const featureModule = 'User';
 const featureHeader = `[${featureName}] [${featureModule}]`;
 
-export const onCarts = createAction(`${featureHeader}: Cart`);
+export const onCartInit = createAction(`${featureHeader}: Cart init`);
 
-export const onCartsError = createAction(
+export const onCartError = createAction(
   `${featureHeader}: Carts ERROR`,
   props<{ error: HttpErrorResponse }>()
 );
 
-export const onCartsSuccess = createAction(
+export const onCartSuccess = createAction(
   `${featureHeader}: Carts OK`,
-  props<{ carts: CartsResponse }>()
+  props<{ cart: CartResponse }>()
 );

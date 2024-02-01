@@ -1,9 +1,14 @@
 <div
-  (click)="goToProduct()"
-  (keydown.enter)="goToProduct()"
+  [routerLink]="['/products/', this.product.id]"
   class="pv-product"
 >
-  <img class="pv-product__image" [src]="product.image" alt="Product image">
+  <img 
+    class="pv-product__image" 
+    [ngSrc]="product.image" 
+    height="200"
+    width="190"
+    alt="Product image"
+  >
   <div class="grid">
 
     <div class="pv-product__title truncate mb-2">

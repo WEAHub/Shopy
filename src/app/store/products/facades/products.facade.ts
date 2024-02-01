@@ -7,6 +7,7 @@ import {
   getProducts,
   getError,
   getProductById,
+  getProductByCategory,
 } from '../selectors/products.selectors';
 import { Product, Products } from '@shared/interfaces/products/Product';
 
@@ -46,5 +47,9 @@ export class ProductsFacade {
 
   public getFeaturedProducts$(): Observable<Products> {
     return this.getProducts$().pipe(map(products => products.slice(0, 6)));
+  }
+
+  public getProductsByCategory$(category: string): Observable<Products> {
+    return this.store.select(getProductByCategory(category));
   }
 }

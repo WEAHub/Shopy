@@ -1,0 +1,13 @@
+@if ((cartLoading$ | async) === false) {
+  <app-header-user-button>
+    <i 
+      pBadge
+      class="lni lni-cart text-3xl" 
+      [value]="(cartProductsCount$ | async)!.toString()"
+    ></i>
+  </app-header-user-button>
+}
+
+<p-overlayPanel #op>
+  <p>test</p>
+</p-overlayPanel>

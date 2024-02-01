@@ -3,6 +3,7 @@ import { HeaderUserComponent } from '../header-user/header-user.component';
 import { HeaderCategoriesComponent } from '../header-categories/header-categories.component';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from '@shared/components/search-bar/search-bar.component';
+import { DirectivesModule } from '@shared/directives/directives.module';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { SearchBarComponent } from '@shared/components/search-bar/search-bar.com
     HeaderUserComponent,
     HeaderCategoriesComponent,
     SearchBarComponent,
+    DirectivesModule,
   ],
 })
 export class HeaderComponent {}

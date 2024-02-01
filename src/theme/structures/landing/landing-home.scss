@@ -1,10 +1,10 @@
 .landing-home {
 
-  height: 35rem;
-
-  &__left {
-
-  }
+  height: 45rem;
+  background-image: url('/assets/images/shopping.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  border-radius: 1rem;
 
   &__left-title {
     font-size: 5rem;
@@ -18,7 +18,4 @@
     font-weight: 400;
   }
 
-  &__right {
-
-  }
 }

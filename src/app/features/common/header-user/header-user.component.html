@@ -1,12 +1,8 @@
 <div class="header-user">
   @if (isAuth$ | async) {
+    <app-header-cart></app-header-cart>
 
     <app-header-user-button>
-      <i class="lni lni-cart text-3xl" pBadge value="1"></i>
-    </app-header-user-button>
-    
-    <app-header-user-button>
-
       <p-avatar 
         [label]="(user$ | async)?.name?.firstname! | getFirstLetter | uppercase" 
         [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
@@ -19,12 +15,11 @@
           {{ (user$ | async)?.name?.firstname }}
         </span>
       </div>
-
     </app-header-user-button>
 
   }
   @else {
-    <app-header-user-button>
+    <app-header-user-button (click)="login()">
 
       <i class="lni lni-user text-4xl"></i>
 
