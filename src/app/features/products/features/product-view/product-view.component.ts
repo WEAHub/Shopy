@@ -9,6 +9,7 @@ import { DirectivesModule } from '@shared/directives/directives.module';
 import { ProductViewSendComponent } from '../product-view-send/product-view-send.component';
 import { LandingFeaturedComponent } from '@app/features/landing/components/landing-featured/landing-featured.component';
 import { ProductViewFacade } from '@app/store/products/facades/products-view.facade';
+import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 
 @Component({
   selector: 'app-product-view',
@@ -20,19 +21,21 @@ import { ProductViewFacade } from '@app/store/products/facades/products-view.fac
     DirectivesModule,
     ProductViewSendComponent,
     LandingFeaturedComponent,
+    LoadingOverlayComponent,
   ],
   providers: [],
   templateUrl: './product-view.component.html',
   styleUrl: './product-view.component.scss',
 })
 export class ProductViewComponent {
-  product!: Observable<Product | undefined>;
+  product$!: Observable<Product | undefined>;
+  productLoading$: Observable<boolean> = this.productViewFacade.isLoading$();
 
   constructor(
     private route: ActivatedRoute,
     private productViewFacade: ProductViewFacade
   ) {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
-    this.product = this.productViewFacade.getProduct$(productId);
+    this.product$ = this.productViewFacade.getProduct$(productId);
   }
 }

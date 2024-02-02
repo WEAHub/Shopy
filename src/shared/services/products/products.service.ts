@@ -31,6 +31,20 @@ export class ProductsService {
       .pipe(map(products => products.map(p => randomizeProduct(p))));
   }
 
+  public getProductsByCategory(
+    category: string,
+    options: Partial<ProductsParameters> = {}
+  ): Observable<ProductsResponseBody> {
+    const endpoint = this.backendService.generateUrl(
+      ProductsEndpoints.GET_PRODUCTS,
+      options,
+      ['category', category]
+    );
+    return this.httpClient
+      .get<ProductsResponseBody>(endpoint)
+      .pipe(map(products => products.map(p => randomizeProduct(p))));
+  }
+
   public getProduct(id: number): Observable<ProductResponseBody> {
     const endpoint =
       this.backendService.generateUrl(ProductsEndpoints.GET_PRODUCTS) + `${id}`;

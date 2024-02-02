@@ -7,6 +7,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductPreviewComponent } from '@shared/components/product-preview/product-preview.component';
 import { CommonModule } from '@angular/common';
 import { DirectivesModule } from '@shared/directives/directives.module';
+import {
+  ProductsParameters,
+  ProductsSorts,
+} from '@shared/interfaces/backend/product/ProductsRequest';
+import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 
 interface ProductsQueryParams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,7 +21,12 @@ interface ProductsQueryParams {
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, ProductPreviewComponent, DirectivesModule],
+  imports: [
+    CommonModule,
+    ProductPreviewComponent,
+    DirectivesModule,
+    LoadingOverlayComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
@@ -26,6 +36,11 @@ export class ProductsComponent {
   isLoading$ = this.productsFacade.isLoading$();
   products$!: Observable<Products>;
   category!: string;
+
+  productsParams: ProductsParameters = {
+    limit: 0,
+    sort: ProductsSorts.ASC,
+  };
 
   constructor(
     private productsFacade: ProductsFacade,
@@ -44,8 +59,15 @@ export class ProductsComponent {
   private onParamsChange(queryParams: ProductsQueryParams): void {
     const { category } = queryParams;
     this.category = category;
-    this.products$ = this.category
-      ? this.productsFacade.getProductsByCategory$(this.category)
-      : this.productsFacade.getProducts$();
+    this.products$ = this.productsFacade.getProducts$();
+
+    if (this.category) {
+      this.productsFacade.getProductsByCategory(
+        this.category,
+        this.productsParams
+      );
+    } else {
+      this.productsFacade.getProducts(this.productsParams);
+    }
   }
 }

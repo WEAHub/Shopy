@@ -6,6 +6,7 @@ import {
   onGetProducts,
   onGetProductsError,
   onInitProducts,
+  onInitProductsByCategory,
 } from '../actions/products.actions';
 import { ProductsService } from '@shared/services/products/products.service';
 
@@ -19,11 +20,25 @@ export class ProductsEffects {
   init$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onInitProducts),
-      switchMap(() =>
-        this.productsService.getProducts().pipe(
+      switchMap(({ productParams }) =>
+        this.productsService.getProducts(productParams).pipe(
           map(products => onGetProducts({ products })),
           catchError(error => of(onGetProductsError({ error })))
         )
+      )
+    )
+  );
+
+  initByCategory$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(onInitProductsByCategory),
+      switchMap(({ category, productParams }) =>
+        this.productsService
+          .getProductsByCategory(category, productParams)
+          .pipe(
+            map(products => onGetProducts({ products })),
+            catchError(error => of(onGetProductsError({ error })))
+          )
       )
     )
   );

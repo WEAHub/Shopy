@@ -10,6 +10,11 @@ import {
   getProductByCategory,
 } from '../selectors/products.selectors';
 import { Product, Products } from '@shared/interfaces/products/Product';
+import { ProductsParameters } from '@shared/interfaces/backend/product/ProductsRequest';
+import {
+  onInitProducts,
+  onInitProductsByCategory,
+} from '../actions/products.actions';
 
 @Injectable()
 export class ProductsFacade {
@@ -45,11 +50,18 @@ export class ProductsFacade {
     return this.store.select(getProductById(id));
   }
 
-  public getFeaturedProducts$(): Observable<Products> {
-    return this.getProducts$().pipe(map(products => products.slice(0, 6)));
-  }
-
   public getProductsByCategory$(category: string): Observable<Products> {
     return this.store.select(getProductByCategory(category));
+  }
+
+  public getProducts(productParams: ProductsParameters): void {
+    this.store.dispatch(onInitProducts({ productParams }));
+  }
+
+  public getProductsByCategory(
+    category: string,
+    productParams: ProductsParameters
+  ): void {
+    this.store.dispatch(onInitProductsByCategory({ category, productParams }));
   }
 }

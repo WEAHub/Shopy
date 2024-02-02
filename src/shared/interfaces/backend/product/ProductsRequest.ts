@@ -1,6 +1,6 @@
 export interface ProductsParameters {
-  limit: number;
-  sort: ProductsSorts;
+  limit?: number;
+  sort?: ProductsSorts;
 }
 
 export enum ProductsSorts {

@@ -5,6 +5,7 @@ import {
   onGetProducts,
   onGetProductsError,
   onInitProducts,
+  onInitProductsByCategory,
 } from '../actions/products.actions';
 
 export type ProductsDataState = EntityDataState<Products>;
@@ -17,6 +18,14 @@ export const initialCategoryState: ProductsDataState = {
 
 export const productReducer = createReducer<ProductsDataState>(
   { ...initialCategoryState },
+  on(onInitProductsByCategory, state => {
+    return {
+      ...state,
+      loading: true,
+      entity: [],
+      error: undefined,
+    };
+  }),
   on(onInitProducts, state => {
     return {
       ...state,
