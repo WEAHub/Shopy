@@ -4,7 +4,10 @@ import { Observable, of, switchMap, take } from 'rxjs';
 import { BackendService } from '../backend/backend.service';
 import { CartsEndpoints } from '@shared/interfaces/backend/cart';
 import { CartsParameters } from '@shared/interfaces/backend/cart/CartRequest';
-import { CartsResponse } from '@shared/interfaces/backend/cart/CartResponse';
+import {
+  CartResponse,
+  CartsResponse,
+} from '@shared/interfaces/backend/cart/CartResponse';
 import { Cart } from '@shared/interfaces/carts/Cart';
 import { AuthFacade } from '@app/store/auth';
 import { User } from '@shared/interfaces/user/User';
@@ -44,5 +47,12 @@ export class CartsService {
         );
       })
     );
+  }
+
+  public updateCart(cart: Cart): Observable<Cart> {
+    const endpoint =
+      this.backendService.generateUrl(CartsEndpoints.CARTS) + `${cart.id}`;
+
+    return this.httpClient.patch<CartResponse>(endpoint, cart);
   }
 }

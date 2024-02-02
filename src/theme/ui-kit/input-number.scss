@@ -1,0 +1,27 @@
+.input-number {
+  & .p-inputtext {
+    border: 1px solid #e7e7e7;
+    max-width: 5rem;
+    font-size: 1.4rem;
+    padding: 0;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  &__action {
+    background: #f1f1f1;
+    color: #888888;
+    border: 1px solid #e7e7e7;
+
+    &:hover {
+      background: #575757;
+      color: white;
+    }
+
+    &:last-child:hover {
+      background: #ff1d1d;
+      color: white;
+    }
+
+  }
+}

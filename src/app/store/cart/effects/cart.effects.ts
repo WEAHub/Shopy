@@ -1,23 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CartsService } from '@shared/services/carts/carts.service';
-import { Action } from '@ngrx/store';
-import { catchError, map, of, switchMap } from 'rxjs';
+import {
+  catchError,
+  exhaustMap,
+  lastValueFrom,
+  map,
+  mergeMap,
+  of,
+  switchMap,
+  take,
+} from 'rxjs';
 import {
   onCartError,
   onCartInit,
   onCartSuccess,
+  onCartUpdate,
+  onCartUpdateError,
+  onCartUpdateSuccess,
 } from '../actions/cart.actions';
+import { CartProduct } from '@shared/interfaces/carts/Cart';
+import { ProductsService } from '@shared/services/products/products.service';
 
 @Injectable()
-export class CartEffects implements OnInitEffects {
+export class CartEffects {
   constructor(
     private actions$: Actions,
-    private cartService: CartsService
+    private cartService: CartsService,
+    private productsService: ProductsService
   ) {}
 
-  ngrxOnInitEffects(): Action {
-    return onCartInit();
+  async aggregateProduct(products: CartProduct[]): Promise<CartProduct[]> {
+    return await Promise.all(
+      products.map(async p => ({
+        ...p,
+        product: await lastValueFrom(
+          this.productsService.getProduct(p.productId)
+        ),
+      }))
+    );
   }
 
   init$ = createEffect(() =>
@@ -25,8 +46,28 @@ export class CartEffects implements OnInitEffects {
       ofType(onCartInit),
       switchMap(() =>
         this.cartService.getCart().pipe(
+          mergeMap(async cart => {
+            const products = await this.aggregateProduct(cart.products);
+            return { ...cart, products };
+          }),
           map(cart => onCartSuccess({ cart })),
           catchError(error => of(onCartError({ error })))
+        )
+      )
+    )
+  );
+
+  update$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(onCartUpdate),
+      exhaustMap(({ cart }) =>
+        this.cartService.updateCart(cart).pipe(
+          mergeMap(async cart => {
+            const products = await this.aggregateProduct(cart.products);
+            return { ...cart, products };
+          }),
+          map(cart => onCartUpdateSuccess({ cart })),
+          catchError(error => of(onCartUpdateError({ error })))
         )
       )
     )

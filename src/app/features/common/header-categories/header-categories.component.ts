@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, RouterModule } from '@angular/router';
 import { CategoriesFacade } from '@app/store/categories';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { Categories } from '@shared/interfaces/categories/Category';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

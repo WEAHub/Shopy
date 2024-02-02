@@ -1,0 +1,26 @@
+<div 
+  class="header-cart-product"
+  *ngVar="cartProduct.product as _product"
+>
+  <img class="header-cart-product__image" [src]="_product.image" />
+  <span class="header-cart-product__title ellipsis" >{{ _product.title }}</span>
+  <span class="header-cart-product__price" >{{ _product.modifiers.finalPrice }}€</span>
+  <form [formGroup]="cartForm">
+    <p-inputNumber
+      formControlName="quantity"
+      [showButtons]="true" 
+      [step]="1.0"
+      [min]="1"
+      [max]=" _product.modifiers.stock"
+      buttonLayout="horizontal" 
+      spinnerMode="horizontal" 
+      styleClass="input-number"
+      decrementButtonClass="input-number__action" 
+      incrementButtonClass="input-number__action" 
+      incrementButtonIcon="pi pi-plus text-base" 
+      decrementButtonIcon="pi pi-minus text-base"
+    ></p-inputNumber>
+    <i (click)='removeFromCart()' class="ml-5 lni lni-trash-can text-xl cursor-pointer text-[color:red]"></i>
+
+  </form>
+</div>

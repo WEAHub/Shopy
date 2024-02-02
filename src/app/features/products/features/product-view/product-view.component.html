@@ -1,4 +1,4 @@
-<div class="product-view flex gap-8" *ngVar="(product | async) as _product">
+<div class="product-view flex flex-wrap gap-8 justify-center" *ngVar="(product | async) as _product">
   <div class="product-view__image">
     <img
       [src]="_product?.image!"
@@ -47,4 +47,7 @@
     </div>
 
   </div>
+  <app-product-view-send [product]="_product" class="flex-grow flex justify-center"></app-product-view-send>
 </div>
+
+<app-landing-featured></app-landing-featured>

@@ -1,28 +1,30 @@
 import { createSelector } from '@ngrx/store';
 import { getProductsFeature } from './get-feature-state';
 
-export const isLoading = createSelector(
+const getProductsStore = createSelector(
   getProductsFeature,
+  state => state.products
+);
+
+export const isLoading = createSelector(
+  getProductsStore,
   state => state.loading!
 );
 
 export const getProducts = createSelector(
-  getProductsFeature,
+  getProductsStore,
   state => state.entity! || []
 );
 
-export const getError = createSelector(
-  getProductsFeature,
-  state => state.error!
-);
+export const getError = createSelector(getProductsStore, state => state.error!);
 
 export const getProductById = (id: number) =>
-  createSelector(getProductsFeature, state =>
+  createSelector(getProductsStore, state =>
     state.entity?.find(p => p.id === id)
   );
 
 export const getProductByCategory = (category: string) =>
   createSelector(
-    getProductsFeature,
+    getProductsStore,
     state => state.entity?.filter(p => p.category === category) || []
   );

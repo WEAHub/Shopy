@@ -29,7 +29,9 @@ export class HeaderUserComponent {
   isLoading$: Observable<boolean> = this.authFacade.isLoading$();
   user$: Observable<User> = this.authFacade.getUser$();
 
-  constructor(private authFacade: AuthFacade) {}
+  constructor(private authFacade: AuthFacade) {
+    //this.login();
+  }
 
   login(): void {
     this.authFacade

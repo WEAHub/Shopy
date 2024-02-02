@@ -10,6 +10,4 @@ import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
   styleUrl: './landing.component.scss',
   imports: [LandingFeaturedComponent, LandingHomeComponent, PrimeNGModule],
 })
-export class LandingComponent {
-  constructor() {}
-}
+export class LandingComponent {}

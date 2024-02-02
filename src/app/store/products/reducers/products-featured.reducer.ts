@@ -2,22 +2,22 @@ import { createReducer, on } from '@ngrx/store';
 import { EntityDataState } from '@shared/interfaces/store/common/EntityDataState';
 import { Products } from '@shared/interfaces/products/Product';
 import {
-  onGetProducts,
-  onGetProductsError,
-  onInitProducts,
-} from '../actions/products.actions';
+  onGetProductsFeatured,
+  onGetProductsFeaturedError,
+  onInitProductsFeatured,
+} from '../actions/products-featured.actions';
 
-export type ProductsDataState = EntityDataState<Products>;
+export type ProductsFeaturedDataState = EntityDataState<Products>;
 
-export const initialCategoryState: ProductsDataState = {
+export const initialCategoryState: ProductsFeaturedDataState = {
   loading: false,
   entity: [],
   error: undefined,
 };
 
-export const productReducer = createReducer<ProductsDataState>(
+export const productFeaturedReducer = createReducer<ProductsFeaturedDataState>(
   { ...initialCategoryState },
-  on(onInitProducts, state => {
+  on(onInitProductsFeatured, state => {
     return {
       ...state,
       loading: true,
@@ -25,14 +25,14 @@ export const productReducer = createReducer<ProductsDataState>(
       error: undefined,
     };
   }),
-  on(onGetProducts, (state, action) => {
+  on(onGetProductsFeatured, (state, action) => {
     return {
       ...state,
       loading: false,
       entity: action.products,
     };
   }),
-  on(onGetProductsError, (state, action) => {
+  on(onGetProductsFeaturedError, (state, action) => {
     return {
       ...state,
       entity: [],

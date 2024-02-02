@@ -1,11 +1,14 @@
+import { Product } from '../products/Product';
+
 export interface Cart {
   id: number;
   userId: number;
   date: Date;
-  products: CartProducts[];
+  products: CartProduct[];
 }
 
-export interface CartProducts {
+export interface CartProduct {
   productId: number;
   quantity: number;
+  product?: Product | undefined;
 }

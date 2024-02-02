@@ -1,6 +1,17 @@
 // Reducers
-import { EntityDataState } from '@shared/interfaces/store/common/EntityDataState';
 import * as fromProducts from './products.reducer';
-import { Products } from '@shared/interfaces/products/Product';
-export type ProductsFeatureState = EntityDataState<Products>;
-export const productsFeatureReducer = fromProducts.categoryReducer;
+import * as fromProductsFeatured from './products-featured.reducer';
+import * as fromProductView from './product-view.reducer';
+import { combineReducers } from '@ngrx/store';
+
+export interface ProductsFeatureState {
+  products: fromProducts.ProductsDataState;
+  productsFeatured: fromProductsFeatured.ProductsFeaturedDataState;
+  productView: fromProductView.ProductsViewDataState;
+}
+
+export const productsFeatureReducer = combineReducers<ProductsFeatureState>({
+  products: fromProducts.productReducer,
+  productsFeatured: fromProductsFeatured.productFeaturedReducer,
+  productView: fromProductView.productViewReducer,
+});

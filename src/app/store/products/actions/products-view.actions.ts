@@ -1,19 +1,22 @@
 import { createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Products } from '@shared/interfaces/products/Product';
+import { Product } from '@shared/interfaces/products/Product';
 
 const featureName = 'Products';
-const featureModule = 'List';
+const featureModule = 'View';
 const featureHeader = `[${featureName}] [${featureModule}]`;
 
-export const onInitProducts = createAction(`${featureHeader}: Init`);
-
-export const onGetProducts = createAction(
-  `${featureHeader}: Get Products`,
-  props<{ products: Products }>()
+export const onInitProductsView = createAction(
+  `${featureHeader}: Init`,
+  props<{ id: number }>()
 );
 
-export const onGetProductsError = createAction(
+export const onGetProductsView = createAction(
+  `${featureHeader}: Get Products`,
+  props<{ product: Product }>()
+);
+
+export const onGetProductsViewError = createAction(
   `${featureHeader}: Get Products Error`,
   props<{ error: HttpErrorResponse }>()
 );

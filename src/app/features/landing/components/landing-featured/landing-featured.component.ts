@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ProductsFacade } from '@app/store/products';
+import { ProductsFacade, ProductsFeaturedFacade } from '@app/store/products';
 import { ProductPreviewComponent } from '@shared/components/product-preview/product-preview.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { Products } from '@shared/interfaces/products/Product';
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class LandingFeaturedComponent {
   products: Observable<Products | undefined> =
-    this.productsFacade.getFeaturedProducts$();
+    this.productsFacade.getProducts$();
   loading: Observable<boolean> = this.productsFacade.isLoading$();
-  constructor(private productsFacade: ProductsFacade) {}
+  constructor(private productsFacade: ProductsFeaturedFacade) {}
 }

@@ -14,7 +14,7 @@ export const categoryReducer = createReducer<EntityDataState<Categories>>(
   on(onInitCategories, state => {
     return {
       ...state,
-      loading: false,
+      loading: true,
       entity: undefined,
       error: undefined,
     };

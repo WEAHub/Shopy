@@ -1,0 +1,55 @@
+<div class="relative h-min flex flex-col pv-send border-[1px] border-[#ebebeb] rounded-2xl p-5 text-base max-w-[30.1rem] w-full">
+  <app-loading-overlay [loading]="(userLoading$ | async)!"></app-loading-overlay>
+  
+  <div class="pv-send__to flex justify-between">
+    <span class="font-semibold">Envío a</span>
+    <span>
+      {{ (user$ | async)?.address?.street }}, 
+      {{ (user$ | async)?.address?.city }},
+      {{ (user$ | async)?.address?.zipcode }}
+    </span>
+  </div>
+  
+  <p-divider></p-divider>
+
+  <div class="pv-send__delivery flex flex-col gap-2">
+    <span class="font-semibold flex items-center gap-2">Entrega<i class="lni lni-arrow-right"></i></span>
+    <span class="font-semibold text-lg">Envio: 3,80€</span>
+    <span class="text-gray">Entrega estimada entre NOS 19 - 22</span>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="pv-send__service flex flex-col gap-2">
+    <span class="font-semibold flex items-center gap-2">Servicio<i class="lni lni-arrow-right"></i></span>
+    <span class="text-[green]">Devolución gratis</span>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="pv-send__service flex flex-col gap-2">
+    <span class="font-semibold flex items-center gap-2">Cantidad</span>
+    <form class="flex flex-col gap-4" [formGroup]="productForm">
+      <p-inputNumber
+        formControlName="quantity"
+        [showButtons]="true" 
+        [step]="1.0"
+        [min]="1"
+        [max]="10"
+        buttonLayout="horizontal" 
+        spinnerMode="horizontal" 
+        styleClass="input-number"
+        decrementButtonClass="input-number__action" 
+        incrementButtonClass="input-number__action" 
+        incrementButtonIcon="pi pi-plus text-base" 
+        decrementButtonIcon="pi pi-minus text-base"
+      ></p-inputNumber>
+      <p-button
+        [disabled]="(addToCartDisabled$ | async)!"
+        label="Añadir a la cesta"
+        styleClass="w-full"
+        (click)="addToCart()"></p-button>
+    </form>
+    
+  </div>
+</div>

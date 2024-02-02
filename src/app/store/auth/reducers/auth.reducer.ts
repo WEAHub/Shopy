@@ -3,7 +3,9 @@ import { EntityDataState } from '@shared/interfaces/store/common/EntityDataState
 import { User } from '@shared/interfaces/user/User';
 import { login, onLoginError, onLoginSuccess } from '../actions/auth.actions';
 
-export const initialAuthState: EntityDataState<User> = {};
+export const initialAuthState: EntityDataState<User> = {
+  loading: false,
+};
 
 export const authReducer = createReducer<EntityDataState<User>>(
   { ...initialAuthState },

@@ -1,13 +1,43 @@
-@if ((cartLoading$ | async) === false) {
-  <app-header-user-button>
+<div class="relative">
+  <app-loading-overlay fontSizeRem="1rem" [loading]="(cartLoading$ | async)!"></app-loading-overlay>
+  <app-header-user-button
+    (mouseenter)="op.show($event)"
+  >
     <i 
       pBadge
       class="lni lni-cart text-3xl" 
       [value]="(cartProductsCount$ | async)!.toString()"
     ></i>
   </app-header-user-button>
-}
+</div>
 
 <p-overlayPanel #op>
-  <p>test</p>
+  <div class="header-cart relative">
+    <app-loading-overlay [loading]="(cartLoading$ | async)!"></app-loading-overlay>
+
+    @for(product of (cartProducts$ | async); track product.productId) {
+      <app-header-cart-product
+        (productDeleted)="deleteProduct(product)"
+        (quantityChanged)="quantityChanged($event)"
+        [cartProduct]="product"
+      ></app-header-cart-product>
+    }
+    @empty {
+      <p>Cart is empty...</p>
+    }
+    
+    <p-divider></p-divider>
+    <div class="flex items-center justify-center">
+      <span class="text-base">Total</span>
+      <span class="header-cart__total ml-10 text-black">{{ cartTotalPrice$ | async }}€</span>
+    </div>
+    <p-divider></p-divider>
+    <p-button 
+      class="text-center" 
+      styleClass="w-full max-w-[30rem]" 
+      label="Checkout"
+      [disabled]="(cartProducts$ | async)?.length === 0"
+    ></p-button>
+
+  </div>
 </p-overlayPanel>
