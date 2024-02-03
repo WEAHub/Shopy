@@ -12,6 +12,7 @@ import { login } from '../actions/auth.actions';
 // Selectors
 import {
   getError,
+  getToken,
   getUser,
   isAuthenticated,
   isLoading,
@@ -40,5 +41,9 @@ export class AuthFacade {
 
   public login(loginData: LoginRequestBody): void {
     this.store.dispatch(login({ loginData }));
+  }
+
+  public getToken$(): Observable<string> {
+    return this.store.select(getToken);
   }
 }

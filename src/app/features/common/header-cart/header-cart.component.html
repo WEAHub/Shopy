@@ -15,7 +15,7 @@
   <div class="header-cart relative">
     <app-loading-overlay [loading]="(cartLoading$ | async)!"></app-loading-overlay>
 
-    @for(product of (cartProducts$ | async); track product.productId) {
+    @for(product of (cartProducts$ | async); track product) {
       <app-header-cart-product
         (productDeleted)="deleteProduct(product)"
         (quantityChanged)="quantityChanged($event)"

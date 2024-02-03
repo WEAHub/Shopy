@@ -3,7 +3,7 @@ import { getAuthFeature } from './get-feature-state';
 
 export const isAuthenticated = createSelector(
   getAuthFeature,
-  state => state.entity !== undefined
+  state => !!state.entity
 );
 
 export const isLoading = createSelector(
@@ -15,7 +15,7 @@ export const getUser = createSelector(getAuthFeature, state => state.entity!);
 
 export const getToken = createSelector(
   getAuthFeature,
-  state => state.entity?.token
+  state => state.entity?.token!
 );
 
 export const getError = createSelector(getAuthFeature, state => state.error!);

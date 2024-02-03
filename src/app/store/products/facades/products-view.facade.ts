@@ -18,12 +18,15 @@ export class ProductViewFacade {
     return this.store.select(isLoading);
   }
 
-  public getProduct$(id: number): Observable<Product> {
-    this.store.dispatch(onInitProductsView({ id }));
+  public getProduct$(): Observable<Product> {
     return this.store.select(getProduct);
   }
 
   public getError$(): Observable<HttpErrorResponse> {
     return this.store.select(getError);
+  }
+
+  public getProduct(id: number): void {
+    this.store.dispatch(onInitProductsView({ id }));
   }
 }

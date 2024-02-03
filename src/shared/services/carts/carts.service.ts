@@ -41,7 +41,7 @@ export class CartsService {
           switchMap((user: User) => {
             const endpoint: string =
               this.backendService.generateUrl(CartsEndpoints.CARTS) +
-              `/${user.id}`;
+              `${user.id}`;
             return this.httpClient.get<Cart>(endpoint);
           })
         );

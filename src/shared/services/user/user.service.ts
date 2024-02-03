@@ -29,7 +29,7 @@ export class UserService {
 
   public getUser(id: number): Observable<UserResponse> {
     const endpoint =
-      this.backendService.generateUrl(UsersEndpoints.GET_USERS) + `/${id}`;
+      this.backendService.generateUrl(UsersEndpoints.GET_USERS) + `${id}`;
     return this.httpClient.get<UserResponse>(endpoint);
   }
 }
