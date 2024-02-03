@@ -1,24 +1,12 @@
 <div class="base-layout border-b-2 border-gray-200">
-  <div class="base-layout__body">
-    
+  <div class="base-layout__body"> 
     <div class="header">
-
-      <div 
-        class="cursor-pointer flex gap-8 items-center"
-        [routerLink]="'/'"
-      >
-        <img class="header__logo" src="assets/images/logo-no-background.svg" alt="Shopy"/>
-
-        <div class="hidden md:block">
-          <app-search-bar></app-search-bar>
-        </div>
-
-      </div>    
-
-
+      <img 
+      [routerLink]="'/'"
+      class="header__logo" 
+      src="assets/images/logo-no-background.svg" 
+      alt="Shopy"/>
       <app-header-user></app-header-user>
-      
     </div>
-
   </div>
 </div>

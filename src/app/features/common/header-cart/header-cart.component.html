@@ -1,7 +1,7 @@
 <div class="relative">
   <app-loading-overlay fontSizeRem="1rem" [loading]="(cartLoading$ | async)!"></app-loading-overlay>
   <app-header-user-button
-    (mouseenter)="op.show($event)"
+    (mouseenter)="showCart($event)"
   >
     <i 
       pBadge

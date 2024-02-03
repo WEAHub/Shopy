@@ -79,6 +79,6 @@ export class SearchBarComponent {
     this.searchForm.reset();
 
     console.log({ id });
-    this.router.navigateByUrl(`/products/${id}`);
+    //this.router.navigateByUrl(`/products/${id}`);
   }
 }

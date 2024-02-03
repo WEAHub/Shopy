@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { CartFacade } from '@app/store/cart';
 import { Cart, CartProduct } from '@shared/interfaces/carts/Cart';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable } from 'rxjs';
+import { Observable, filter, take } from 'rxjs';
 import { HeaderUserButtonComponent } from '../header-user-button/header-user-button.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { HeaderCartProductComponent } from '../header-cart-product/header-cart-product.component';
@@ -21,6 +21,7 @@ import { LoadingOverlayComponent } from '@shared/components/loading-overlay/load
   ],
   templateUrl: './header-cart.component.html',
   styleUrl: './header-cart.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderCartComponent {
   @ViewChild('op', { static: false })
@@ -43,5 +44,14 @@ export class HeaderCartComponent {
 
   quantityChanged(product: CartProduct): void {
     this.cartFacade.updateProduct(product);
+  }
+
+  showCart($event: MouseEvent): void {
+    this.cartLoading$
+      .pipe(
+        take(1),
+        filter(loading => !loading)
+      )
+      .subscribe(() => this.op?.show($event));
   }
 }

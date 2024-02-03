@@ -1,5 +1,4 @@
 <div class="search-bar">
-
   <form [formGroup]="searchForm" (submit)="onSearchSubmit()" >
     <div class="p-inputgroup w-full">
       <span class="search-bar__group p-inputgroup-addon">
@@ -25,9 +24,6 @@
           <app-search-result [product]="product"></app-search-result>
         </ng-template>
       </p-autoComplete>
-
     </div>
   </form>
-
-
 </div>

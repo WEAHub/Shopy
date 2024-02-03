@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Product } from '@shared/interfaces/products/Product';
 import { RedZoomModule } from 'ngx-red-zoom';
@@ -28,7 +28,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './product-view.component.html',
   styleUrl: './product-view.component.scss',
 })
-export class ProductViewComponent {
+export class ProductViewComponent implements AfterViewInit {
   private destroyRef = inject(DestroyRef);
   product$: Observable<Product | undefined> =
     this.productViewFacade.getProduct$();
@@ -40,12 +40,15 @@ export class ProductViewComponent {
     private productViewFacade: ProductViewFacade
   ) {
     this.initProduct();
+  }
+
+  ngAfterViewInit(): void {
     this.router.events
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter(event => event instanceof NavigationEnd)
       )
-      .subscribe(this.initProduct.bind(this));
+      .subscribe(() => this.initProduct());
   }
 
   private initProduct(): void {
