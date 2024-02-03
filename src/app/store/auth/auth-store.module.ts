@@ -9,6 +9,7 @@ import { authFeatureReducer } from './reducers';
 import { authFeatureFacades } from './facades';
 import { authFeatureEffects } from './effects';
 import { AuthServiceModule } from '@shared/services/auth/auth.service.module';
+import { UserServiceModule } from '@shared/services/user/user.service.module';
 
 @NgModule({
   declarations: [],
@@ -16,6 +17,7 @@ import { AuthServiceModule } from '@shared/services/auth/auth.service.module';
   imports: [
     CommonModule,
     AuthServiceModule,
+    UserServiceModule,
     StoreModule.forFeature(authFeatureKey, authFeatureReducer),
     EffectsModule.forFeature(authFeatureEffects),
   ],

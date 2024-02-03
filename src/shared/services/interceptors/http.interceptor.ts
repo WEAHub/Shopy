@@ -21,7 +21,6 @@ export const authInterceptor: HttpInterceptorFn = (
         return authFacade.getToken$().pipe(
           take(1),
           switchMap(token => {
-            console.log(token);
             const _req = req.clone({
               setHeaders: {
                 authorization: `Bearer ${token}`,
@@ -31,7 +30,6 @@ export const authInterceptor: HttpInterceptorFn = (
           })
         );
       }
-
       return next(req);
     })
   );

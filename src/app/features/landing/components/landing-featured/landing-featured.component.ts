@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ProductsFacade, ProductsFeaturedFacade } from '@app/store/products';
+import { ProductsFeaturedFacade } from '@app/store/products';
 import { ProductPreviewComponent } from '@shared/components/product-preview/product-preview.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { Products } from '@shared/interfaces/products/Product';

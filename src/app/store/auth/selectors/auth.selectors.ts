@@ -15,6 +15,7 @@ export const getUser = createSelector(getAuthFeature, state => state.entity!);
 
 export const getToken = createSelector(
   getAuthFeature,
+  // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
   state => state.entity?.token!
 );
 
