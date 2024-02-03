@@ -11,8 +11,8 @@
   </app-header-user-button>
 </div>
 
-<p-overlayPanel #op>
-  <div class="header-cart relative">
+<p-overlayPanel #op styleClass="header-cart">
+  <div class="grid relative">
     <app-loading-overlay [loading]="(cartLoading$ | async)!"></app-loading-overlay>
 
     @for(product of (cartProducts$ | async); track product) {

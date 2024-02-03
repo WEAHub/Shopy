@@ -66,8 +66,9 @@ export class ProductsComponent {
         this.category,
         this.productsParams
       );
-    } else {
-      this.productsFacade.getProducts(this.productsParams);
+      return;
     }
+
+    this.productsFacade.getProducts(this.productsParams);
   }
 }

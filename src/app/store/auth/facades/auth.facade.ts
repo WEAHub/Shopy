@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom, take } from 'rxjs';
 
 // Interfaces
 import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
 import { User } from '@shared/interfaces/user/User';
 
 // Actions
-import { login } from '../actions/auth.actions';
+import { login, onLogout } from '../actions/auth.actions';
 
 // Selectors
 import {
@@ -45,5 +45,28 @@ export class AuthFacade {
 
   public getToken$(): Observable<string> {
     return this.store.select(getToken);
+  }
+
+  public forceLogin(): void {
+    this.isAuthenticated$()
+      .pipe(take(1))
+      .subscribe(isAuth => {
+        if (isAuth) return;
+
+        const loginBody: LoginRequestBody = {
+          username: 'mor_2314',
+          password: '83r5^_',
+        };
+
+        this.login(loginBody);
+      });
+  }
+
+  public logout(): void {
+    this.store.dispatch(onLogout());
+  }
+
+  public async isAuthenticated(): Promise<boolean> {
+    return await lastValueFrom(this.isAuthenticated$());
   }
 }

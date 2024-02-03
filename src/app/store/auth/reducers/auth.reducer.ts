@@ -1,7 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import { EntityDataState } from '@shared/interfaces/store/common/EntityDataState';
 import { User } from '@shared/interfaces/user/User';
-import { login, onLoginError, onLoginSuccess } from '../actions/auth.actions';
+import {
+  login,
+  onLoginError,
+  onLoginSuccess,
+  onLogout,
+} from '../actions/auth.actions';
 
 export const initialAuthState: EntityDataState<User> = {
   loading: false,
@@ -31,5 +36,8 @@ export const authReducer = createReducer<EntityDataState<User>>(
       error: action.error,
       entity: undefined,
     };
+  }),
+  on(onLogout, () => {
+    return initialAuthState;
   })
 );

@@ -2,7 +2,7 @@
   @if (isAuth$ | async) {
     <app-header-cart></app-header-cart>
 
-    <app-header-user-button>
+    <app-header-user-button (click)="menu.toggle($event)">
       <p-avatar 
         [label]="(user$ | async)?.name?.firstname! | getFirstLetter | uppercase" 
         [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
@@ -17,18 +17,24 @@
       </div>
     </app-header-user-button>
 
+    <p-menu #menu [model]="userMenuItems" [popup]="true"></p-menu>
+
+
   }
   @else {
-    <app-header-user-button (click)="login()">
-
-      <i class="lni lni-user text-4xl"></i>
-
-      <div class="flex flex-col">
-        <span class="text-sm font-medium">Hello, sign in</span>
-        <span class="text-base font-semibold">Account</span>
-      </div>
-
-    </app-header-user-button>
+    <div class="relative">
+      <app-loading-overlay fontSizeRem="1rem" [loading]="(isLoading$ | async)!"></app-loading-overlay>
+      <app-header-user-button (click)="login()">
+  
+        <i class="lni lni-user text-4xl"></i>
+  
+        <div class="flex flex-col">
+          <span class="text-sm font-medium">Hello, sign in</span>
+          <span class="text-base font-semibold">Account</span>
+        </div>
+  
+      </app-header-user-button>
+    </div>
   }
 
 </div>

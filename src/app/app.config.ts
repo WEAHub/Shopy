@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideClientHydration(),
     provideAnimations(),
-    importProvidersFrom(fromStore.AppStoreModule),
+    importProvidersFrom([fromStore.AppStoreModule]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };

@@ -21,7 +21,6 @@ export const productViewReducer = createReducer<ProductsViewDataState>(
     return {
       ...state,
       loading: true,
-      entity: undefined,
       error: undefined,
     };
   }),

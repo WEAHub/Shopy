@@ -26,3 +26,4 @@ export const setUserDetails = createAction(
   `${featureHeader}: Login USER DETAILS`,
   props<{ userDetails: User }>()
 );
+export const onLogout = createAction(`${featureHeader}: Logout`);

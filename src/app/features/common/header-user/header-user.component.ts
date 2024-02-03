@@ -3,12 +3,15 @@ import { Component } from '@angular/core';
 import { AuthFacade } from '@app/store/auth';
 import { User } from '@shared/interfaces/user/User';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
-import { Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HeaderUserButtonComponent } from '../header-user-button/header-user-button.component';
 import { PipesModule } from '@shared/pipes';
-import { LoginRequestBody } from '@shared/interfaces/backend/login/LoginRequest';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { HeaderCartComponent } from '../header-cart/header-cart.component';
+import { UserMenu } from './header-user.menu';
+import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
+import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-user',
@@ -20,6 +23,7 @@ import { HeaderCartComponent } from '../header-cart/header-cart.component';
     PipesModule,
     DirectivesModule,
     HeaderCartComponent,
+    LoadingOverlayComponent,
   ],
   templateUrl: './header-user.component.html',
   styleUrl: './header-user.component.scss',
@@ -29,23 +33,28 @@ export class HeaderUserComponent {
   isLoading$: Observable<boolean> = this.authFacade.isLoading$();
   user$: Observable<User> = this.authFacade.getUser$();
 
-  constructor(private authFacade: AuthFacade) {
-    //this.login();
-  }
+  userMenu = new UserMenu({
+    editProfile: this.editProfile.bind(this),
+    logout: this.logout.bind(this),
+  });
+
+  userMenuItems: MenuItem[] = this.userMenu.getMenus();
+
+  constructor(
+    private authFacade: AuthFacade,
+    private router: Router
+  ) {}
 
   login(): void {
-    this.authFacade
-      .isAuthenticated$()
-      .pipe(take(1))
-      .subscribe(isAuth => {
-        if (isAuth) return;
+    this.authFacade.forceLogin();
+  }
 
-        const loginBody: LoginRequestBody = {
-          username: 'mor_2314',
-          password: '83r5^_',
-        };
+  editProfile(): void {
+    this.router.navigateByUrl('/user');
+  }
 
-        this.authFacade.login(loginBody);
-      });
+  logout(): void {
+    this.router.navigateByUrl('/landing');
+    this.authFacade.logout();
   }
 }

@@ -1,10 +1,11 @@
 .product-view {
 
   &__image { 
-    width: 32rem;
+    width: 40rem;
     img { 
       display: block;
       border-radius: 1.5rem;
+      max-height: 40rem;
     }
   }
 

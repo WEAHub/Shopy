@@ -1,8 +1,8 @@
-<div class="relative">
+<div class="relative" *ngVar="(product$ | async) as _product">
   <app-loading-overlay [loading]="(productLoading$ | async)!"></app-loading-overlay>
-  @if((productLoading$ | async)! === false) {
+  @if(_product) {
 
-    <div class="product-view flex flex-wrap gap-8 justify-center" *ngVar="(product$ | async) as _product">
+    <div class="product-view flex flex-wrap gap-8 justify-center">
       <div class="product-view__image">
         <img
           [src]="_product?.image!"

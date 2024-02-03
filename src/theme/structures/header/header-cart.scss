@@ -1,5 +1,5 @@
 .header-cart {
-
+  z-index: 9 !important;
   display: grid;
 
   &__total {
@@ -36,6 +36,7 @@
     font-size: 1.5rem; 
     font-weight: 600;
     color: black;
+    text-align: right;
   }
 
 }
