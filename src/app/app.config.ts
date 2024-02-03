@@ -21,8 +21,7 @@ import { authInterceptor } from '@shared/services/interceptors/http.interceptor'
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor])),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideClientHydration(),
     provideAnimations(),
     importProvidersFrom(fromStore.AppStoreModule),

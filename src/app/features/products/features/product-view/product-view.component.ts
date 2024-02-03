@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Product } from '@shared/interfaces/products/Product';
 import { RedZoomModule } from 'ngx-red-zoom';
 import { StarsComponent } from '@shared/components/stars/stars.component';
@@ -43,7 +43,7 @@ export class ProductViewComponent {
     this.router.events
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter(event => event instanceof NavigationStart)
+        filter(event => event instanceof NavigationEnd)
       )
       .subscribe(this.initProduct.bind(this));
   }
