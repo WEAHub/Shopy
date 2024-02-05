@@ -1,22 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createReducer, on } from '@ngrx/store';
-import { EntityDataState } from '@shared/interfaces/store/common/EntityDataState';
-import { User } from '@shared/interfaces/user/User';
+
 import {
   login,
   onLoginError,
   onLoginSuccess,
   onLogout,
 } from '../actions/auth.actions';
+import { AuthFeatureState } from '.';
+import { createRehydrateReducer } from '@app/store/hydrate/hydration.reducer';
+import { authFeatureKey } from '../feature-key';
 
-export const initialAuthState: EntityDataState<User> = {
+export const initialAuthState: AuthFeatureState = {
   loading: false,
 };
 
-export const authReducer = createReducer<EntityDataState<User>>(
-  { ...initialAuthState },
-  on(login, state => {
+export const authReducer = createRehydrateReducer<AuthFeatureState>(
+  { key: authFeatureKey },
+  initialAuthState,
+  on(login, () => {
     return {
-      ...state,
       error: undefined,
       entity: undefined,
       loading: true,

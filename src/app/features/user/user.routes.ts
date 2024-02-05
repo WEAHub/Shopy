@@ -6,6 +6,15 @@ const routes: Routes = [
   {
     path: '',
     component: UserComponent,
+    children: [
+      {
+        path: 'details',
+        loadComponent: () =>
+          import('./features/user-details//user-details.component').then(
+            m => m.UserDetailsComponent
+          ),
+      },
+    ],
   },
 ];
 

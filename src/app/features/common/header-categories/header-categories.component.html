@@ -8,7 +8,7 @@
         <i class="lni lni-spinner-solid animate-spin"></i>
       }
       @else {
-        <div class="flex gap-5" *ngVar="(categories$ | async) as _categories">
+        <div class="flex gap-10" *ngVar="(categories$ | async) as _categories">
           @for(category of _categories; track $index) {
             <div 
               [routerLink]="['/products']"

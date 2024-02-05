@@ -9,10 +9,10 @@ import { ProductsStoreModule } from './products/products-store.module';
 import { CartStoreModule } from './cart/cart-store.module';
 
 export const featureStores = [
+  CartStoreModule,
   AuthStoreModule,
   CategoriesStoreModule,
   ProductsStoreModule,
-  CartStoreModule,
 ];
 
 @NgModule({

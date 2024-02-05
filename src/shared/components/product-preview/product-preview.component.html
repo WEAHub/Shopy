@@ -2,13 +2,15 @@
   [routerLink]="['/products/', this.product.id]"
   class="pv-product"
 >
-  <img 
+  <div class="relative">
+    <img 
     class="pv-product__image" 
-    [ngSrc]="product.image" 
-    height="200"
-    width="190"
     alt="Product image"
+    [ngSrc]="product.image" 
+    fill
   >
+  </div>
+  
   <div class="grid">
 
     <div class="pv-product__title truncate mb-2">

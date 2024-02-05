@@ -1,16 +1,25 @@
-import { AfterViewInit, Component, DestroyRef, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  inject,
+} from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Product } from '@shared/interfaces/products/Product';
 import { RedZoomModule } from 'ngx-red-zoom';
 import { StarsComponent } from '@shared/components/stars/stars.component';
-import { Observable, filter } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { Observable, filter, tap } from 'rxjs';
+import { CommonModule, isPlatformServer } from '@angular/common';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { ProductViewSendComponent } from '../product-view-send/product-view-send.component';
 import { LandingFeaturedComponent } from '@app/features/landing/components/landing-featured/landing-featured.component';
 import { ProductViewFacade } from '@app/store/products/facades/products-view.facade';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MetadataService } from '@shared/services/metadata/metadata.service';
 
 @Component({
   selector: 'app-product-view',
@@ -24,21 +33,27 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     LandingFeaturedComponent,
     LoadingOverlayComponent,
   ],
-  providers: [],
+  providers: [MetadataService],
   templateUrl: './product-view.component.html',
   styleUrl: './product-view.component.scss',
 })
-export class ProductViewComponent implements AfterViewInit {
+export class ProductViewComponent implements AfterViewInit, OnInit {
   private destroyRef = inject(DestroyRef);
-  product$: Observable<Product | undefined> =
-    this.productViewFacade.getProduct$();
+  product$: Observable<Product> = this.productViewFacade
+    .getProduct$()
+    .pipe(tap(this.addMetaTags.bind(this)));
   productLoading$: Observable<boolean> = this.productViewFacade.isLoading$();
+  isServer: boolean = isPlatformServer(this.platformId);
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
     private route: ActivatedRoute,
     private router: Router,
-    private productViewFacade: ProductViewFacade
-  ) {
+    private productViewFacade: ProductViewFacade,
+    private metadataService: MetadataService
+  ) {}
+
+  ngOnInit(): void {
     this.initProduct();
   }
 
@@ -54,5 +69,17 @@ export class ProductViewComponent implements AfterViewInit {
   private initProduct(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
     this.productViewFacade.getProduct(productId);
+  }
+
+  private addMetaTags(product: Product): void {
+    if (!product) return;
+    this.metadataService.updateMetadata({
+      title: product?.title,
+      description: product?.description,
+      keywords: this.metadataService.extractWords([
+        product?.title,
+        product?.description,
+      ]),
+    });
   }
 }
