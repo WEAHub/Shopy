@@ -8,6 +8,7 @@ import {
 } from '@shared/interfaces/backend/users/UsersResponse';
 import { UsersEndpoints } from '@shared/interfaces/backend/users';
 import { UsersParameters } from '@shared/interfaces/backend/users/UsersRequest';
+import { User } from '@shared/interfaces/user/User';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,11 @@ export class UserService {
     const endpoint =
       this.backendService.generateUrl(UsersEndpoints.GET_USERS) + `${id}`;
     return this.httpClient.get<UserResponse>(endpoint);
+  }
+
+  public updateUser(user: Partial<User>): Observable<UserResponse> {
+    const endpoint =
+      this.backendService.generateUrl(UsersEndpoints.GET_USERS) + `${user.id}`;
+    return this.httpClient.patch<UserResponse>(endpoint, user);
   }
 }

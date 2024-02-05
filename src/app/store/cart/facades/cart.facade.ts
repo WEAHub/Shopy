@@ -103,7 +103,9 @@ export class CartFacade {
             products.push(product);
           } else {
             products = products.map((p, i) =>
-              i === productIdx ? { ...p, quantity: p.quantity + 1 } : p
+              i === productIdx
+                ? { ...p, quantity: p.quantity + product.quantity }
+                : p
             );
           }
 

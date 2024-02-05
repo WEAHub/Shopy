@@ -1,1 +1,26 @@
-<p>user-details works!</p>
+<div class="max-w-[35rem]">
+  <form [formGroup]="userForm" class="flex flex-col gap-5 text-base">
+
+    <div class="flex flex-col gap-2">
+      <label for="username">Nombre</label>
+      <input pInputText id="username" formControlName="firstName"/>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="lastname">Apellidos</label>
+      <input pInputText id="lastname" formControlName="lastName"/>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="email">Correo electrónico</label>
+      <input pInputText id="email" formControlName="email"/>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="phone">Teléfono</label>
+      <input pInputText id="phone" maxlength="14" formControlName="phone"/>
+    </div>
+
+    <p-button [disabled]="($userLoading | async) || userForm.invalid || !userForm.dirty" label="Guardar" (click)="onSubmit()"></p-button>
+  </form>
+</div>

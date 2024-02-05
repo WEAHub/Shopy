@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
-import { login, onLoginError, onLoginSuccess } from '../actions/auth.actions';
+import {
+  login,
+  onLoginError,
+  onLoginSuccess,
+  onSetUserDetails,
+  onSetUserDetailsError,
+  onSetUserDetailsSuccess,
+} from '../actions/auth.actions';
 import { catchError, exhaustMap, map, of, switchMap, take } from 'rxjs';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { UserService } from '@shared/services/user/user.service';
@@ -13,7 +20,6 @@ import { AuthFacade } from '../facades';
 export class AuthEffects implements OnInitEffects {
   constructor(
     private actions$: Actions,
-    private authFacade: AuthFacade,
     private authService: AuthService,
     private userService: UserService
   ) {}
@@ -22,7 +28,7 @@ export class AuthEffects implements OnInitEffects {
     return onCartInit();
   }
 
-  public login$ = createEffect(() =>
+  login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(login),
       exhaustMap(({ loginData }) =>
@@ -43,10 +49,22 @@ export class AuthEffects implements OnInitEffects {
     )
   );
 
-  public loginSuccess$ = createEffect(() =>
+  loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onLoginSuccess),
       map(() => onCartInit())
+    )
+  );
+
+  setDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(onSetUserDetails),
+      exhaustMap(({ userData }) =>
+        this.userService.updateUser(userData).pipe(
+          map(userData => onSetUserDetailsSuccess({ userData })),
+          catchError(error => of(onSetUserDetailsError({ error })))
+        )
+      )
     )
   );
 }

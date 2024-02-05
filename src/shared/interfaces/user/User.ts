@@ -5,6 +5,7 @@ export interface User {
   name: UserName;
   address: UserAddress;
   token?: string;
+  phone: string;
 }
 
 export interface UserName {

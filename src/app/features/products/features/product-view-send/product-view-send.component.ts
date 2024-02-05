@@ -35,6 +35,8 @@ export class ProductViewSendComponent {
   userAuth$ = this.authFacade.isAuthenticated$();
   userLoading$ = this.authFacade.isLoading$();
 
+  cartLoading$ = this.cartFacade.isLoading$();
+
   addToCartDisabled$ = this.userLoading$.pipe(
     combineLatestWith(this.userAuth$),
     map(([loading, auth]) => loading || !auth)

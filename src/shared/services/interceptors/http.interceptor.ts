@@ -13,7 +13,6 @@ export const authInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> => {
   const authFacade = inject(AuthFacade);
-
   return authFacade.isAuthenticated$().pipe(
     take(1),
     switchMap(isAuth => {

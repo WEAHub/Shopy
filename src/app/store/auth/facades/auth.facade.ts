@@ -7,7 +7,7 @@ import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
 import { User } from '@shared/interfaces/user/User';
 
 // Actions
-import { login, onLogout } from '../actions/auth.actions';
+import { login, onLogout, onSetUserDetails } from '../actions/auth.actions';
 
 // Selectors
 import {
@@ -39,12 +39,12 @@ export class AuthFacade {
     return this.store.select(getError);
   }
 
-  public login(loginData: LoginRequestBody): void {
-    this.store.dispatch(login({ loginData }));
-  }
-
   public getToken$(): Observable<string> {
     return this.store.select(getToken);
+  }
+
+  public login(loginData: LoginRequestBody): void {
+    this.store.dispatch(login({ loginData }));
   }
 
   public forceLogin(): void {
@@ -66,7 +66,7 @@ export class AuthFacade {
     this.store.dispatch(onLogout());
   }
 
-  public async isAuthenticated(): Promise<boolean> {
-    return await lastValueFrom(this.isAuthenticated$());
+  public updateUser(userData: Partial<User>): void {
+    this.store.dispatch(onSetUserDetails({ userData }));
   }
 }

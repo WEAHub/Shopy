@@ -1,1 +1,12 @@
-<p>user-menu works!</p>
+<div class="user-menu">
+  @for(menuItem of menuItems; track $index) {
+    <div 
+      class="user-menu__item"
+      routerLinkActive="user-menu__item--active"
+      [routerLink]="menuItem.route"
+    >
+      <i class="user-menu__item-icon" [ngClass]="menuItem.icon"></i>
+      <span class="user-menu__item-title">{{ menuItem.title }}</span>
+    </div>
+  }
+</div>

@@ -13,17 +13,28 @@ export const login = createAction(
 );
 
 export const onLoginError = createAction(
-  `${featureHeader}: Login ERROR`,
+  `${featureHeader}: Login Error`,
   props<{ error: HttpErrorResponse }>()
 );
 
 export const onLoginSuccess = createAction(
-  `${featureHeader}: Login OK`,
+  `${featureHeader}: Login Success`,
   props<{ userData: User }>()
 );
 
-export const setUserDetails = createAction(
-  `${featureHeader}: Login USER DETAILS`,
-  props<{ userDetails: User }>()
+export const onSetUserDetails = createAction(
+  `${featureHeader}: Set Details Init`,
+  props<{ userData: Partial<User> }>()
 );
+
+export const onSetUserDetailsSuccess = createAction(
+  `${featureHeader}: Set Details Success`,
+  props<{ userData: User }>()
+);
+
+export const onSetUserDetailsError = createAction(
+  `${featureHeader}: Set Details Error`,
+  props<{ error: HttpErrorResponse }>()
+);
+
 export const onLogout = createAction(`${featureHeader}: Logout`);
