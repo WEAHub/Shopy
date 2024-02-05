@@ -32,7 +32,6 @@ export class CartsService {
   }
 
   public getCart(): Observable<Cart> {
-    console.log('getCart');
     return this.authFacade.isAuthenticated$().pipe(
       take(1),
       switchMap(isAuth => {
