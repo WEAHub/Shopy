@@ -4,7 +4,6 @@ import {
   DestroyRef,
   Inject,
   OnInit,
-  PLATFORM_ID,
   inject,
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -12,7 +11,7 @@ import { Product } from '@shared/interfaces/products/Product';
 import { RedZoomModule } from 'ngx-red-zoom';
 import { StarsComponent } from '@shared/components/stars/stars.component';
 import { Observable, filter, tap } from 'rxjs';
-import { CommonModule, isPlatformServer } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { ProductViewSendComponent } from '../product-view-send/product-view-send.component';
 import { LandingFeaturedComponent } from '@app/features/landing/components/landing-featured/landing-featured.component';
@@ -43,10 +42,8 @@ export class ProductViewComponent implements AfterViewInit, OnInit {
     .getProduct$()
     .pipe(tap(this.addMetaTags.bind(this)));
   productLoading$: Observable<boolean> = this.productViewFacade.isLoading$();
-  isServer: boolean = isPlatformServer(this.platformId);
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
     private route: ActivatedRoute,
     private router: Router,
     private productViewFacade: ProductViewFacade,
