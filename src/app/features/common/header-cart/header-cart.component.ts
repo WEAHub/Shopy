@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewChild,
+} from '@angular/core';
 import { CartFacade } from '@app/store/cart';
 import { Cart, CartProduct } from '@shared/interfaces/carts/Cart';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
@@ -33,8 +37,10 @@ export class HeaderCartComponent {
   cartProductsCount$: Observable<number> =
     this.cartFacade.getCartProductsCount$();
 
-  cartProducts$: Observable<CartProduct[]> = this.cartFacade.getCartProducts$();
-  cartTotalPrice$: Observable<number> = this.cartFacade.getCartTotalPrice$();
+  cartProducts$: Observable<CartProduct[]> =
+    this.cartFacade.getCartProducts$();
+  cartTotalPrice$: Observable<number> =
+    this.cartFacade.getCartTotalPrice$();
 
   constructor(private cartFacade: CartFacade) {}
 

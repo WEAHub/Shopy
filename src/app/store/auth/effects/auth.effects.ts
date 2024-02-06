@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
+import {
+  Actions,
+  OnInitEffects,
+  createEffect,
+  ofType,
+} from '@ngrx/effects';
 import {
   login,
   onLoginError,
@@ -8,13 +13,12 @@ import {
   onSetUserDetailsError,
   onSetUserDetailsSuccess,
 } from '../actions/auth.actions';
-import { catchError, exhaustMap, map, of, switchMap, take } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { UserService } from '@shared/services/user/user.service';
 import { decodeToken } from '@shared/utils/token.util';
 import { onCartInit } from '@app/store/cart/actions/cart.actions';
 import { Action } from '@ngrx/store';
-import { AuthFacade } from '../facades';
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {

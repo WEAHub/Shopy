@@ -16,7 +16,10 @@ export const getProducts = createSelector(
   state => state.entity! || []
 );
 
-export const getError = createSelector(getProductsStore, state => state.error!);
+export const getError = createSelector(
+  getProductsStore,
+  state => state.error!
+);
 
 export const getProductById = (id: number) =>
   createSelector(getProductsStore, state =>

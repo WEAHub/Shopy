@@ -6,7 +6,9 @@ const featureName = 'Products';
 const featureModule = 'Featured';
 const featureHeader = `[${featureName}] [${featureModule}]`;
 
-export const onInitProductsFeatured = createAction(`${featureHeader}: Init`);
+export const onInitProductsFeatured = createAction(
+  `${featureHeader}: Init`
+);
 
 export const onGetProductsFeatured = createAction(
   `${featureHeader}: Get Products`,

@@ -13,7 +13,9 @@ export class AuthService {
     private httpClient: HttpClient
   ) {}
 
-  public login(loginData: LoginRequestBody): Observable<LoginResponseBody> {
+  public login(
+    loginData: LoginRequestBody
+  ): Observable<LoginResponseBody> {
     const endpoint = this.backendService.generateUrl(LoginEndpoints.LOGIN);
     return this.httpClient.post<LoginResponseBody>(endpoint, loginData);
   }

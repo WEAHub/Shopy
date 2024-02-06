@@ -47,7 +47,8 @@ export class ProductsService {
 
   public getProduct(id: number): Observable<ProductResponseBody> {
     const endpoint =
-      this.backendService.generateUrl(ProductsEndpoints.GET_PRODUCTS) + `${id}`;
+      this.backendService.generateUrl(ProductsEndpoints.GET_PRODUCTS) +
+      `${id}`;
     return this.httpClient
       .get<ProductResponseBody>(endpoint)
       .pipe(map(product => randomizeProduct(product)));

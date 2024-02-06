@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
+import {
+  Actions,
+  OnInitEffects,
+  createEffect,
+  ofType,
+} from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import {

@@ -1,0 +1,20 @@
+<ng-container
+  *ngIf="
+    ((!showErrors &&
+      (controlHandle.touched || controlHandle.dirty)) ||
+      showErrors) &&
+    controlHandle.errors
+  "
+>
+  <div
+    class="input-errors"
+    *ngVar="controlHandle.errors; let controlErrors"
+  >
+    <small
+      [ngClass]="errorClass"
+      *ngFor="let error of controlErrors | errorsValidator"
+    >
+      {{ 'validators.' + error.name | translate: error.params }}
+    </small>
+  </div>
+</ng-container>

@@ -10,8 +10,9 @@ export interface ProductsFeatureState {
   productView: fromProductView.ProductsViewDataState;
 }
 
-export const productsFeatureReducer = combineReducers<ProductsFeatureState>({
-  products: fromProducts.productReducer,
-  productsFeatured: fromProductsFeatured.productFeaturedReducer,
-  productView: fromProductView.productViewReducer,
-});
+export const productsFeatureReducer =
+  combineReducers<ProductsFeatureState>({
+    products: fromProducts.productReducer,
+    productsFeatured: fromProductsFeatured.productFeaturedReducer,
+    productView: fromProductView.productViewReducer,
+  });

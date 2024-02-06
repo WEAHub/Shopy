@@ -17,7 +17,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class HeaderCategoriesComponent {
   private destroyRef = inject(DestroyRef);
   isLoading$: Observable<boolean> = this.categoriesFacade.isLoading$();
-  categories$: Observable<Categories> = this.categoriesFacade.getCategories$();
+  categories$: Observable<Categories> =
+    this.categoriesFacade.getCategories$();
   activeCategory$: Observable<string> = this.route.queryParams.pipe(
     takeUntilDestroyed(this.destroyRef),
     map((params: Params) => params['category'])

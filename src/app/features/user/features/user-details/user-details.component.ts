@@ -62,7 +62,10 @@ export class UserDetailsComponent implements OnInit {
     });
 
     this.$user
-      .pipe(takeUntilDestroyed(this.destroyRef), tap(this.fillForm.bind(this)))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(this.fillForm.bind(this))
+      )
       .subscribe();
   }
 

@@ -81,7 +81,9 @@ export class MetadataService {
     );
   }
 
-  private generateMetaDefinitions(metadata: PageMetadata): MetaDefinition[] {
+  private generateMetaDefinitions(
+    metadata: PageMetadata
+  ): MetaDefinition[] {
     return [
       { property: 'og:url', content: `${this.hostUrl}${this.router.url}` },
 

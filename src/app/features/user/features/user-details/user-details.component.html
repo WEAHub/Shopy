@@ -21,6 +21,10 @@
       <input pInputText id="phone" maxlength="14" formControlName="phone"/>
     </div>
 
-    <p-button [disabled]="($userLoading | async) || userForm.invalid || !userForm.dirty" label="Guardar" (click)="onSubmit()"></p-button>
+    <p-button 
+      [disabled]="($userLoading | async) || userForm.invalid || !userForm.dirty" 
+      label="Guardar" 
+      (click)="onSubmit()">
+    </p-button>
   </form>
 </div>

@@ -11,7 +11,10 @@ export const isLoading = createSelector(
   state => state.loading!
 );
 
-export const getUser = createSelector(getAuthFeature, state => state.entity!);
+export const getUser = createSelector(
+  getAuthFeature,
+  state => state.entity!
+);
 
 export const getToken = createSelector(
   getAuthFeature,
@@ -19,4 +22,7 @@ export const getToken = createSelector(
   state => state.entity?.token!
 );
 
-export const getError = createSelector(getAuthFeature, state => state.error!);
+export const getError = createSelector(
+  getAuthFeature,
+  state => state.error!
+);

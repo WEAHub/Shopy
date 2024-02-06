@@ -62,6 +62,8 @@ export class ProductsFacade {
     category: string,
     productParams: ProductsParameters
   ): void {
-    this.store.dispatch(onInitProductsByCategory({ category, productParams }));
+    this.store.dispatch(
+      onInitProductsByCategory({ category, productParams })
+    );
   }
 }

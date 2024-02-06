@@ -1,6 +1,8 @@
 // Base Environment
 
 export const environment = {
+  defaultLang: 'es',
+  languages: ['es', 'en'],
   production: false,
   hostUrl: 'http://shopy.com/',
   apiURL: 'https://fakestoreapi.com',

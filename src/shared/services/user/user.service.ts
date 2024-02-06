@@ -36,7 +36,8 @@ export class UserService {
 
   public updateUser(user: Partial<User>): Observable<UserResponse> {
     const endpoint =
-      this.backendService.generateUrl(UsersEndpoints.GET_USERS) + `${user.id}`;
+      this.backendService.generateUrl(UsersEndpoints.GET_USERS) +
+      `${user.id}`;
     return this.httpClient.patch<UserResponse>(endpoint, user);
   }
 }

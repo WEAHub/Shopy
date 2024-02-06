@@ -9,7 +9,12 @@ import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 @Component({
   selector: 'app-product-preview',
   standalone: true,
-  imports: [StarsComponent, PrimeNGModule, DirectivesModule, NgOptimizedImage],
+  imports: [
+    StarsComponent,
+    PrimeNGModule,
+    DirectivesModule,
+    NgOptimizedImage,
+  ],
   templateUrl: './product-preview.component.html',
   styleUrl: './product-preview.component.scss',
 })

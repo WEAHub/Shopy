@@ -3,12 +3,7 @@ import {
   importProvidersFrom,
   isDevMode,
 } from '@angular/core';
-import {
-  InMemoryScrollingFeature,
-  InMemoryScrollingOptions,
-  provideRouter,
-  withInMemoryScrolling,
-} from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import {
@@ -23,16 +18,12 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { authInterceptor } from '@shared/services/interceptors/http.interceptor';
-
-const scrollConfig: InMemoryScrollingOptions = {
-  scrollPositionRestoration: 'top',
-  anchorScrolling: 'enabled',
-};
-
-const inMemoryScrollingFeature: InMemoryScrollingFeature =
-  withInMemoryScrolling(scrollConfig);
+import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslation } from './config/translate.config';
+import { inMemoryScrollingFeature } from './config/scroll.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -42,7 +33,10 @@ export const appConfig: ApplicationConfig = {
       withHttpTransferCacheOptions({ includePostRequests: true })
     ),
     provideAnimations(),
-    importProvidersFrom([fromStore.AppStoreModule]),
+    importProvidersFrom([
+      TranslateModule.forRoot(provideTranslation()),
+      fromStore.AppStoreModule,
+    ]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };

@@ -6,11 +6,18 @@ export const isLoading = createSelector(
   state => state.loading!
 );
 
-export const getCart = createSelector(getCartFeature, state => state.entity!);
-export const getError = createSelector(getCartFeature, state => state.error);
+export const getCart = createSelector(
+  getCartFeature,
+  state => state.entity!
+);
+export const getError = createSelector(
+  getCartFeature,
+  state => state.error
+);
 
-export const getCartProductsCount = createSelector(getCartFeature, state =>
-  state.entity !== undefined ? state.entity.products.length : 0
+export const getCartProductsCount = createSelector(
+  getCartFeature,
+  state => (state.entity !== undefined ? state.entity.products.length : 0)
 );
 
 export const getCartProducts = createSelector(getCartFeature, state =>

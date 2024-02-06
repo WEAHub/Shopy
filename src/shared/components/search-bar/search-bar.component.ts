@@ -1,4 +1,7 @@
-import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import {
+  AutoComplete,
+  AutoCompleteCompleteEvent,
+} from 'primeng/autocomplete';
 import {
   FormBuilder,
   FormGroup,
@@ -47,7 +50,9 @@ export class SearchBarComponent {
     });
   }
 
-  public async filterProducts(event: AutoCompleteCompleteEvent): Promise<void> {
+  public async filterProducts(
+    event: AutoCompleteCompleteEvent
+  ): Promise<void> {
     const query = event.query.toLowerCase();
     this.filteredProducts = await lastValueFrom(
       this.productsFacade

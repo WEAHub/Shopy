@@ -39,5 +39,7 @@ export class SubscribeInputComponent {
     if (this.subForm.invalid) return;
 
     const { email } = this.subForm.value;
+
+    console.log(email);
   }
 }

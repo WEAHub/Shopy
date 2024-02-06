@@ -15,29 +15,30 @@ export const initialCategoryState: ProductsFeaturedDataState = {
   error: undefined,
 };
 
-export const productFeaturedReducer = createReducer<ProductsFeaturedDataState>(
-  { ...initialCategoryState },
-  on(onInitProductsFeatured, state => {
-    return {
-      ...state,
-      loading: true,
-      entity: [],
-      error: undefined,
-    };
-  }),
-  on(onGetProductsFeatured, (state, action) => {
-    return {
-      ...state,
-      loading: false,
-      entity: action.products,
-    };
-  }),
-  on(onGetProductsFeaturedError, (state, action) => {
-    return {
-      ...state,
-      entity: [],
-      loading: false,
-      error: action.error,
-    };
-  })
-);
+export const productFeaturedReducer =
+  createReducer<ProductsFeaturedDataState>(
+    { ...initialCategoryState },
+    on(onInitProductsFeatured, state => {
+      return {
+        ...state,
+        loading: true,
+        entity: [],
+        error: undefined,
+      };
+    }),
+    on(onGetProductsFeatured, (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        entity: action.products,
+      };
+    }),
+    on(onGetProductsFeaturedError, (state, action) => {
+      return {
+        ...state,
+        entity: [],
+        loading: false,
+        error: action.error,
+      };
+    })
+  );

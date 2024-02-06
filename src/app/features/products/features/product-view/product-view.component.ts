@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   DestroyRef,
-  Inject,
   OnInit,
   inject,
 } from '@angular/core';
@@ -41,7 +40,8 @@ export class ProductViewComponent implements AfterViewInit, OnInit {
   product$: Observable<Product> = this.productViewFacade
     .getProduct$()
     .pipe(tap(this.addMetaTags.bind(this)));
-  productLoading$: Observable<boolean> = this.productViewFacade.isLoading$();
+  productLoading$: Observable<boolean> =
+    this.productViewFacade.isLoading$();
 
   constructor(
     private route: ActivatedRoute,

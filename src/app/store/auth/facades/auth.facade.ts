@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, lastValueFrom, take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 // Interfaces
 import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
 import { User } from '@shared/interfaces/user/User';
 
 // Actions
-import { login, onLogout, onSetUserDetails } from '../actions/auth.actions';
+import {
+  login,
+  onLogout,
+  onSetUserDetails,
+} from '../actions/auth.actions';
 
 // Selectors
 import {

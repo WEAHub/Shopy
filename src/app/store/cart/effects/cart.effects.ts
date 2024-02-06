@@ -9,7 +9,6 @@ import {
   mergeMap,
   of,
   switchMap,
-  tap,
 } from 'rxjs';
 import {
   onCartError,
