@@ -18,7 +18,7 @@ export function processLocation(googleAddress: any): AddressLocation {
     googleAddress,
     'street_number'
   );
-  const locality = getLocationDataByType(googleAddress, 'locality');
+  const city = getLocationDataByType(googleAddress, 'locality');
   const postalCode = getLocationDataByType(googleAddress, 'postal_code');
   const lat = googleAddress?.geometry?.location?.lat().toString();
   const lng = googleAddress?.geometry?.location?.lng().toString();
@@ -30,7 +30,7 @@ export function processLocation(googleAddress: any): AddressLocation {
     province,
     street,
     streetNumber,
-    locality,
+    city,
     postalCode,
   };
 

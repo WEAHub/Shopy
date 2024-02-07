@@ -5,6 +5,6 @@ export interface AddressLocation {
   province: string;
   street: string;
   streetNumber: string;
-  locality: string;
+  city: string;
   postalCode: string;
 }

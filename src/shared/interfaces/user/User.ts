@@ -19,6 +19,8 @@ export interface UserAddress {
   number: number;
   zipcode: string;
   geolocation: UserGeoLocation;
+  province?: string;
+  address?: string;
 }
 
 export interface UserGeoLocation {

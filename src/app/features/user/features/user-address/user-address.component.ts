@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormGroup,
@@ -13,7 +14,7 @@ import { InputValidatorComponent } from '@shared/components/input-validator/inpu
 import { AddressLocation } from '@shared/interfaces/location/location';
 import { User } from '@shared/interfaces/user/User';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-user-address',
@@ -30,6 +31,7 @@ import { Observable } from 'rxjs';
   styleUrl: './user-address.component.scss',
 })
 export class UserAddressComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
   $user: Observable<User> = this.authFacade.getUser$();
   $userLoading: Observable<boolean> = this.authFacade.isLoading$();
   addressForm!: FormGroup;
@@ -45,15 +47,32 @@ export class UserAddressComponent implements OnInit {
 
   private prepareForm(): void {
     this.addressForm = this.fb.group({
+      id: [null],
       address: ['', Validators.required],
       lat: [null, Validators.required],
       lng: [null, Validators.required],
       province: ['', Validators.required],
       street: ['', Validators.required],
-      streetNumber: ['', Validators.required],
-      locality: ['', Validators.required],
-      postalCode: ['', Validators.required],
+      number: ['', Validators.required],
+      city: ['', Validators.required],
+      zipcode: ['', Validators.required],
     });
+
+    this.$user
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(this.fillForm.bind(this))
+      )
+      .subscribe();
+  }
+
+  private fillForm(user: User): void {
+    console.log(user);
+    this.addressForm.patchValue({
+      id: user.id,
+      ...user.address,
+    });
+    this.addressForm.markAllAsTouched();
   }
 
   onAddressChange(address: AddressLocation): void {
@@ -63,5 +82,24 @@ export class UserAddressComponent implements OnInit {
 
   onSubmit(): void {
     if (this.addressForm.invalid) return;
+    const formData = this.addressForm.value;
+
+    const userUpdate: Partial<User> = {
+      id: formData.id,
+      address: {
+        city: formData.city,
+        number: formData.streetNumber,
+        street: formData.street,
+        zipcode: formData.postalCode,
+        address: formData.address,
+        province: formData.province,
+        geolocation: {
+          lat: formData.lat,
+          long: formData.lng,
+        },
+      },
+    };
+
+    this.authFacade.updateUser(userUpdate);
   }
 }
