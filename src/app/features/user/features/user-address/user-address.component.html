@@ -1,1 +1,52 @@
-<p>user-address works!</p>
+
+<div class="max-w-[35rem]">
+
+<form [formGroup]="addressForm" class="grid gap-5 text-base" >
+
+  <div class="flex flex-col gap-2">
+    <label for="street">Dirección</label>
+    <app-autocomplete-places
+      formControlName="address"
+      (addressChange)="onAddressChange($event)">
+    </app-autocomplete-places>
+  </div>
+
+  <div class="grid grid-cols-6 gap-3">
+    <div class="flex flex-col gap-2 col-span-5">
+      <label for="street">Calle</label>
+      <input pInputText id="street" formControlName="street"/>
+    </div>
+    <div class="flex flex-col gap-2 ">
+      <label for="streetNumber">Nº</label>
+      <input pInputText id="streetNumber" formControlName="streetNumber"/>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-3">
+
+    <div class="flex flex-col gap-2">
+      <label for="locality">Ciudad</label>
+      <input pInputText id="locality" formControlName="locality"/>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="postalCode">Codigo postal</label>
+      <input pInputText id="postalCode" formControlName="postalCode"/>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="province">Provincia</label>
+      <input pInputText id="province" formControlName="province"/>
+    </div>
+  </div>
+  
+  <p-button 
+    [disabled]="($userLoading | async) || addressForm.invalid || !addressForm.dirty" 
+    label="Guardar" 
+    (click)="onSubmit()">
+  </p-button>
+
+</form>
+
+</div>
+  
