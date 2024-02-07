@@ -67,7 +67,6 @@ export class UserAddressComponent implements OnInit {
   }
 
   private fillForm(user: User): void {
-    console.log(user);
     this.addressForm.patchValue({
       id: user.id,
       ...user.address,

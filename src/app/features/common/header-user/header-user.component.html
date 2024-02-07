@@ -1,4 +1,4 @@
-<div class="header-user">
+<div class="header-user relative">
   @if (isAuth$ | async) {
     <app-header-cart></app-header-cart>
 
@@ -17,7 +17,12 @@
       </div>
     </app-header-user-button>
 
-    <p-menu #menu [model]="userMenuItems" [popup]="true"></p-menu>
+    <p-menu 
+      #menu 
+      [model]="userMenuItems"
+      [popup]="true" 
+      appendTo="body"
+    ></p-menu>
 
 
   }
