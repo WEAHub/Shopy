@@ -14,7 +14,7 @@
   </app-header-user-button>
 </div>
 
-<p-overlayPanel #op styleClass="header-cart" appendTo="">
+<p-overlayPanel #op styleClass="header-cart" appendTo="body">
   <div class="grid relative">
     <app-loading-overlay [loading]="(cartLoading$ | async)!"></app-loading-overlay>
 
