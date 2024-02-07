@@ -40,7 +40,7 @@
   </div>
   
   <p-button 
-    [disabled]="($userLoading | async) || addressForm.invalid || !addressForm.dirty" 
+    [disabled]="($userLoading | async) || addressForm.invalid || !addressForm.touched" 
     label="Guardar" 
     (click)="onSubmit()">
   </p-button>

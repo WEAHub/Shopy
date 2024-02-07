@@ -76,7 +76,7 @@ export class UserAddressComponent implements OnInit {
 
   onAddressChange(address: AddressLocation): void {
     this.addressForm.patchValue(address);
-    this.addressForm.markAsTouched();
+    this.addressForm.markAllAsTouched();
   }
 
   onSubmit(): void {
@@ -87,9 +87,9 @@ export class UserAddressComponent implements OnInit {
       id: formData.id,
       address: {
         city: formData.city,
-        number: formData.streetNumber,
+        number: formData.number,
         street: formData.street,
-        zipcode: formData.postalCode,
+        zipcode: formData.zipcode,
         address: formData.address,
         province: formData.province,
         geolocation: {

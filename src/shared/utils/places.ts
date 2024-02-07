@@ -14,12 +14,9 @@ export function processLocation(googleAddress: any): AddressLocation {
     'administrative_area_level_2'
   );
   const street = getLocationDataByType(googleAddress, 'route');
-  const streetNumber = getLocationDataByType(
-    googleAddress,
-    'street_number'
-  );
+  const number = getLocationDataByType(googleAddress, 'street_number');
   const city = getLocationDataByType(googleAddress, 'locality');
-  const postalCode = getLocationDataByType(googleAddress, 'postal_code');
+  const zipcode = getLocationDataByType(googleAddress, 'postal_code');
   const lat = googleAddress?.geometry?.location?.lat().toString();
   const lng = googleAddress?.geometry?.location?.lng().toString();
 
@@ -29,9 +26,9 @@ export function processLocation(googleAddress: any): AddressLocation {
     lng,
     province,
     street,
-    streetNumber,
+    number,
     city,
-    postalCode,
+    zipcode,
   };
 
   return location;

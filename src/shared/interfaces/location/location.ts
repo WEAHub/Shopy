@@ -4,7 +4,7 @@ export interface AddressLocation {
   lng: number;
   province: string;
   street: string;
-  streetNumber: string;
+  number: string;
   city: string;
-  postalCode: string;
+  zipcode: string;
 }
