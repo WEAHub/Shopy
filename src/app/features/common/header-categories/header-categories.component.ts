@@ -1,10 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject } from '@angular/core';
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Params,
+  Router,
+  RouterModule,
+} from '@angular/router';
 import { CategoriesFacade } from '@app/store/categories';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { Categories } from '@shared/interfaces/categories/Category';
-import { Observable, map } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -16,16 +22,25 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class HeaderCategoriesComponent {
   private destroyRef = inject(DestroyRef);
+
   isLoading$: Observable<boolean> = this.categoriesFacade.isLoading$();
+
   categories$: Observable<Categories> =
     this.categoriesFacade.getCategories$();
+
   activeCategory$: Observable<string> = this.route.queryParams.pipe(
-    takeUntilDestroyed(this.destroyRef),
     map((params: Params) => params['category'])
+  );
+
+  hideCategories$: Observable<boolean> = this.router.events.pipe(
+    takeUntilDestroyed(this.destroyRef),
+    filter(event => event instanceof NavigationEnd),
+    map(event => (event as NavigationEnd).url.startsWith('/user'))
   );
 
   constructor(
     private categoriesFacade: CategoriesFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 }

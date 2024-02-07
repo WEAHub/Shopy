@@ -1,4 +1,4 @@
-<div class="relative" *ngVar="(product$ | async) as _product">
+<div class="relative mb-10" *ngVar="(product$ | async) as _product">
   <app-loading-overlay [loading]="(productLoading$ | async)!"></app-loading-overlay>
   @if(_product) {
 

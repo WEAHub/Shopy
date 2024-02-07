@@ -4,6 +4,8 @@ import { HeaderCategoriesComponent } from '../header-categories/header-categorie
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from '@shared/components/search-bar/search-bar.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
+import { HeaderCategoriesMobileComponent } from '../header-categories-mobile/header-categories-mobile.component';
+import { HeaderLanguageSwitchComponent } from '../header-language-switch/header-language-switch.component';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +18,8 @@ import { DirectivesModule } from '@shared/directives/directives.module';
     HeaderCategoriesComponent,
     SearchBarComponent,
     DirectivesModule,
+    HeaderCategoriesMobileComponent,
+    HeaderLanguageSwitchComponent,
   ],
 })
 export class HeaderComponent {}

@@ -3,7 +3,7 @@
 </div>
 
 <div class="flex justify-center" >
-  <div class="grow gap-5 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 place-content-around justify-between justify-items-center w-fit">
+  <div class="grow gap-5 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 place-content-around justify-center md:justify-between justify-items-center w-fit">
     @if((loading | async) === false) {
   
       @for (product of (products | async); track product.id) {

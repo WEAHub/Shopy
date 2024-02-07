@@ -1,0 +1,29 @@
+<div class="flex items-center">
+  <app-header-user-button (click)="visible = true">
+    <i class="lni lni-menu text-[2.5rem] cursor-pointer text-[color:#262626]"></i>
+  </app-header-user-button>
+</div>
+
+<p-sidebar [(visible)]="visible" [baseZIndex]="-1">
+  <ng-template pTemplate="header">      
+    <img 
+      [routerLink]="'/'"
+      class="header__logo cursor-pointer" 
+      src="assets/images/logo-no-background.svg" 
+      alt="Shopy"
+    />
+  </ng-template>
+
+  <h3 class="text-[black] text-xl font-bold mb-5">Categories</h3>
+  <div class="flex flex-col gap-3">
+    @for(category of ($categories | async); track $index) {
+      <a 
+        (click)="visible = false"
+        [routerLink]="['/products']"
+        [queryParams]="{category}"
+      >
+        {{ category | titlecase }}
+      </a>
+    }
+  </div>
+</p-sidebar>

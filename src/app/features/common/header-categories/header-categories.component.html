@@ -3,7 +3,8 @@
 <div class="base-layout">
   <div class="base-layout__body">
 
-    <div class="header-categories" *ngVar="(isLoading$ | async) as _loading">
+    @if((hideCategories$ | async) === false) {
+    <div class="header-categories hidden sm:block" *ngVar="(isLoading$ | async) as _loading">
       @if(_loading) {
         <i class="lni lni-spinner-solid animate-spin"></i>
       }
@@ -29,6 +30,6 @@
         </div>
       }
     </div>
-
+    }
   </div>
 </div>

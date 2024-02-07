@@ -1,0 +1,25 @@
+<div *ngVar="(language | async) as _language">
+  <app-header-user-button (click)="menu.toggle($event)">
+    <img 
+      class="w-[1.6rem]"
+      [src]="'assets/images/' + _language + '.svg'"
+    />
+  </app-header-user-button>
+  <p-menu #menu [model]="languages" [popup]="true">
+    <ng-template pTemplate="item" let-lang>
+      <div
+        (click)="changeLanguage(lang.label)"
+        [ngClass]="{
+          'pointer-events-none font-semibold text-[gray]' : _language === lang.label
+        }"
+        class="flex items-center text-lg gap-2 p-3 text-[black] cursor-pointer"
+      >
+        <img 
+          class="w-[1.6rem]"
+          [src]="'assets/images/' + lang.label + '.svg'"
+        />
+        <span>{{ lang.label | uppercase }}</span>
+      </div>
+    </ng-template>
+  </p-menu>
+</div>

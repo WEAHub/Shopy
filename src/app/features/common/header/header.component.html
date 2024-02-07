@@ -1,12 +1,18 @@
 <div class="base-layout border-b-2 border-gray-200">
   <div class="base-layout__body"> 
     <div class="header">
+      <app-header-categories-mobile 
+        class="block sm:hidden">
+      </app-header-categories-mobile>
       <img 
-      [routerLink]="'/'"
-      class="header__logo cursor-pointer" 
-      src="assets/images/logo-no-background.svg" 
-      alt="Shopy"/>
-      <app-header-user></app-header-user>
+        [routerLink]="'/'"
+        class="header__logo cursor-pointer hidden sm:block" 
+        src="assets/images/logo-no-background.svg" 
+        alt="Shopy"/>
+      <div class="flex gap-[1rem] items-center">
+        <app-header-language-switch></app-header-language-switch>
+        <app-header-user></app-header-user>
+      </div>
     </div>
   </div>
 </div>

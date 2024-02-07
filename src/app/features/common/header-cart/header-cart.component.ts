@@ -51,13 +51,4 @@ export class HeaderCartComponent {
   quantityChanged(product: CartProduct): void {
     this.cartFacade.updateProduct(product);
   }
-
-  showCart($event: MouseEvent): void {
-    this.cartLoading$
-      .pipe(
-        take(1),
-        filter(loading => !loading)
-      )
-      .subscribe(() => this.op?.show($event));
-  }
 }
