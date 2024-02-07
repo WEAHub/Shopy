@@ -12,6 +12,7 @@ import {
   ProductsSorts,
 } from '@shared/interfaces/backend/product/ProductsRequest';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
+import { ProductsFiltersComponent } from './components/products-filters/products-filters.component';
 
 interface ProductsQueryParams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,6 +27,7 @@ interface ProductsQueryParams {
     ProductPreviewComponent,
     DirectivesModule,
     LoadingOverlayComponent,
+    ProductsFiltersComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -60,7 +62,15 @@ export class ProductsComponent {
     const { category } = queryParams;
     this.category = category;
     this.products$ = this.productsFacade.getProducts$();
+    this.getProducts();
+  }
 
+  onFiltersChange(filters: ProductsParameters): void {
+    this.productsParams = filters;
+    this.getProducts();
+  }
+
+  getProducts(): void {
     if (this.category) {
       this.productsFacade.getProductsByCategory(
         this.category,

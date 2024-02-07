@@ -1,0 +1,22 @@
+<form [formGroup]="filtersForm" class="flex gap-5">
+  <div class="flex gap-5 items-center">
+    <label for="limit">Limite</label>
+    <p-dropdown 
+      id="limit"
+      formControlName="limit" 
+      placeholder="Sin limite"
+      [options]="limits" 
+      [showClear]="true"
+    ></p-dropdown>
+  </div>
+  <div class="flex gap-5 items-center">
+    <label for="sort">Orden</label>
+    <p-dropdown 
+      id="sort"
+      formControlName="sort" 
+      placeholder="Orden"
+      [options]="sorts" 
+      [showClear]="true"
+    ></p-dropdown>
+  </div>
+</form>

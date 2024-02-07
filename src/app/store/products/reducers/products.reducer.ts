@@ -22,7 +22,6 @@ export const productReducer = createReducer<ProductsDataState>(
     return {
       ...state,
       loading: true,
-      entity: [],
       error: undefined,
     };
   }),
