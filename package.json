@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration dev",
     "start:dev": "npm start",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build": "ng build  --configuration production",
+    "watch": "ng build --watch --configuration dev",
     "test": "ng test",
     "serve:ssr:Shopy-Front": "node dist/shopy-front/server/server.mjs",
     "lint": "ng lint"
