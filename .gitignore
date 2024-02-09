@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 index.env.html
+.package-lock.json
