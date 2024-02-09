@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './features/common/header/header.component';
 import { FooterComponent } from './features/common/footer/footer.component';
@@ -21,25 +21,22 @@ import { PrimeNGConfig } from 'primeng/api';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
-  title = 'Shopy-Front';
+  title = 'Shopy';
 
   constructor(
     private ngConfig: PrimeNGConfig,
     private translate: TranslateService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.initTranslations();
   }
 
   private initTranslations(): void {
     // APP Translations
-    const { defaultLang } = environment;
-    const browserLang = this.translate.getBrowserLang();
-    const currentLang =
-      environment.languages.find(language => language === browserLang) ??
-      defaultLang;
-
+    const currentLang = this.getCurrentLang();
     this.translate.addLangs(environment.languages);
     this.translate.setDefaultLang(currentLang);
     this.translate.use(currentLang);
@@ -51,5 +48,12 @@ export class AppComponent {
       .subscribe(primeNgTranslations =>
         this.ngConfig.setTranslation(primeNgTranslations)
       );
+  }
+
+  getCurrentLang(): string {
+    const { defaultLang } = environment;
+    const browserLang = this.translate.getBrowserLang();
+    // prettier-ignore
+    return environment.languages.find(language => language === browserLang) ?? defaultLang;
   }
 }

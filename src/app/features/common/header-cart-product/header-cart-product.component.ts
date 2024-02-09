@@ -21,7 +21,7 @@ import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 
-interface FormQuantity {
+export interface FormQuantity {
   quantity: number;
 }
 
@@ -53,7 +53,7 @@ export class HeaderCartProductComponent implements OnInit {
     this.prepareForm();
   }
 
-  private prepareForm(): void {
+  prepareForm(): void {
     this.cartForm = this.fb.group({
       quantity: [this.cartProduct.quantity],
     });
@@ -63,7 +63,7 @@ export class HeaderCartProductComponent implements OnInit {
       .subscribe(this.onCartFormChanges.bind(this));
   }
 
-  private onCartFormChanges(formData: FormQuantity): void {
+  onCartFormChanges(formData: FormQuantity): void {
     const { quantity } = formData;
 
     const productUpdated: CartProduct = {

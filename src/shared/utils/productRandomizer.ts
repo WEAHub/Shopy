@@ -41,14 +41,20 @@ export function randomizeProduct(
   };
 }
 
-function rndNumberRange(min: number, max: number): number {
+export function rndNumberRange(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function getPercentagePrice(price: number, percent: number): number {
+export function getPercentagePrice(
+  price: number,
+  percent: number
+): number {
   return Math.round(price - price * (percent / 100));
 }
 
-function percentage(partialValue: number, totalValue: number): number {
+export function percentage(
+  partialValue: number,
+  totalValue: number
+): number {
   return Math.round((100 * partialValue) / totalValue);
 }

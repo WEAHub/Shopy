@@ -1,8 +1,7 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -23,19 +22,18 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@app/*": ["./src/app/*"],
-      "@environments/*": ["./src/environments/*"],
-      "@shared/*": ["./src/shared/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@interfaces/*": ["./src/shared/interfaces/*"],
-
-    },
+      "@app/*": ["./app/*"],
+      "@environments/*": ["./environments/*"],
+      "@shared/*": ["./shared/*"],
+      "@assets/*": ["./assets/*"],
+      "@interfaces/*": ["./shared/interfaces/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "esModuleInterop": true,
-  },
+    "esModuleInterop": true
+  }
 }

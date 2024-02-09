@@ -7,7 +7,7 @@ import { CartFacade } from '@app/store/cart';
 import { Cart, CartProduct } from '@shared/interfaces/carts/Cart';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable, filter, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HeaderUserButtonComponent } from '../header-user-button/header-user-button.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { HeaderCartProductComponent } from '../header-cart-product/header-cart-product.component';

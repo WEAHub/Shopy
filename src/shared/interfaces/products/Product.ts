@@ -8,7 +8,7 @@ export interface Product {
   category: string;
   image: string;
   rating: ProductRating;
-  modifiers: ProductModifiers;
+  modifiers?: ProductModifiers;
 }
 
 export interface ProductRating {
