@@ -44,17 +44,18 @@ export const authReducer = createRehydrateReducer<AuthFeatureState>(
   on(onLogout, () => {
     return initialAuthState;
   }),
-  on(onSetUserDetailsSuccess, (state, { userData }) => {
-    return {
-      ...state,
-      entity: { ...state.entity, ...userData },
-    };
-  }),
   on(onLoginError, (state, action) => {
     return {
       ...state,
       error: action.error,
       entity: undefined,
+    };
+  }),
+  on(onSetUserDetailsSuccess, (state, { userData }) => {
+    return {
+      ...state,
+      loading: false,
+      entity: { ...state.entity, ...userData },
     };
   })
 );

@@ -18,15 +18,15 @@
     </div>
 
     <div class="flex gap-3">
-      <span class="pv-product__price">{{ product.modifiers.finalPrice }}€</span>
+      <span class="pv-product__price">{{ product.modifiers?.finalPrice! }}€</span>
       <span class="pv-product__last-price">{{ product.price }}€</span>
-      <span class="pv-product__dicount-percent">{{ product.modifiers.discountPercent }}%</span>
+      <span class="pv-product__dicount-percent">{{ product.modifiers?.discountPercent! }}%</span>
     </div>
 
     <div class="pv-product__stars flex gap-2 items-center">
-      <app-stars [filledStars]="product.modifiers.stars"></app-stars>
+      <app-stars [filledStars]="product.modifiers?.stars!"></app-stars>
       <span class="text-sm text-[color:--gray-500]">
-        {{ product.modifiers.stockTotal - product.modifiers.stock }} vendidos
+        {{ product.modifiers?.stockTotal! - product.modifiers?.stock! }} vendidos
       </span>
     </div>
 
@@ -36,12 +36,12 @@
         <p-progressBar
           [styleClass]="'h-4'"
           [showValue]="false" 
-          [value]="product.modifiers.stockPercent"
+          [value]="product.modifiers?.stockPercent"
         ></p-progressBar>
       </div>
 
       <span class="text-sm text-[color:--gray-500]">
-        Quedan {{ product.modifiers.stock }}
+        Quedan {{ product.modifiers?.stock }}
       </span>
 
     </div>
@@ -49,7 +49,7 @@
     <div class="flex items-center gap-2">
       <img class="pv-product__days-image" src="assets/images/choice.webp">
       <span class="text-sm text-[color:--gray-500]">
-        Entrega en {{ product.modifiers.estimatedDays }} días
+        Entrega en {{ product.modifiers?.estimatedDays }} días
       </span>
     </div>
 
