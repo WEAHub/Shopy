@@ -40,10 +40,7 @@ export class AuthEffects implements OnInitEffects {
           switchMap(response => {
             const { sub: userId } = decodeToken(response.token);
             return this.userService.getUser(userId).pipe(
-              map(user => ({
-                ...user,
-                ...response,
-              })),
+              map(user => ({ ...user, ...response })),
               map(userData => onLoginSuccess({ userData }))
             );
           }),
