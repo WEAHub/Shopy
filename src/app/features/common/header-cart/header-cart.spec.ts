@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import en from '@assets/i18n/en.json';

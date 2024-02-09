@@ -5,7 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { CartEffects } from './cart.effects';
 import { Observable, of, throwError } from 'rxjs';
 import * as TypeMoq from 'typemoq';
-import { Action, resultMemoize } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ProductsService } from '@shared/services/products/products.service';

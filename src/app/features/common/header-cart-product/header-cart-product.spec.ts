@@ -10,7 +10,6 @@ import {
   FormQuantity,
   HeaderCartProductComponent,
 } from './header-cart-product.component';
-import { CartProduct } from '@shared/interfaces/carts/Cart';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('Header', () => {
