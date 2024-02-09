@@ -9,6 +9,7 @@ import {
   ProductsResponseBody,
 } from '@shared/interfaces/backend/product/ProductsResponse';
 import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
 
 const productMock = {
   id: 1,
@@ -36,7 +37,7 @@ const productsByCategoryMock = [
   },
 ];
 
-describe('User Service', () => {
+describe('Products Service', () => {
   let service: ProductsService;
   let httpTestingController: HttpTestingController;
   beforeEach(() => {
@@ -59,8 +60,7 @@ describe('User Service', () => {
     products.subscribe(_products =>
       expect(_products).toEqual(productsByCategoryMock)
     );
-    const expectedUrl =
-      'https://fakestoreapi.com/products/category/jewelery';
+    const expectedUrl = environment.apiURL + '/products/category/jewelery';
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toEqual('GET');
 
@@ -71,7 +71,7 @@ describe('User Service', () => {
     const product: Observable<ProductResponseBody> = service.getProduct(1);
 
     product.subscribe(_product => expect(_product).toEqual(productMock));
-    const expectedUrl = 'https://fakestoreapi.com/products/1';
+    const expectedUrl = environment.apiURL + '/products/1';
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toEqual('GET');
 

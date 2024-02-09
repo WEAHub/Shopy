@@ -10,6 +10,7 @@ import {
   UserResponse,
 } from '@shared/interfaces/backend/users/UsersResponse';
 import { UsersSorts } from '@shared/interfaces/backend/users/UsersRequest';
+import { environment } from '@environments/environment.base';
 
 const usersMock = [
   {
@@ -85,8 +86,7 @@ describe('User Service', () => {
     });
 
     users.subscribe(users => expect(users).toEqual(usersMock));
-    const expectedUrl =
-      'https://fakestoreapi.com/users/?limit=3&sort=desc';
+    const expectedUrl = environment.apiURL + '/users/?limit=3&sort=desc';
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toEqual('GET');
 
@@ -96,7 +96,7 @@ describe('User Service', () => {
   it('should return an observable with one user', () => {
     const user: Observable<UserResponse> = service.getUser(1);
     user.subscribe(users => expect(users).toEqual(usersMock[0]));
-    const expectedUrl = 'https://fakestoreapi.com/users/1';
+    const expectedUrl = environment.apiURL + '/users/1';
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toEqual('GET');
     req.flush(usersMock[0]);
@@ -107,7 +107,7 @@ describe('User Service', () => {
       usersMock[0]
     );
     user.subscribe(users => expect(users).toEqual(usersMock[0]));
-    const expectedUrl = 'https://fakestoreapi.com/users/1';
+    const expectedUrl = environment.apiURL + '/users/1';
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toEqual('PATCH');
     req.flush(usersMock[0]);
