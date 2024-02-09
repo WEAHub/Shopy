@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
-interface ErrorsParsed {
+export interface ErrorsParsed {
   name?: string;
   params?: unknown;
 }
@@ -11,9 +11,7 @@ interface ErrorsParsed {
   name: 'errorsValidator',
 })
 export class ErrorsValidatorPipe implements PipeTransform {
-  transform(errors: ValidationErrors): ErrorsParsed[] | null {
-    if (!errors) return null;
-
+  transform(errors: ValidationErrors): ErrorsParsed[] {
     const errorsParsed = Object.entries(errors).map(([name, params]) => {
       return {
         name,
