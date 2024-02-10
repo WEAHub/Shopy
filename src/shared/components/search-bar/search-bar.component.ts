@@ -44,7 +44,7 @@ export class SearchBarComponent {
     this.prepareForm();
   }
 
-  private prepareForm(): void {
+  prepareForm(): void {
     this.searchForm = this.fb.group({
       search: [null],
     });
