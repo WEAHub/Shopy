@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './features/common/header/header.component';
 import { FooterComponent } from './features/common/footer/footer.component';
