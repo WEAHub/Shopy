@@ -1,3 +1,4 @@
+import { errorMock, userMock } from '@shared/mocks/tests';
 import {
   login,
   onLoginError,
@@ -5,37 +6,6 @@ import {
   onSetUserDetailsSuccess,
 } from '../actions/auth.actions';
 import { authReducer, initialAuthState } from './auth.reducer';
-import { User } from '@shared/interfaces/user/User';
-
-const userMock: User = {
-  address: {
-    city: 'Test',
-    number: 21,
-    street: 'Test',
-    zipcode: '123123',
-    address: 'Test Address',
-    province: 'test',
-    geolocation: { lat: '12', long: '34' },
-  },
-  id: 2,
-  email: 'morrison@gmail.com',
-  password: '83r5^_',
-  name: { firstname: 'david', lastname: 'morrison' },
-  phone: '1-570-236-7033',
-  token: 'testToken',
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const errorMock: any = {
-  status: 401,
-  statusText: 'Unknown Error',
-  url: 'https://fakestoreapi.com/auth/login',
-  ok: false,
-  name: 'HttpErrorResponse',
-  message:
-    'Http failure response for https://fakestoreapi.com/auth/login: 401 ',
-  error: {},
-};
 
 describe('Auth Reducer', () => {
   it('should have initial state with loading = true', () => {
