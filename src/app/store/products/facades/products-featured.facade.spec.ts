@@ -1,24 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { errorMock, productsMock } from '@shared/mocks/tests';
+import {
+  getError,
+  getProducts,
+  isLoading,
+} from '../selectors/products-featured.selectors';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { ProductsFeaturedFacade } from './products-featured.facade';
 import { ProductViewFacade } from './products-view.facade';
-import {
-  isLoading,
-  getProduct,
-  getError,
-} from '../selectors/product-view.selectors';
-import { onInitProductsView } from '../actions/products-view.actions';
-import { productMock, errorMock } from '@shared/mocks/tests';
+
 describe('Product View Facade', () => {
-  let productViewFacade: ProductViewFacade;
+  let productFeaturedFacade: ProductsFeaturedFacade;
   let store: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        ProductViewFacade,
+        ProductsFeaturedFacade,
         provideMockStore({
           selectors: [
             {
@@ -26,8 +26,8 @@ describe('Product View Facade', () => {
               value: false,
             },
             {
-              selector: getProduct,
-              value: productMock,
+              selector: getProducts,
+              value: productsMock,
             },
             {
               selector: getError,
@@ -39,12 +39,12 @@ describe('Product View Facade', () => {
       ],
     });
     store = TestBed.inject(MockStore);
-    productViewFacade = TestBed.inject(ProductViewFacade);
+    productFeaturedFacade = TestBed.inject(ProductsFeaturedFacade);
   });
 
   it('isLoading$() should return isLoading selector', done => {
     const selectSpy = jest.spyOn(store, 'select');
-    productViewFacade.isLoading$().subscribe(loading => {
+    productFeaturedFacade.isLoading$().subscribe(loading => {
       expect(loading).toBe(false);
       done();
     });
@@ -54,13 +54,13 @@ describe('Product View Facade', () => {
     expect(selectSpy).toHaveReturnedWith(expectedReturn);
   });
 
-  it('getProduct$() should return getProduct selector', done => {
+  it('getProducts$() should return getProducts selector', done => {
     const selectSpy = jest.spyOn(store, 'select');
-    productViewFacade.getProduct$().subscribe(product => {
-      expect(product).toEqual(productMock);
+    productFeaturedFacade.getProducts$().subscribe(products => {
+      expect(products).toEqual(productsMock);
       done();
     });
-    const expectedReturn = store.select(getProduct);
+    const expectedReturn = store.select(getProducts);
 
     expect(selectSpy).toHaveBeenCalled();
     expect(selectSpy).toHaveReturnedWith(expectedReturn);
@@ -68,7 +68,7 @@ describe('Product View Facade', () => {
 
   it('getError$() should return getProduct selector', done => {
     const selectSpy = jest.spyOn(store, 'select');
-    productViewFacade.getError$().subscribe(error => {
+    productFeaturedFacade.getError$().subscribe(error => {
       expect(error).toEqual(errorMock);
       done();
     });
@@ -76,12 +76,5 @@ describe('Product View Facade', () => {
 
     expect(selectSpy).toHaveBeenCalled();
     expect(selectSpy).toHaveReturnedWith(expectedReturn);
-  });
-
-  it('getProduct$() should return getProduct selector', () => {
-    const dispatchSpy = jest.spyOn(store, 'dispatch');
-    productViewFacade.getProduct(1);
-    const expectedAction = onInitProductsView({ id: productMock.id });
-    expect(dispatchSpy).toHaveBeenCalledWith(expectedAction);
   });
 });
