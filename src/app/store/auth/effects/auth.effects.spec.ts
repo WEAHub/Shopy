@@ -16,28 +16,7 @@ import {
   onSetUserDetails,
   onSetUserDetailsSuccess,
 } from '../actions/auth.actions';
-//41-48,67-69
-
-const token = { token: 'testToken' };
-
-const userMock = {
-  address: {
-    city: 'Test',
-    number: 21,
-    street: 'Test',
-    zipcode: '123123',
-    address: 'Test Address',
-    province: 'test',
-    geolocation: { lat: '12', long: '34' },
-  },
-  id: 2,
-  email: 'morrison@gmail.com',
-  password: '83r5^_',
-  username: 'mor_2314',
-  name: { firstname: 'david', lastname: 'morrison' },
-  phone: '1-570-236-7033',
-  token: 'testToken',
-};
+import { tokenResponseMock, userMock } from '@shared/mocks/tests';
 
 describe('AuthEffects', () => {
   let effects: AuthEffects;
@@ -80,7 +59,7 @@ describe('AuthEffects', () => {
 
     mockAuthService
       .setup(x => x.login(loginData))
-      .returns(() => of(token))
+      .returns(() => of(tokenResponseMock))
       .verifiable();
 
     mockUserService

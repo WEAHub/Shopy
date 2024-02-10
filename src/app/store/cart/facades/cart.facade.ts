@@ -93,7 +93,7 @@ export class CartFacade {
       .pipe(
         take(1),
         map(cart => {
-          let products = [...cart.products];
+          const products = [...cart.products];
 
           const productIdx = products.findIndex(
             p => p.productId === product.productId
@@ -102,11 +102,7 @@ export class CartFacade {
           if (productIdx === -1) {
             products.push(product);
           } else {
-            products = products.map((p, i) =>
-              i === productIdx
-                ? { ...p, quantity: p.quantity + product.quantity }
-                : p
-            );
+            products[productIdx].quantity += product.quantity;
           }
 
           this.updateCart({

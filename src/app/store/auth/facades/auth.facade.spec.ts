@@ -5,36 +5,7 @@ import { AuthFacade } from './auth.facade';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { getError, getToken } from '../selectors/auth.selectors';
 import { onSetUserDetails } from '../actions/auth.actions';
-
-const tokenMock = 'testToken';
-
-const errorMock: any = {
-  status: 401,
-  statusText: 'Unknown Error',
-  url: 'https://fakestoreapi.com/auth/login',
-  ok: false,
-  name: 'HttpErrorResponse',
-  message:
-    'Http failure response for https://fakestoreapi.com/auth/login: 401 ',
-  error: {},
-};
-const userMock = {
-  address: {
-    city: 'Test',
-    number: 21,
-    street: 'Test',
-    zipcode: '123123',
-    address: 'Test Address',
-    province: 'test',
-    geolocation: { lat: '12', long: '34' },
-  },
-  id: 2,
-  email: 'morrison@gmail.com',
-  password: '83r5^_',
-  name: { firstname: 'david', lastname: 'morrison' },
-  phone: '1-570-236-7033',
-  token: 'testToken',
-};
+import { errorMock, tokenMock, userMock } from '@shared/mocks/tests';
 
 describe('AuthEffects', () => {
   let authFacade: AuthFacade;

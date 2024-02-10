@@ -21,20 +21,18 @@ import { PrimeNGConfig } from 'primeng/api';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   private destroyRef = inject(DestroyRef);
   title = 'Shopy';
 
   constructor(
     private ngConfig: PrimeNGConfig,
     private translate: TranslateService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.initTranslations();
   }
 
-  private initTranslations(): void {
+  initTranslations(): void {
     // APP Translations
     const currentLang = this.getCurrentLang();
     this.translate.addLangs(environment.languages);

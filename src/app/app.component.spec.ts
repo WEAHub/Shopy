@@ -71,7 +71,7 @@ describe('AppComponent', () => {
   it(`PrimeNG Translations`, () => {
     const useSpy = jest.spyOn(translate, 'use');
     const ngSpy = jest.spyOn(ngConfig, 'setTranslation');
-    component.ngOnInit();
+    component.initTranslations();
     expect(useSpy).toHaveBeenCalled();
     expect(ngSpy).toHaveBeenCalled();
   });
