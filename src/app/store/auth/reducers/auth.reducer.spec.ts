@@ -3,6 +3,7 @@ import {
   login,
   onLoginError,
   onLoginSuccess,
+  onLogout,
   onSetUserDetailsSuccess,
 } from '../actions/auth.actions';
 import { authReducer, initialAuthState } from './auth.reducer';
@@ -70,5 +71,11 @@ describe('Auth Reducer', () => {
     };
     const action = onSetUserDetailsSuccess({ userData: userMockModified });
     expect(authReducer(state, action)).toEqual(expected);
+  });
+
+  it('should init onLogout and restore initial state', () => {
+    const expected = initialAuthState;
+    const action = onLogout;
+    expect(authReducer(initialAuthState, action)).toEqual(expected);
   });
 });
