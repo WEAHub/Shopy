@@ -7,14 +7,14 @@ import { Products } from '@shared/interfaces/products/Product';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-landing-featured',
+  selector: 'app-products-featured',
   standalone: true,
   imports: [ProductPreviewComponent, DirectivesModule, CommonModule],
-  templateUrl: './landing-featured.component.html',
-  styleUrl: './landing-featured.component.scss',
+  templateUrl: './products-featured.component.html',
+  styleUrl: './products-featured.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LandingFeaturedComponent {
+export class ProductsFeaturedComponent {
   products: Observable<Products | undefined> =
     this.productsFacade.getProducts$();
   loading: Observable<boolean> = this.productsFacade.isLoading$();

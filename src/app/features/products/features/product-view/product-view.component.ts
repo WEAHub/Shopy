@@ -13,7 +13,7 @@ import { Observable, filter, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { ProductViewSendComponent } from '../product-view-send/product-view-send.component';
-import { LandingFeaturedComponent } from '@app/features/landing/components/landing-featured/landing-featured.component';
+import { ProductsFeaturedComponent } from '@shared/components/products-featured/products-featured.component';
 import { ProductViewFacade } from '@app/store/products/facades/products-view.facade';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -28,7 +28,7 @@ import { MetadataService } from '@shared/services/metadata/metadata.service';
     StarsComponent,
     DirectivesModule,
     ProductViewSendComponent,
-    LandingFeaturedComponent,
+    ProductsFeaturedComponent,
     LoadingOverlayComponent,
   ],
   providers: [MetadataService],

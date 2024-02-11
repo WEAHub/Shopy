@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LandingFeaturedComponent } from './components/landing-featured/landing-featured.component';
+import { ProductsFeaturedComponent } from '../../../shared/components/products-featured/products-featured.component';
 import { LandingHomeComponent } from './components/landing-home/landing-home.component';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 
@@ -8,6 +8,10 @@ import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
   standalone: true,
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',
-  imports: [LandingFeaturedComponent, LandingHomeComponent, PrimeNGModule],
+  imports: [
+    ProductsFeaturedComponent,
+    LandingHomeComponent,
+    PrimeNGModule,
+  ],
 })
 export class LandingComponent {}
