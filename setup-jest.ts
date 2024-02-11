@@ -8,11 +8,8 @@ const _error = console.error;
 const excludeErrors: string[] = ['Error: Could not parse CSS stylesheet'];
 
 console.error = function (msg) {
-  const excludeThis = !!excludeErrors.find(error => error.includes(msg));
-
-  if (!excludeThis) {
-    _error(msg);
-  }
+  const excludeThis = !excludeErrors.find(error => error.includes(msg));
+  if (excludeThis) _error(msg);
 };
 
 configure({
@@ -22,7 +19,4 @@ configure({
       defaultTranslation as never
     ),
   ],
-  dom: {
-    testIdAttribute: 'id',
-  },
 });
