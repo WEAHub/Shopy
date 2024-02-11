@@ -45,21 +45,10 @@ export class CartFacade {
       .pipe(
         take(1),
         map(cart => {
-          const productId = cart.products.findIndex(
-            p => p.productId === product.productId
-          );
-
-          if (productId === -1) return;
-
-          const products = [...cart.products];
-          products.splice(productId, 1);
-
-          cart = {
-            ...cart,
-            products,
-          };
-
-          this.updateCart(cart);
+          const _cart = this.deleteProductProcess(cart, product);
+          if (_cart) {
+            this.updateCart(_cart);
+          }
         })
       )
       .subscribe();
@@ -70,19 +59,10 @@ export class CartFacade {
       .pipe(
         take(1),
         map(cart => {
-          const productId = cart.products.findIndex(
-            p => p.productId === product.productId
-          );
-
-          if (productId === -1) return;
-
-          const products = [...cart.products];
-          products[productId] = { ...product };
-
-          this.updateCart({
-            ...cart,
-            products,
-          });
+          const _cart = this.updateProductProcess(cart, product);
+          if (_cart) {
+            this.updateCart(_cart);
+          }
         })
       )
       .subscribe();
@@ -93,28 +73,71 @@ export class CartFacade {
       .pipe(
         take(1),
         map(cart => {
-          const products = [...cart.products];
-
-          const productIdx = products.findIndex(
-            p => p.productId === product.productId
-          );
-
-          if (productIdx === -1) {
-            products.push(product);
-          } else {
-            const { quantity, ..._product } = products[productIdx];
-            products[productIdx] = {
-              ..._product,
-              quantity: quantity + product.quantity,
-            };
-          }
-
-          this.updateCart({
-            ...cart,
-            products,
-          });
+          const _cart = this.addProductProcess(cart, product);
+          this.updateCart(_cart);
         })
       )
       .subscribe();
+  }
+
+  private addProductProcess(cart: Cart, product: CartProduct): Cart {
+    const products = [...cart.products];
+
+    const productIdx = products.findIndex(
+      p => p.productId === product.productId
+    );
+
+    if (productIdx === -1) {
+      products.push(product);
+    } else {
+      const { quantity, ..._product } = products[productIdx];
+      products[productIdx] = {
+        ..._product,
+        quantity: quantity + product.quantity,
+      };
+    }
+
+    return {
+      ...cart,
+      products,
+    };
+  }
+
+  private updateProductProcess(
+    cart: Cart,
+    product: CartProduct
+  ): Cart | undefined {
+    const productId = cart.products.findIndex(
+      p => p.productId === product.productId
+    );
+
+    if (productId === -1) return;
+
+    const products = [...cart.products];
+    products[productId] = { ...product };
+
+    return {
+      ...cart,
+      products,
+    };
+  }
+
+  private deleteProductProcess(
+    cart: Cart,
+    product: CartProduct
+  ): Cart | undefined {
+    const productId = cart.products.findIndex(
+      p => p.productId === product.productId
+    );
+
+    if (productId === -1) return;
+
+    const products = [...cart.products];
+    products.splice(productId, 1);
+
+    return {
+      ...cart,
+      products,
+    };
   }
 }

@@ -83,7 +83,7 @@ export class SearchBarComponent {
     this.autocomplete.hide();
     this.searchForm.reset();
 
-    console.log({ id });
-    //this.router.navigateByUrl(`/products/${id}`);
+    // console.log({ id });
+    // this.router.navigateByUrl(`/products/${id}`);
   }
 }
