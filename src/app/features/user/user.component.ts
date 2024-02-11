@@ -5,11 +5,12 @@ import { AuthFacade } from '@app/store/auth';
 import { Title } from '@angular/platform-browser';
 import { map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BaseLayoutComponent } from '@shared/components/base-layout/base-layout.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [UserMenuComponent, RouterOutlet],
+  imports: [UserMenuComponent, RouterOutlet, BaseLayoutComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })

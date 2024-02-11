@@ -13,6 +13,7 @@ import {
 } from '@shared/interfaces/backend/product/ProductsRequest';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { ProductsFiltersComponent } from './components/products-filters/products-filters.component';
+import { BaseLayoutComponent } from '@shared/components/base-layout/base-layout.component';
 
 interface ProductsQueryParams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,6 +29,7 @@ interface ProductsQueryParams {
     DirectivesModule,
     LoadingOverlayComponent,
     ProductsFiltersComponent,
+    BaseLayoutComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',

@@ -1,7 +1,6 @@
 
 
-<div class="base-layout">
-  <div class="base-layout__body pt-10">
+<app-base-layout>
     <div class="relative">
       <app-loading-overlay [loading]="(isLoading$ | async)!"></app-loading-overlay>
       <div class="grid gap-6">
@@ -19,6 +18,4 @@
           }
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </div></app-base-layout>

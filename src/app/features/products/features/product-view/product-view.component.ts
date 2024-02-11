@@ -18,6 +18,7 @@ import { ProductViewFacade } from '@app/store/products/facades/products-view.fac
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetadataService } from '@shared/services/metadata/metadata.service';
+import { BaseLayoutComponent } from '@shared/components/base-layout/base-layout.component';
 
 @Component({
   selector: 'app-product-view',
@@ -30,6 +31,7 @@ import { MetadataService } from '@shared/services/metadata/metadata.service';
     ProductViewSendComponent,
     ProductsFeaturedComponent,
     LoadingOverlayComponent,
+    BaseLayoutComponent,
   ],
   providers: [MetadataService],
   templateUrl: './product-view.component.html',
