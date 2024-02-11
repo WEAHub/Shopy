@@ -102,7 +102,11 @@ export class CartFacade {
           if (productIdx === -1) {
             products.push(product);
           } else {
-            products[productIdx].quantity += product.quantity;
+            const { quantity, ..._product } = products[productIdx];
+            products[productIdx] = {
+              ..._product,
+              quantity: quantity + product.quantity,
+            };
           }
 
           this.updateCart({
