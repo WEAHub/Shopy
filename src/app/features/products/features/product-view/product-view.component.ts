@@ -12,7 +12,7 @@ import { StarsComponent } from '@shared/components/stars/stars.component';
 import { Observable, filter, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { DirectivesModule } from '@shared/directives/directives.module';
-import { ProductViewSendComponent } from '../product-view-send/product-view-send.component';
+import { ProductViewSendComponent } from './components/product-view-send/product-view-send.component';
 import { ProductsFeaturedComponent } from '@shared/components/products-featured/products-featured.component';
 import { ProductViewFacade } from '@app/store/products/facades/products-view.facade';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';

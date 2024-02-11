@@ -1,59 +1,67 @@
-<div class="relative mb-10" *ngVar="(product$ | async) as _product">
-  <app-loading-overlay [loading]="(productLoading$ | async)!"></app-loading-overlay>
-  @if(_product) {
 
-    <div class="product-view flex flex-wrap gap-8 justify-center">
-      <div class="product-view__image">
-        <img
-          [src]="_product?.image!"
-          [redZoom]="_product?.image!"
-          [redZoomLazy]="true"
-          redZoomClass="red-zoom--style--overlay"
-          alt="Product image"
-        >
-      </div>
-      <div class="flex flex-col gap-4">
+
+
+
+<div class="base-layout">
+  <div class="base-layout__body pt-10">
+    <div class="relative mb-10" *ngVar="(product$ | async) as _product">
+      <app-loading-overlay [loading]="(productLoading$ | async)!"></app-loading-overlay>
+      @if(_product) {
+
+        <div class="product-view flex flex-wrap gap-8 justify-center">
+          <div class="product-view__image">
+            <img
+              [src]="_product?.image!"
+              [redZoom]="_product?.image!"
+              [redZoomLazy]="true"
+              redZoomClass="red-zoom--style--overlay"
+              alt="Product image"
+            >
+          </div>
+          <div class="flex flex-col gap-4">
+            
+            <!-- PRICE -->
+            <span class="product-view__price">
+              {{ _product?.modifiers?.finalPrice }} €
+            </span>
         
-        <!-- PRICE -->
-        <span class="product-view__price">
-          {{ _product?.modifiers?.finalPrice }} €
-        </span>
-    
-        <span class="product-view__price-details text-[color:var(--gray-500)]">
-          Precio con IVA incluido | 2% de descuento extra
-        </span>
-    
-        <!-- CHOICE -->
-        <div class="product-view__choice flex flex-col gap-3">
-           <img src="assets/images/choice_nobg.webp" alt="Choice"/>
-           <div class="flex flex-col gap-1">
-            <span>· <b>Envío gratis</b> en pedidos +10,00€</span>
-            <span>· <b>Entrega rápida</b> entrega en 7 días</span>
-            <span>· <b>Devoluciones gratis</b>  en los siguientes 15 días, sin preguntas</span>
-           </div>
-        </div>
-    
-        <!-- TITLE -->
-        <div class="product-view__title">
-          <span>{{ _product?.title }}</span>
-        </div>
-    
-        <!-- STARS & STATS-->
-        <div class="flex gap-3 items-start">
-          <app-stars [filledStars]="_product?.modifiers?.stars!"></app-stars>
-          <div class="product-view__stats-details">
-            <span>{{ _product?.rating?.count }} Valoraciones</span>
+            <span class="product-view__price-details text-[color:var(--gray-500)]">
+              Precio con IVA incluido | 2% de descuento extra
+            </span>
+        
+            <!-- CHOICE -->
+            <div class="product-view__choice flex flex-col gap-3">
+              <img src="assets/images/choice_nobg.webp" alt="Choice"/>
+              <div class="flex flex-col gap-1">
+                <span>· <b>Envío gratis</b> en pedidos +10,00€</span>
+                <span>· <b>Entrega rápida</b> entrega en 7 días</span>
+                <span>· <b>Devoluciones gratis</b>  en los siguientes 15 días, sin preguntas</span>
+              </div>
+            </div>
+        
+            <!-- TITLE -->
+            <div class="product-view__title">
+              <span>{{ _product?.title }}</span>
+            </div>
+        
+            <!-- STARS & STATS-->
+            <div class="flex gap-3 items-start">
+              <app-stars [filledStars]="_product?.modifiers?.stars!"></app-stars>
+              <div class="product-view__stats-details">
+                <span>{{ _product?.rating?.count }} Valoraciones</span>
+              </div>
+              ౹
+              <div class="product-view__stats-details">
+                <span>{{ _product?.modifiers?.stockTotal! - _product?.modifiers?.stock! }} Vendidos</span>
+              </div>
+            </div>
+        
           </div>
-          ౹
-          <div class="product-view__stats-details">
-            <span>{{ _product?.modifiers?.stockTotal! - _product?.modifiers?.stock! }} Vendidos</span>
-          </div>
+          <app-product-view-send [product]="_product" class="flex-grow flex justify-center"></app-product-view-send>
         </div>
-    
-      </div>
-      <app-product-view-send [product]="_product" class="flex-grow flex justify-center"></app-product-view-send>
+      }
     </div>
-  }
-</div>
 
-<app-products-featured></app-products-featured>
+    <app-products-featured></app-products-featured> 
+  </div>
+</div>
