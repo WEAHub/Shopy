@@ -61,6 +61,10 @@ export class CartEffects {
       ofType(onCartUpdate),
       exhaustMap(({ cart }) =>
         this.cartService.updateCart(cart).pipe(
+          mergeMap(async cart => {
+            const products = await this.aggregateProduct(cart.products);
+            return { ...cart, products };
+          }),
           map(cart => onCartUpdateSuccess({ cart })),
           catchError(error => of(onCartUpdateError({ error })))
         )
