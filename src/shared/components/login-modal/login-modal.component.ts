@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,7 @@ import { LoginRequestBody } from '@shared/interfaces/backend/login/LoginRequest'
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login-modal',
@@ -28,11 +29,14 @@ import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.comp
   styleUrl: './login-modal.component.scss',
 })
 export class LoginModalComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
   visible: boolean = false;
   loginForm!: FormGroup;
-  isLoading$: Observable<boolean> = this.authFacade.isLoading$();
+  isLoading$: Observable<boolean> = this.authFacade.isLoading$().pipe();
   loginErrors$: Observable<HttpErrorResponse> =
     this.authFacade.getError$();
+
+  isAuth$: Observable<boolean> = this.authFacade.isAuthenticated$();
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +45,7 @@ export class LoginModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepareForm();
+    this.authHandler();
   }
 
   private prepareForm(): void {
@@ -53,6 +58,16 @@ export class LoginModalComponent implements OnInit {
       username: 'mor_2314',
       password: '83r5^_',
     });
+  }
+
+  private authHandler(): void {
+    this.isAuth$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(isAuth => {
+        if (isAuth) {
+          this.hideModal();
+        }
+      });
   }
 
   showModal(): void {
