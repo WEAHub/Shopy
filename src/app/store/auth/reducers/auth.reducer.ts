@@ -17,7 +17,10 @@ export const initialAuthState: AuthFeatureState = {
 };
 
 export const authReducer = createRehydrateReducer<AuthFeatureState>(
-  { key: authFeatureKey },
+  {
+    key: authFeatureKey,
+    skipHydrateActions: [onLoginError, login],
+  },
   initialAuthState,
   on(login, () => {
     return {
@@ -34,19 +37,13 @@ export const authReducer = createRehydrateReducer<AuthFeatureState>(
       error: undefined,
     };
   }),
-  on(onLoginError, (state, action) => {
-    return {
-      ...initialAuthState,
-      error: action.error,
-      entity: undefined,
-    };
-  }),
   on(onLogout, () => {
     return initialAuthState;
   }),
   on(onLoginError, (state, action) => {
     return {
       ...state,
+      loading: false,
       error: action.error,
       entity: undefined,
     };

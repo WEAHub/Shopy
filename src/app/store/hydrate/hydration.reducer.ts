@@ -10,6 +10,7 @@ import { OnReducer } from '@ngrx/store/src/reducer_creator';
 
 interface RehydrateConfig {
   key: string;
+  skipHydrateActions: Action[];
 }
 
 export function createRehydrateReducer<S, A extends Action = Action>(
@@ -26,8 +27,14 @@ export function createRehydrateReducer<S, A extends Action = Action>(
   const item = localStorage.getItem(key);
   const newInitialState = (item && JSON.parse(item)) ?? initialState;
 
-  const newEvents: ReducerTypes<S, ActionCreator[]>[] = events.map(
-    (oldEvent: ReducerTypes<S, ActionCreator[]>) => {
+  const newEvents: ReducerTypes<S, ActionCreator[]>[] = events
+    .filter(
+      event =>
+        !config.skipHydrateActions.find(_action =>
+          event.types.includes(_action.type)
+        )
+    )
+    .map((oldEvent: ReducerTypes<S, ActionCreator[]>) => {
       const reducer: OnReducer<S, ActionCreator[]> = (
         state: S,
         action: ActionType<ActionCreator[][number]>
@@ -41,8 +48,8 @@ export function createRehydrateReducer<S, A extends Action = Action>(
         ...oldEvent,
         reducer,
       };
-    }
-  );
+    });
 
-  return createReducer(newInitialState, ...newEvents);
+  const _events = [...events, ...newEvents];
+  return createReducer(newInitialState, ..._events);
 }
