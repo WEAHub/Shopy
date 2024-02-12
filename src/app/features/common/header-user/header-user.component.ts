@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthFacade } from '@app/store/auth';
 import { User } from '@shared/interfaces/user/User';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
@@ -12,6 +12,7 @@ import { UserMenu } from './header-user.menu';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { LoginModalComponent } from '@shared/components/login-modal/login-modal.component';
 
 @Component({
   selector: 'app-header-user',
@@ -24,11 +25,14 @@ import { Router } from '@angular/router';
     DirectivesModule,
     HeaderCartComponent,
     LoadingOverlayComponent,
+    LoginModalComponent,
   ],
   templateUrl: './header-user.component.html',
   styleUrl: './header-user.component.scss',
 })
 export class HeaderUserComponent {
+  @ViewChild('loginModal') loginModal!: LoginModalComponent;
+
   isAuth$: Observable<boolean> = this.authFacade.isAuthenticated$();
   isLoading$: Observable<boolean> = this.authFacade.isLoading$();
   user$: Observable<User> = this.authFacade.getUser$();
@@ -46,7 +50,8 @@ export class HeaderUserComponent {
   ) {}
 
   login(): void {
-    this.authFacade.forceLogin();
+    //this.authFacade.forceLogin();
+    this.loginModal.showModal();
   }
 
   editProfile(): void {
