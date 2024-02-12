@@ -12,7 +12,6 @@ import {
 } from '@angular/platform-browser';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
-import * as fromStore from './store';
 import {
   provideHttpClient,
   withFetch,
@@ -24,6 +23,7 @@ import { authInterceptor } from '@shared/services/interceptors/http.interceptor'
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslation } from './config/translate.config';
 import { inMemoryScrollingFeature } from './config/scroll.config';
+import { AppStoreModule } from './store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     importProvidersFrom([
       TranslateModule.forRoot(provideTranslation()),
-      fromStore.AppStoreModule,
+      AppStoreModule,
     ]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],

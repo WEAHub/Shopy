@@ -3,7 +3,7 @@ import {
   getPercentagePrice,
   percentage,
   rndNumberRange,
-} from './productRandomizer';
+} from './product-randomizer';
 
 test('should calculate percentage price', () => {
   const price = 100;

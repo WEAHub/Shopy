@@ -1,11 +1,30 @@
 <div class="landing-home flex">
-  <div class="self-center">
-    <h2 class="landing-home__left-title">Descubre un Mundo de Estilo</h2>
-    <h3 class="landing-home__left-subtitle mb-10">
-      Tu destino online para comprar con estilo.
-    </h3>
-    <div class="landing-home-subscribe">
-      <app-subscribe-input></app-subscribe-input>
-    </div>
-  </div>
+
+  <swiper-container appSwiper #swiper init="false" class="w-full" [config]="swiperConfig">
+    <swiper-slide>
+      
+      <div class="w-full h-full relative px-24">
+        <div class="flex justify-center">
+          <div class="flex gap-24 flex-col sm:flex-row">
+            <div class="self-center">
+              <h2 class="text-5xl">Descubre un mundo de <b>estilo</b></h2>
+              <h3 class="landing-home__left-subtitle mb-10">
+                Tu destino online para comprar con estilo.
+              </h3>
+              <div class="landing-home-subscribe">
+                <app-subscribe-input></app-subscribe-input>
+              </div>  
+            </div>
+            <img class="max-w-[45rem] w-full" src="assets/images/swiper-1.png" />
+          </div>
+        </div>
+      </div>
+
+    </swiper-slide>
+    <swiper-slide>
+      <div class="h-full w-full">
+        <img class="w-full h-full" src="assets/images/swiper-2.png">
+      </div>
+    </swiper-slide>
+  </swiper-container>
 </div>

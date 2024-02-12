@@ -1,21 +1,6 @@
 .landing-home {
 
-  height: 45rem;
-  background-image: url('/assets/images/shopping.png');
-  background-repeat: no-repeat;
-  background-position: right;
-  border-radius: 1rem;
-
-  &__left-title {
-    font-size: 5rem;
-    font-weight: 700;
-    max-width: 40rem;
-    line-height: 6rem;
-  }
-
-  &__left-subtitle {
-    font-size: 2.5rem;
-    font-weight: 400;
-  }
+  height: calc(100dvh - 15rem);
+  border-bottom: 1px solid #e5e7eb;
 
 }

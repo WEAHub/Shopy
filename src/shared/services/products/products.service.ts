@@ -8,7 +8,7 @@ import {
   ProductsResponseBody,
   ProductResponseBody,
 } from '@shared/interfaces/backend/product/ProductsResponse';
-import { randomizeProduct } from '@shared/utils/productRandomizer';
+import { randomizeProduct } from '@shared/utils/product-randomizer';
 
 @Injectable({
   providedIn: 'root',
