@@ -13,8 +13,6 @@ import { getProducts } from '@app/store/products/selectors/products.selectors';
 describe('Search Bar Component', () => {
   let component: SearchBarComponent;
   let fixture: ComponentFixture<SearchBarComponent>;
-  let store: MockStore;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -43,7 +41,6 @@ describe('Search Bar Component', () => {
         MockStore,
       ],
     }).compileComponents();
-    store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(SearchBarComponent);
     component = fixture.componentInstance;
   });

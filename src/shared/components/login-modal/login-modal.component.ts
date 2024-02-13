@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-modal',
@@ -24,6 +25,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ReactiveFormsModule,
     InputValidatorComponent,
     LoadingOverlayComponent,
+    TranslateModule,
   ],
   templateUrl: './login-modal.component.html',
   styleUrl: './login-modal.component.scss',
@@ -58,6 +60,8 @@ export class LoginModalComponent implements OnInit {
       username: 'mor_2314',
       password: '83r5^_',
     });
+
+    this.loginForm.markAllAsTouched();
   }
 
   private authHandler(): void {

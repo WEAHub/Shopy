@@ -13,6 +13,7 @@ import { LoadingOverlayComponent } from '@shared/components/loading-overlay/load
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { LoginModalComponent } from '@shared/components/login-modal/login-modal.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header-user',
@@ -26,6 +27,7 @@ import { LoginModalComponent } from '@shared/components/login-modal/login-modal.
     HeaderCartComponent,
     LoadingOverlayComponent,
     LoginModalComponent,
+    TranslateModule,
   ],
   templateUrl: './header-user.component.html',
   styleUrl: './header-user.component.scss',
@@ -46,7 +48,8 @@ export class HeaderUserComponent {
 
   constructor(
     private authFacade: AuthFacade,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   login(): void {

@@ -8,7 +8,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { ProductsFeaturedFacade } from './products-featured.facade';
-import { ProductViewFacade } from './products-view.facade';
 
 describe('Product View Facade', () => {
   let productFeaturedFacade: ProductsFeaturedFacade;

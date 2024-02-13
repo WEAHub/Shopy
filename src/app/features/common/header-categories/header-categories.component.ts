@@ -10,13 +10,21 @@ import {
 import { CategoriesFacade } from '@app/store/categories';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { Categories } from '@shared/interfaces/categories/Category';
-import { Observable, filter, map } from 'rxjs';
+import { Observable, filter, map, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from '@shared/pipes';
 
 @Component({
   selector: 'app-header-categories',
   standalone: true,
-  imports: [DirectivesModule, CommonModule, RouterModule],
+  imports: [
+    DirectivesModule,
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    PipesModule,
+  ],
   templateUrl: './header-categories.component.html',
   styleUrl: './header-categories.component.scss',
 })
@@ -29,7 +37,8 @@ export class HeaderCategoriesComponent {
     this.categoriesFacade.getCategories$();
 
   activeCategory$: Observable<string> = this.route.queryParams.pipe(
-    map((params: Params) => params['category'])
+    map((params: Params) => params['category']),
+    tap(console.log)
   );
 
   hideCategories$: Observable<boolean> = this.router.events.pipe(

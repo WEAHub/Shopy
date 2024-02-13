@@ -10,17 +10,25 @@
       }
       @else {
         <div class="flex gap-10" *ngVar="(categories$ | async) as _categories">
+          
+        <div 
+          [routerLink]="['/products']"
+          class="header-categories__category"
+ 
+        >
+          <span class="header-categories__category-title">
+            {{ 'words.all' | translate }}
+          </span>
+        </div>
           @for(category of _categories; track $index) {
             <div 
               [routerLink]="['/products']"
               [queryParams]="{category}"
               class="header-categories__category"
-              [ngClass]="{
-                'header-categories__category--active': category === (activeCategory$ | async)
-              }"
+              routerLinkActive="header-categories__category--active"
             >
               <span class="header-categories__category-title">
-                {{ category }}
+                {{ category | categoryPipe | translate }}
               </span>
             </div>
           }

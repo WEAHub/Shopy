@@ -28,11 +28,11 @@ import { AppStoreModule } from './store';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, inMemoryScrollingFeature),
+    provideAnimations(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideClientHydration(
       withHttpTransferCacheOptions({ includePostRequests: true })
     ),
-    provideAnimations(),
     importProvidersFrom([
       TranslateModule.forRoot(provideTranslation()),
       AppStoreModule,

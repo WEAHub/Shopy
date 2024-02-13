@@ -7,6 +7,26 @@
     "matching": "Passwords do not match",
     "cantMatch": "Can't be the same"
   },
+  "words": {
+    "username": "User name",
+    "password": "Password",
+    "account": "Account",
+    "all": "All"
+  },
+  "categories": {
+    "electronics": "Electronics",
+    "jewelery": "Jewelery",
+    "mensclothing": "Men's clothing",
+    "womensclothing": "Women's clothing"
+  },
+  "messages": {
+    "hellosign": "Hello, sign in",
+    "enteruser": "Enter your user name",
+    "enterpass": "Enter your password",
+    "error": {
+      "baduser": "User or password invalid"
+    }
+  },
   "primeng": {
     "startsWith": "Starts with",
     "contains": "Contains",

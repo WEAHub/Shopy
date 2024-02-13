@@ -1,17 +1,14 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { productMock, errorMock, productsMock } from '@shared/mocks/tests';
-import { getProduct } from '../selectors/product-view.selectors';
+import { errorMock, productsMock } from '@shared/mocks/tests';
 import * as productsSelectors from '../selectors/products.selectors';
 import {
   getError,
-  getProductById,
   getProducts,
   isLoading,
 } from '../selectors/products.selectors';
 import { ProductsFacade } from './products.facade';
-import { of } from 'rxjs';
 import { createSelector } from '@ngrx/store';
 import { ProductsSorts } from '@shared/interfaces/backend/product/ProductsRequest';
 import {

@@ -16,6 +16,7 @@ import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
   selector: 'app-header-language-switch',
   standalone: true,
   imports: [
+    CommonModule,
     HeaderUserButtonComponent,
     TranslateModule,
     CommonModule,
@@ -44,5 +45,6 @@ export class HeaderLanguageSwitchComponent {
 
   changeLanguage(language: string): void {
     this.translateService.use(language);
+    this.translateService.setDefaultLang(language);
   }
 }

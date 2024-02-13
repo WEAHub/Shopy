@@ -7,6 +7,26 @@
     "matching": "Las contraseñas no coinciden",
     "cantMatch": "No pueden ser iguales"
   },
+  "words": {
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "account": "Cuenta",
+    "all": "Todos"
+  },
+  "categories": {
+    "electronics": "Electronica",
+    "jewelery": "Joyeria",
+    "mensclothing": "Ropa de hombre",
+    "womensclothing": "Ropa de mujer"
+  },
+  "messages": {
+    "hellosign": "Hola, registrate",
+    "enteruser": "Introduce tu nombre de usuario",
+    "enterpass": "Introduce tu contraseña",
+    "error": {
+      "baduser": "Usuario o contraseñas incorrectos"
+    }
+  },
   "primeng": {
     "startsWith": "Comience con",
     "contains": "Contenga",
