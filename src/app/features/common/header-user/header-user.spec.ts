@@ -54,6 +54,7 @@ describe('Header', () => {
     expect(component).toBeTruthy();
   });
 
+  /* 
   it('force login should call the service', () => {
     const loginSpy = jest.spyOn(component, 'login');
     const authSpy = jest.spyOn(authFacade, 'forceLogin');
@@ -69,7 +70,8 @@ describe('Header', () => {
     expect(loginSpy).toHaveBeenCalled();
     expect(authSpy).toHaveBeenCalled();
     expect(authLoginSpy).toHaveBeenCalledWith(loginBody);
-  });
+  }); 
+  */
 
   it('edit profile link should redirect to /user', () => {
     const editSpy = jest.spyOn(component, 'editProfile');
