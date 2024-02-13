@@ -24,8 +24,6 @@ export class LandingHomeComponent {
   swiperConfig: SwiperOptions = {
     spaceBetween: 10,
     navigation: true,
-    autoplay: true,
-    loop: true,
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

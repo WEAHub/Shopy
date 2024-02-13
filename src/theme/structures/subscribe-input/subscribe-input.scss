@@ -2,7 +2,6 @@
   width: 100%;
 
   &__email {
-    
     &:enabled:focus {
       outline: none;
       outline-offset: 0;
@@ -10,6 +9,7 @@
       border-color: none;
     }
     
+    background: transparent;
     padding: 1rem 3rem;
     width: 100%;
     border: 0;

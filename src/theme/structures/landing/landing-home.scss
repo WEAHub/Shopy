@@ -1,6 +1,11 @@
 .landing-home {
 
   height: calc(100dvh - 20rem);
-  border-bottom: 1px solid #e5e7eb;
+  //border-bottom: 1px solid #e5e7eb;
 
+  &__swiper-1-bg {
+    background-image: radial-gradient(at top left, transparent 67%, #fff 67.1%), linear-gradient(73deg, #9deedf 0%, #2979ff 100%);
+    background-size: 120% 100%,cover;
+    background-repeat: no-repeat;
+  }
 }
