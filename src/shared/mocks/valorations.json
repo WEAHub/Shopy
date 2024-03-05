@@ -1,122 +1,92 @@
 [
   {
-    "comment": "Great book, highly recommend",
-    "score": "4.5",
-    "date": "2019"
+    "comment": "Great product, highly recommend!",
+    "score": 5,
+    "date": "1632489600",
+    "name": "John Doe"
   },
   {
-    "comment": "Amazing product, exceeded my expectations",
-    "score": "5.0",
-    "date": "2020"
+    "comment": "This product exceeded my expectations.",
+    "score": 4.5,
+    "date": "1632403200",
+    "name": "Jane Smith"
   },
   {
-    "comment": "Very satisfied with my purchase",
-    "score": "4.8",
-    "date": "2018"
+    "comment": "I've been using this for months and it still works perfectly.",
+    "score": 4,
+    "date": "1632316800",
+    "name": "Mike Johnson"
   },
   {
-    "comment": "Excellent quality and value",
-    "score": "4.7",
-    "date": "2021"
+    "comment": "The quality of this product is top-notch.",
+    "score": 4.8,
+    "date": "1632230400",
+    "name": "Sarah Wilson"
   },
   {
-    "comment": "Incredible service, fast shipping",
-    "score": "4.9",
-    "date": "2017"
+    "comment": "I'm very satisfied with my purchase.",
+    "score": 4.5,
+    "date": "1632144000",
+    "name": "Chris Thompson"
   },
   {
-    "comment": "Top-notch product, worth every penny",
-    "score": "4.6",
-    "date": "2016"
+    "comment": "This product is a game-changer.",
+    "score": 5,
+    "date": "1632057600",
+    "name": "Emily Davis"
   },
   {
-    "comment": "Couldn't be happier with my decision",
-    "score": "4.4",
-    "date": "2015"
+    "comment": "The customer service for this product is excellent.",
+    "score": 4.7,
+    "date": "1631971200",
+    "name": "David Anderson"
   },
   {
-    "comment": "Impressed by the attention to detail",
-    "score": "4.7",
-    "date": "2019"
+    "comment": "I would buy this product again in a heartbeat.",
+    "score": 4.3,
+    "date": "1631884800",
+    "name": "Olivia Martinez"
   },
   {
-    "comment": "Highly reliable and efficient",
-    "score": "4.9",
-    "date": "2020"
+    "comment": "This product is worth every penny.",
+    "score": 4.9,
+    "date": "1631798400",
+    "name": "Sophia Hernandez"
   },
   {
-    "comment": "Outstanding customer support",
-    "score": "5.0",
-    "date": "2018"
+    "comment": "I can't imagine my life without this product.",
+    "score": 4.6,
+    "date": "1631712000",
+    "name": "Michael Lee"
   },
   {
-    "comment": "Adds value to my daily routine",
-    "score": "4.8",
-    "date": "2021"
+    "comment": "The design of this product is sleek and modern.",
+    "score": 4.2,
+    "date": "1631625600",
+    "name": "Jessica Garcia"
   },
   {
-    "comment": "Well-packaged and delivered on time",
-    "score": "4.6",
-    "date": "2017"
+    "comment": "This product has improved my daily routine.",
+    "score": 4.7,
+    "date": "1631539200",
+    "name": "Matthew Rodriguez"
   },
   {
-    "comment": "A game-changer in its category",
-    "score": "4.5",
-    "date": "2016"
+    "comment": "I've recommended this product to all my friends.",
+    "score": 4.8,
+    "date": "1631452800",
+    "name": "Ava Wilson"
   },
   {
-    "comment": "Pleasantly surprised by the results",
-    "score": "4.7",
-    "date": "2015"
+    "comment": "The price of this product is very reasonable.",
+    "score": 4.5,
+    "date": "1631366400",
+    "name": "Ethan Lopez"
   },
   {
-    "comment": "Truly exceptional, exceeded all expectations",
-    "score": "4.9",
-    "date": "2019"
-  },
-  {
-    "comment": "Highly recommended, best in its class",
-    "score": "5.0",
-    "date": "2020"
-  },
-  {
-    "comment": "Great value for the price",
-    "score": "4.8",
-    "date": "2018"
-  },
-  {
-    "comment": "Reliable and user-friendly",
-    "score": "4.7",
-    "date": "2021"
-  },
-  {
-    "comment": "Prompt delivery and excellent condition",
-    "score": "4.9",
-    "date": "2017"
-  },
-  {
-    "comment": "Impressive performance and durability",
-    "score": "4.6",
-    "date": "2016"
-  },
-  {
-    "comment": "Satisfied with my purchase, no complaints",
-    "score": "4.4",
-    "date": "2015"
-  },
-  {
-    "comment": "Attention-grabbing and visually stunning",
-    "score": "4.7",
-    "date": "2019"
-  },
-  {
-    "comment": "Efficient and effective, gets the job done",
-    "score": "4.9",
-    "date": "2020"
-  },
-  {
-    "comment": "Exceptional customer service",
-    "score": "5.0",
-    "date": "2018"
+    "comment": "This product arrived quickly and in perfect condition.",
+    "score": 4.9,
+    "date": "1631280000",
+    "name": "Isabella Gonzalez"
   }
 ]

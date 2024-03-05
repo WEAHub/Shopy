@@ -1,14 +1,29 @@
 export type Products = Product[];
 
 export interface Product {
+  /*   
   id: number;
   title: string;
   price: number;
   description: string;
-  category: string;
+  categoryId: number;
   image: string;
   rating: ProductRating;
+  modifiers?: ProductModifiers; 
+  */
+  id?: number;
+  name: string;
+  image: string;
+  description: string;
+  stock: number;
+  stockTotal: number;
   modifiers?: ProductModifiers;
+  addedDate: Date;
+  updateDate: Date;
+  categoryId: number;
+  price: number;
+  published?: boolean;
+  stars: number;
 }
 
 export interface ProductRating {
@@ -18,12 +33,14 @@ export interface ProductRating {
 
 export interface ProductModifiers {
   discountPercent: number;
-  discountPrice: number;
+  discountPrice?: number;
+  hasChoice: boolean;
+  /*
   finalPrice: number;
   stock: number;
   stockTotal: number;
   stockPercent: number;
   stars: number;
   estimatedDays: number;
-  hasChoice: boolean;
+  */
 }

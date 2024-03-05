@@ -35,7 +35,9 @@ export class ProductsFeaturedEffects implements OnInitEffects {
             limit: 6,
           })
           .pipe(
-            map(products => onGetProductsFeatured({ products })),
+            map(products =>
+              onGetProductsFeatured({ products: products.data })
+            ),
             catchError(error => of(onGetProductsFeaturedError({ error })))
           )
       )

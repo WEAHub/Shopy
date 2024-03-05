@@ -1,0 +1,12 @@
+
+<app-loading-overlay [loading]="loading"></app-loading-overlay>
+<img
+  style="transition: opacity .3s ease-in-out"
+  [class.opacity-0]="loading"
+  (load)="onLoad()"
+  (error)="onError()"
+  [ngClass]="imageClass" 
+  [ngSrc]="imageUrl" 
+  [alt]="imageAlt"
+  fill
+/>

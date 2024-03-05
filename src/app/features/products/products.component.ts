@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsFacade } from '@app/store/products';
-import { Products } from '@shared/interfaces/products/Product';
+import { Product, Products } from '@shared/interfaces/products/Product';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductPreviewComponent } from '@shared/components/product-preview/product-preview.component';
@@ -14,6 +14,7 @@ import {
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { ProductsFiltersComponent } from './components/products-filters/products-filters.component';
 import { BaseLayoutComponent } from '@shared/components/base-layout/base-layout.component';
+import { Paginated } from '@shared/interfaces/products/Paginated';
 
 interface ProductsQueryParams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,12 +39,12 @@ export class ProductsComponent {
   private destroyRef = inject(DestroyRef);
 
   isLoading$ = this.productsFacade.isLoading$();
-  products$!: Observable<Products>;
-  category!: string;
+  products$!: Observable<Paginated<Product>>;
+  categoryId!: number;
 
   productsParams: ProductsParameters = {
     limit: 0,
-    sort: ProductsSorts.ASC,
+    sort: ProductsSorts.DESC,
   };
 
   constructor(
@@ -62,7 +63,7 @@ export class ProductsComponent {
 
   private onParamsChange(queryParams: ProductsQueryParams): void {
     const { category } = queryParams;
-    this.category = category;
+    this.categoryId = category;
     this.products$ = this.productsFacade.getProducts$();
     this.getProducts();
   }
@@ -73,9 +74,9 @@ export class ProductsComponent {
   }
 
   getProducts(): void {
-    if (this.category) {
+    if (this.categoryId) {
       this.productsFacade.getProductsByCategory(
-        this.category,
+        this.categoryId,
         this.productsParams
       );
       return;

@@ -1,18 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
 import { EntityDataState } from '@shared/interfaces/store/common/EntityDataState';
-import { Products } from '@shared/interfaces/products/Product';
+import { Product } from '@shared/interfaces/products/Product';
+
 import {
   onGetProducts,
   onGetProductsError,
   onInitProducts,
   onInitProductsByCategory,
 } from '../actions/products.actions';
+import { Paginated } from '@shared/interfaces/products/Paginated';
 
-export type ProductsDataState = EntityDataState<Products>;
+export type ProductsDataState = EntityDataState<Paginated<Product>>;
 
 export const initialCategoryState: ProductsDataState = {
   loading: false,
-  entity: [],
+  entity: undefined,
   error: undefined,
 };
 
@@ -29,7 +31,7 @@ export const productReducer = createReducer<ProductsDataState>(
     return {
       ...state,
       loading: true,
-      entity: [],
+      entity: undefined,
       error: undefined,
     };
   }),
@@ -43,7 +45,7 @@ export const productReducer = createReducer<ProductsDataState>(
   on(onGetProductsError, (state, action) => {
     return {
       ...state,
-      entity: [],
+      entity: undefined,
       loading: false,
       error: action.error,
     };

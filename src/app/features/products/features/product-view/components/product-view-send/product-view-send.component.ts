@@ -62,7 +62,7 @@ export class ProductViewSendComponent {
     if (this.productForm.invalid) return;
 
     const { quantity } = this.productForm.value;
-    const productId = this.product.id;
+    const productId = this.product.id!;
 
     const cartProduct: CartProduct = {
       productId,

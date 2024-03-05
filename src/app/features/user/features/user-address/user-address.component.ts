@@ -69,7 +69,7 @@ export class UserAddressComponent implements OnInit {
   private fillForm(user: User): void {
     this.addressForm.patchValue({
       id: user.id,
-      ...user.address,
+      ...user.location,
     });
     this.addressForm.markAllAsTouched();
   }
@@ -84,21 +84,17 @@ export class UserAddressComponent implements OnInit {
     const formData = this.addressForm.value;
 
     const userUpdate: Partial<User> = {
-      id: formData.id,
-      address: {
+      location: {
         city: formData.city,
-        number: formData.number,
+        number: Number(formData.number),
         street: formData.street,
-        zipcode: formData.zipcode,
+        zipcode: Number(formData.zipcode),
         address: formData.address,
         province: formData.province,
-        geolocation: {
-          lat: formData.lat,
-          long: formData.lng,
-        },
+        lat: Number(formData.lat),
+        long: Number(formData.lng),
       },
     };
-
-    this.authFacade.updateUser(userUpdate);
+    this.authFacade.updateUser(formData.id, userUpdate);
   }
 }

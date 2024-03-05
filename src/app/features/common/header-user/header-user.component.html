@@ -4,7 +4,7 @@
 
     <app-header-user-button (click)="menu.toggle($event)">
       <p-avatar 
-        [label]="(user$ | async)?.name?.firstname! | getFirstLetter | uppercase" 
+        [label]="(user$ | async)?.firstName! | getFirstLetter | uppercase" 
         [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
         size="large"
       ></p-avatar>
@@ -12,7 +12,7 @@
       <div class="flex flex-col">
         <span class="text-sm font-medium">Welcome</span>
         <span class="text-base font-semibold capitalize">
-          {{ (user$ | async)?.name?.firstname }}
+          {{ (user$ | async)?.firstName }}
         </span>
       </div>
     </app-header-user-button>

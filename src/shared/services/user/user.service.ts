@@ -34,10 +34,12 @@ export class UserService {
     return this.httpClient.get<UserResponse>(endpoint);
   }
 
-  public updateUser(user: Partial<User>): Observable<UserResponse> {
+  public updateUser(
+    id: number,
+    user: Partial<User>
+  ): Observable<UserResponse> {
     const endpoint =
-      this.backendService.generateUrl(UsersEndpoints.GET_USERS) +
-      `${user.id}`;
-    return this.httpClient.patch<UserResponse>(endpoint, user);
+      this.backendService.generateUrl(UsersEndpoints.GET_USERS) + `${id}`;
+    return this.httpClient.put<UserResponse>(endpoint, user);
   }
 }

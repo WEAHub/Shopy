@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BackendService } from '../backend/backend.service';
-import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
+import { LoginRequestBody } from '@shared/interfaces/backend/auth/LoginRequest';
 import { Observable } from 'rxjs';
-import { LoginResponseBody } from '@interfaces/backend/login/LoginResponse';
+import { LoginResponseBody } from '@shared/interfaces/backend/auth/LoginResponse';
 import { HttpClient } from '@angular/common/http';
-import { LoginEndpoints } from '@interfaces/backend/login';
+import { AuthEndpoints } from '@shared/interfaces/backend/auth';
+import { UserTokens } from '@shared/interfaces/user/User';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,18 @@ export class AuthService {
   public login(
     loginData: LoginRequestBody
   ): Observable<LoginResponseBody> {
-    const endpoint = this.backendService.generateUrl(LoginEndpoints.LOGIN);
+    const endpoint = this.backendService.generateUrl(AuthEndpoints.LOGIN);
     return this.httpClient.post<LoginResponseBody>(endpoint, loginData);
+  }
+
+  public refresh(refreshToken: string): Observable<UserTokens> {
+    const endpoint = this.backendService.generateUrl(
+      AuthEndpoints.REFRESH
+    );
+    return this.httpClient.get<UserTokens>(endpoint, {
+      headers: {
+        authorization: `Bearer ${refreshToken}`,
+      },
+    });
   }
 }

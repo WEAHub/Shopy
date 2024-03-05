@@ -1,30 +1,26 @@
-export interface User {
-  id: number;
+export interface User extends UserTokens {
+  id?: number;
   email: string;
-  password: string;
-  name: UserName;
-  address: UserAddress;
-  token?: string;
+  password?: string;
+  firstName: string;
+  lastName: string;
+  location: UserAddress;
   username?: string;
   phone: string;
-}
-
-export interface UserName {
-  firstname: string;
-  lastname: string;
 }
 
 export interface UserAddress {
   city: string;
   street: string;
   number: number;
-  zipcode: string;
-  geolocation: UserGeoLocation;
+  zipcode: number;
+  lat: number;
+  long: number;
   province?: string;
   address?: string;
 }
 
-export interface UserGeoLocation {
-  lat: string;
-  long: string;
+export interface UserTokens {
+  accessToken: string;
+  refreshToken: string;
 }

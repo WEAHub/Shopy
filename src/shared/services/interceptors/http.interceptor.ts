@@ -4,28 +4,50 @@ import {
   HttpHandlerFn,
   HttpEvent,
 } from '@angular/common/http';
-import { Observable, switchMap, take } from 'rxjs';
+import { Observable, combineLatest, filter, switchMap, take } from 'rxjs';
 import { inject } from '@angular/core';
 import { AuthFacade } from '@app/store/auth';
+import { isTokenExpired } from '@shared/utils/token.util';
+
+const noTokenURIs = [
+  'auth/refresh',
+  'auth/login',
+  '/category/',
+  '/product/?',
+  '/assets/',
+];
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> => {
   const authFacade = inject(AuthFacade);
-  return authFacade.isAuthenticated$().pipe(
+  const needToken = !noTokenURIs.find(u => req.url.includes(u));
+
+  return combineLatest([
+    authFacade.isAuthenticated$(),
+    authFacade.getToken$(),
+    authFacade.isLoading$(),
+  ]).pipe(
     take(1),
-    switchMap(isAuth => {
-      if (isAuth) {
-        return authFacade.getToken$().pipe(
+    switchMap(([isAuth, { accessToken }, loading]) => {
+      if (isAuth && needToken) {
+        const isExpired = isTokenExpired(accessToken);
+        if (!loading && isExpired) authFacade.refreshToken();
+        return combineLatest([
+          authFacade.isLoading$(),
+          authFacade.getToken$(),
+        ]).pipe(
+          filter(([_loading]) => !_loading),
           take(1),
-          switchMap(token => {
-            const _req = req.clone({
-              setHeaders: {
-                authorization: `Bearer ${token}`,
-              },
-            });
-            return next(_req);
+          switchMap(([, tokens]) => {
+            return next(
+              req.clone({
+                setHeaders: {
+                  authorization: `Bearer ${tokens.accessToken}`,
+                },
+              })
+            );
           })
         );
       }

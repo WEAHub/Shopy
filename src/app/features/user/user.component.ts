@@ -32,9 +32,7 @@ export class UserComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         map(user =>
-          this.titleService.setTitle(
-            `Shopy - Perfil de ${user.name.firstname}`
-          )
+          this.titleService.setTitle(`Shopy - Perfil de ${user.firstName}`)
         )
       )
       .subscribe();

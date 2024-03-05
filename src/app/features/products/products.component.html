@@ -10,7 +10,7 @@
         <div 
           class="gap-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 justify-center md:justify-between"
         >
-          @for (product of (products$ | async); track product.id) {
+          @for (product of (products$ | async)?.data; track product.id) {
             <app-product-preview [product]="product"/>
           } 
           @empty {

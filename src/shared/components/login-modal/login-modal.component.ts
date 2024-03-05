@@ -9,7 +9,7 @@ import {
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { InputValidatorComponent } from '../input-validator/input-validator.component';
 import { AuthFacade } from '@app/store/auth';
-import { LoginRequestBody } from '@shared/interfaces/backend/login/LoginRequest';
+import { LoginRequestBody } from '@shared/interfaces/backend/auth/LoginRequest';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
@@ -52,13 +52,13 @@ export class LoginModalComponent implements OnInit {
 
   private prepareForm(): void {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
 
     this.loginForm.patchValue({
-      username: 'mor_2314',
-      password: '83r5^_',
+      password: 'TestinG123!X',
+      email: '31@gmail.com',
     });
 
     this.loginForm.markAllAsTouched();
@@ -84,10 +84,10 @@ export class LoginModalComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.invalid) return;
-    const { username, password } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
     const loginBody: LoginRequestBody = {
-      username,
+      email,
       password,
     };
 

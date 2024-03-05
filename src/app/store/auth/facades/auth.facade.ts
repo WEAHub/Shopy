@@ -3,13 +3,14 @@ import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 
 // Interfaces
-import { LoginRequestBody } from '@interfaces/backend/login/LoginRequest';
-import { User } from '@shared/interfaces/user/User';
+import { LoginRequestBody } from '@shared/interfaces/backend/auth/LoginRequest';
+import { User, UserTokens } from '@shared/interfaces/user/User';
 
 // Actions
 import {
   login,
   onLogout,
+  onRefresh,
   onSetUserDetails,
 } from '../actions/auth.actions';
 
@@ -43,7 +44,7 @@ export class AuthFacade {
     return this.store.select(getError);
   }
 
-  public getToken$(): Observable<string> {
+  public getToken$(): Observable<UserTokens> {
     return this.store.select(getToken);
   }
 
@@ -58,8 +59,8 @@ export class AuthFacade {
         if (isAuth) return;
 
         const loginBody: LoginRequestBody = {
-          username: 'mor_2314',
-          password: '83r5^_',
+          email: '1@gmail.com',
+          password: 'Yest123!!!XA2',
         };
 
         this.login(loginBody);
@@ -70,7 +71,13 @@ export class AuthFacade {
     this.store.dispatch(onLogout());
   }
 
-  public updateUser(userData: Partial<User>): void {
-    this.store.dispatch(onSetUserDetails({ userData }));
+  public updateUser(id: number, userData: Partial<User>): void {
+    this.store.dispatch(onSetUserDetails({ id, userData }));
+  }
+
+  public refreshToken(): void {
+    this.getToken$()
+      .pipe(take(1))
+      .subscribe(tokens => this.store.dispatch(onRefresh({ tokens })));
   }
 }

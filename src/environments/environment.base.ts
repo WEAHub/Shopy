@@ -8,9 +8,10 @@ export const environment = {
   apiURL: 'https://fakestoreapi.com',
   apiEndpoints: {
     AUTH: 'auth/login',
-    USERS: 'users/',
-    CATEGORIES: 'products/categories/',
-    PRODUCTS: 'products/',
+    REFRESH: 'auth/refresh',
+    USERS: 'user/',
+    CATEGORIES: 'category/',
+    PRODUCTS: 'product/',
     CARTS: 'carts/',
   },
 };

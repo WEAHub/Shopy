@@ -8,7 +8,6 @@ import {
   ProductsResponseBody,
   ProductResponseBody,
 } from '@shared/interfaces/backend/product/ProductsResponse';
-import { randomizeProduct } from '@shared/utils/product-randomizer';
 
 @Injectable({
   providedIn: 'root',
@@ -26,31 +25,28 @@ export class ProductsService {
       ProductsEndpoints.GET_PRODUCTS,
       options
     );
-    return this.httpClient
-      .get<ProductsResponseBody>(endpoint)
-      .pipe(map(products => products.map(p => randomizeProduct(p))));
+    return this.httpClient.get<ProductsResponseBody>(endpoint);
+    //.pipe(map(products => products.map(p => randomizeProduct(p))));
   }
 
   public getProductsByCategory(
-    category: string,
+    categoryId: number,
     options: Partial<ProductsParameters> = {}
   ): Observable<ProductsResponseBody> {
     const endpoint = this.backendService.generateUrl(
       ProductsEndpoints.GET_PRODUCTS,
-      options,
-      ['category', category]
+      { ...options, category: categoryId }
+      // ['category', category]
     );
-    return this.httpClient
-      .get<ProductsResponseBody>(endpoint)
-      .pipe(map(products => products.map(p => randomizeProduct(p))));
+    return this.httpClient.get<ProductsResponseBody>(endpoint);
+    //.pipe(map(products => products.map(p => randomizeProduct(p))));
   }
 
   public getProduct(id: number): Observable<ProductResponseBody> {
     const endpoint =
       this.backendService.generateUrl(ProductsEndpoints.GET_PRODUCTS) +
       `${id}`;
-    return this.httpClient
-      .get<ProductResponseBody>(endpoint)
-      .pipe(map(product => randomizeProduct(product)));
+    return this.httpClient.get<ProductResponseBody>(endpoint);
+    //.pipe(map(product => randomizeProduct(product)));
   }
 }

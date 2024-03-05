@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, switchMap, take } from 'rxjs';
+import { Observable, of, switchMap, take, tap } from 'rxjs';
 import { BackendService } from '../backend/backend.service';
 import { CartsEndpoints } from '@shared/interfaces/backend/cart';
 import { CartsParameters } from '@shared/interfaces/backend/cart/CartRequest';
@@ -38,10 +38,10 @@ export class CartsService {
         if (!isAuth) return of({} as Cart);
         return this.authFacade.getUser$().pipe(
           take(1),
-          switchMap((user: User) => {
-            const endpoint: string =
-              this.backendService.generateUrl(CartsEndpoints.CARTS) +
-              `${user.id}`;
+          switchMap(() => {
+            const endpoint: string = this.backendService.generateUrl(
+              CartsEndpoints.CARTS
+            );
             return this.httpClient.get<Cart>(endpoint);
           })
         );

@@ -23,11 +23,12 @@ export const getError = createSelector(
 
 export const getProductById = (id: number) =>
   createSelector(getProductsStore, state =>
-    state.entity?.find(p => p.id === id)
+    state.entity?.data?.find(p => p.id === id)
   );
 
-export const getProductByCategory = (category: string) =>
+export const getProductByCategory = (categoryId: number) =>
   createSelector(
     getProductsStore,
-    state => state.entity?.filter(p => p.category === category) || []
+    state =>
+      state.entity?.data?.filter(p => p.categoryId === categoryId) || []
   );

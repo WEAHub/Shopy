@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { createSelector } from '@ngrx/store';
 import { getAuthFeature } from './get-feature-state';
 
@@ -16,11 +17,10 @@ export const getUser = createSelector(
   state => state.entity!
 );
 
-export const getToken = createSelector(
-  getAuthFeature,
-  // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-  state => state.entity?.token!
-);
+export const getToken = createSelector(getAuthFeature, state => ({
+  accessToken: state.entity?.accessToken!,
+  refreshToken: state.entity?.refreshToken!,
+}));
 
 export const getError = createSelector(
   getAuthFeature,

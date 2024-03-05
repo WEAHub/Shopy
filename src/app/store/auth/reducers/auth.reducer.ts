@@ -6,20 +6,26 @@ import {
   onLoginError,
   onLoginSuccess,
   onLogout,
+  onRefresh,
+  onRefreshError,
+  onRefreshSuccess,
   onSetUserDetailsSuccess,
 } from '../actions/auth.actions';
 import { AuthFeatureState } from '.';
 import { createRehydrateReducer } from '@app/store/hydrate/hydration.reducer';
 import { authFeatureKey } from '../feature-key';
+import { User } from '@shared/interfaces/user/User';
 
 export const initialAuthState: AuthFeatureState = {
   loading: false,
+  error: undefined,
+  entity: undefined,
 };
 
 export const authReducer = createRehydrateReducer<AuthFeatureState>(
   {
     key: authFeatureKey,
-    skipHydrateActions: [onLoginError, login],
+    skipHydrateActions: [onLoginError, login, onRefresh, onRefreshError],
   },
   initialAuthState,
   on(login, () => {
@@ -53,6 +59,30 @@ export const authReducer = createRehydrateReducer<AuthFeatureState>(
       ...state,
       loading: false,
       entity: { ...state.entity, ...userData },
+    };
+  }),
+  on(onRefresh, state => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(onRefreshSuccess, (state, { tokens }) => {
+    return {
+      ...state,
+      loading: false,
+      entity: {
+        ...state.entity!,
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
+      },
+    };
+  }),
+  on(onRefreshError, (state, { error }) => {
+    return {
+      ...state,
+      loading: false,
+      error,
     };
   })
 );

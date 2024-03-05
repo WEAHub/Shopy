@@ -19,6 +19,7 @@ import { LoadingOverlayComponent } from '@shared/components/loading-overlay/load
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MetadataService } from '@shared/services/metadata/metadata.service';
 import { BaseLayoutComponent } from '@shared/components/base-layout/base-layout.component';
+import { ProductViewCommentsComponent } from './components/product-view-comments/product-view-comments.component';
 
 @Component({
   selector: 'app-product-view',
@@ -32,6 +33,7 @@ import { BaseLayoutComponent } from '@shared/components/base-layout/base-layout.
     ProductsFeaturedComponent,
     LoadingOverlayComponent,
     BaseLayoutComponent,
+    ProductViewCommentsComponent,
   ],
   providers: [MetadataService],
   templateUrl: './product-view.component.html',
@@ -73,10 +75,10 @@ export class ProductViewComponent implements AfterViewInit, OnInit {
   private addMetaTags(product: Product): void {
     if (!product) return;
     this.metadataService.updateMetadata({
-      title: product?.title,
+      title: product?.name,
       description: product?.description,
       keywords: this.metadataService.extractWords([
-        product?.title,
+        product?.name,
         product?.description,
       ]),
     });

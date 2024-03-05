@@ -6,10 +6,10 @@ const featureName = 'Categories';
 const featureModule = 'List';
 const featureHeader = `[${featureName}] [${featureModule}]`;
 
-export const onInitCategories = createAction(`${featureHeader}: INIT`);
+export const onInitCategories = createAction(`${featureHeader}: Init`);
 
 export const onGetCategories = createAction(
-  `${featureHeader}: Get Categories`,
+  `${featureHeader}: Get Categories Successs`,
   props<{ categories: Categories }>()
 );
 

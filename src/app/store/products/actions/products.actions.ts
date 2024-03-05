@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Products } from '@shared/interfaces/products/Product';
+import { Product } from '@shared/interfaces/products/Product';
 import { ProductsParameters } from '@shared/interfaces/backend/product/ProductsRequest';
+import { Paginated } from '@shared/interfaces/products/Paginated';
 
 const featureName = 'Products';
 const featureModule = 'List';
@@ -14,12 +15,12 @@ export const onInitProducts = createAction(
 
 export const onInitProductsByCategory = createAction(
   `${featureHeader}: By Category Init`,
-  props<{ category: string; productParams: ProductsParameters }>()
+  props<{ categoryId: number; productParams: ProductsParameters }>()
 );
 
 export const onGetProducts = createAction(
-  `${featureHeader}: Get Products`,
-  props<{ products: Products }>()
+  `${featureHeader}: Get Products Success`,
+  props<{ products: Paginated<Product> }>()
 );
 
 export const onGetProductsError = createAction(

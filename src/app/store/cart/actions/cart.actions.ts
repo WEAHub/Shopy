@@ -8,15 +8,15 @@ const featureModule = 'User';
 const featureHeader = `[${featureName}] [${featureModule}]`;
 
 // INIT CART
-export const onCartInit = createAction(`${featureHeader}: Cart init`);
+export const onCartInit = createAction(`${featureHeader}: Cart Init`);
 
 export const onCartError = createAction(
-  `${featureHeader}: Cart ERROR`,
+  `${featureHeader}: Cart Error`,
   props<{ error: HttpErrorResponse }>()
 );
 
 export const onCartSuccess = createAction(
-  `${featureHeader}: Cart OK`,
+  `${featureHeader}: Cart Success`,
   props<{ cart: CartResponse }>()
 );
 

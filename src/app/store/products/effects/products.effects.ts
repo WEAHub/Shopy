@@ -32,9 +32,9 @@ export class ProductsEffects {
   initByCategory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onInitProductsByCategory),
-      switchMap(({ category, productParams }) =>
+      switchMap(({ categoryId, productParams }) =>
         this.productsService
-          .getProductsByCategory(category, productParams)
+          .getProductsByCategory(categoryId, productParams)
           .pipe(
             map(products => onGetProducts({ products })),
             catchError(error => of(onGetProductsError({ error })))

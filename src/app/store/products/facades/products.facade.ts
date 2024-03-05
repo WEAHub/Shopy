@@ -15,6 +15,7 @@ import {
   onInitProducts,
   onInitProductsByCategory,
 } from '../actions/products.actions';
+import { Paginated } from '@shared/interfaces/products/Paginated';
 
 @Injectable()
 export class ProductsFacade {
@@ -24,20 +25,20 @@ export class ProductsFacade {
     return this.store.select(isLoading);
   }
 
-  public getProducts$(): Observable<Products> {
+  public getProducts$(): Observable<Paginated<Product>> {
     return this.store.select(getProducts);
   }
 
   public getError$(): Observable<HttpErrorResponse> {
     return this.store.select(getError);
   }
-
-  public findProductsByWord$(query: string): Observable<Products> {
+  /* 
+  public findProductsByWord$(query: string): Observable<Paginated<Product>> {
     query = query.toLowerCase();
     return this.getProducts$().pipe(
       take(1),
       map((products: Products) =>
-        products.filter(
+        products.data.filter(
           p =>
             p.title.toLowerCase().indexOf(query) > -1 ||
             p.description.toLowerCase().indexOf(query) > -1
@@ -45,13 +46,13 @@ export class ProductsFacade {
       )
     );
   }
-
+ */
   public findProductById$(id: number): Observable<Product | undefined> {
     return this.store.select(getProductById(id));
   }
 
-  public getProductsByCategory$(category: string): Observable<Products> {
-    return this.store.select(getProductByCategory(category));
+  public getProductsByCategory$(categoryId: number): Observable<Products> {
+    return this.store.select(getProductByCategory(categoryId));
   }
 
   public getProducts(productParams: ProductsParameters): void {
@@ -59,11 +60,11 @@ export class ProductsFacade {
   }
 
   public getProductsByCategory(
-    category: string,
+    categoryId: number,
     productParams: ProductsParameters
   ): void {
     this.store.dispatch(
-      onInitProductsByCategory({ category, productParams })
+      onInitProductsByCategory({ categoryId, productParams })
     );
   }
 }

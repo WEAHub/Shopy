@@ -1,8 +1,8 @@
 
 
 
-<app-base-layout>
-  <div class="relative mb-10" *ngVar="(product$ | async) as _product">
+<app-base-layout  *ngVar="(product$ | async) as _product">
+  <div class="relative mb-10">
     <app-loading-overlay [loading]="(productLoading$ | async)!"></app-loading-overlay>
     @if(_product) {
 
@@ -19,8 +19,15 @@
         <div class="flex flex-col gap-4">
           
           <!-- PRICE -->
-          <span class="product-view__price">
-            {{ _product?.modifiers?.finalPrice }} €
+          <span class="product-view__price flex gap-3">
+            @if (_product.modifiers?.discountPercent) {
+              <span>{{ _product.modifiers?.discountPrice }}€</span>
+              <span class="pv-product__last-price">{{ _product.price }}€</span>
+              <span class="pv-product__dicount-percent">{{ _product.modifiers?.discountPercent }}%</span>
+            }
+            @else {
+              <span>{{ _product.price }}€</span>
+            }
           </span>
       
           <span class="product-view__price-details text-[color:var(--gray-500)]">
@@ -28,7 +35,7 @@
           </span>
       
           <!-- CHOICE -->
-          <div class="product-view__choice flex flex-col gap-3">
+          <div *ngIf="_product.modifiers?.hasChoice" class="product-view__choice flex flex-col gap-3">
             <img src="assets/images/choice_nobg.webp" alt="Choice"/>
             <div class="flex flex-col gap-1">
               <span>· <b>Envío gratis</b> en pedidos +10,00€</span>
@@ -39,7 +46,7 @@
       
           <!-- TITLE -->
           <div class="product-view__title">
-            <span>{{ _product?.title }}</span>
+            <span>{{ _product.name }}</span>
           </div>
       
           <!-- STARS & STATS-->
@@ -60,5 +67,7 @@
     }
   </div>
 
+
+  <app-product-view-comments [product]="_product"></app-product-view-comments>
   <app-products-featured></app-products-featured> 
 </app-base-layout>

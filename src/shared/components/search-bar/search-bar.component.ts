@@ -14,8 +14,9 @@ import { Router } from '@angular/router';
 
 import { SearchResultComponent } from '../search-result/search-result.component';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
-import { Products } from '@shared/interfaces/products/Product';
+import { Product, Products } from '@shared/interfaces/products/Product';
 import { ProductsFacade } from '@app/store/products';
+import { Paginated } from '@shared/interfaces/products/Paginated';
 
 @Component({
   selector: 'app-search-bar',
@@ -34,7 +35,8 @@ export class SearchBarComponent {
 
   filteredProducts!: Products;
   searchForm!: FormGroup;
-  products$: Observable<Products> = this.productsFacade.getProducts$();
+  products$: Observable<Paginated<Product>> =
+    this.productsFacade.getProducts$();
 
   constructor(
     private fb: FormBuilder,
@@ -54,17 +56,17 @@ export class SearchBarComponent {
     event: AutoCompleteCompleteEvent
   ): Promise<void> {
     const query = event.query.toLowerCase();
-    this.filteredProducts = await lastValueFrom(
+    /*    this.filteredProducts = await lastValueFrom(
       this.productsFacade
         .findProductsByWord$(query)
         .pipe(map(this.truncateNames))
-    );
+    ); */
   }
 
   public truncateNames(products: Products): Products {
     return products.map(p => ({
       ...p,
-      title: p.title.substring(0, 50),
+      name: p.name.substring(0, 50),
     }));
   }
 

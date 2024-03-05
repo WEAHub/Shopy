@@ -23,12 +23,12 @@
           @for(category of _categories; track $index) {
             <div 
               [routerLink]="['/products']"
-              [queryParams]="{category}"
+              [queryParams]="{category: category.id}"
               class="header-categories__category"
               routerLinkActive="header-categories__category--active"
             >
               <span class="header-categories__category-title">
-                {{ category | categoryPipe | translate }}
+                {{ category.name | categoryPipe | translate }}
               </span>
             </div>
           }

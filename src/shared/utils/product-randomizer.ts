@@ -2,7 +2,7 @@ import {
   Product,
   ProductModifiers,
 } from '@shared/interfaces/products/Product';
-
+/* 
 export function randomizeProduct(
   product: Product,
   forceChoice: boolean = false
@@ -26,7 +26,6 @@ export function randomizeProduct(
   const modifiers: ProductModifiers = {
     discountPercent,
     discountPrice,
-    finalPrice,
     stockTotal,
     stockPercent,
     stock,
@@ -39,7 +38,7 @@ export function randomizeProduct(
     ...product,
     modifiers,
   };
-}
+} */
 
 export function rndNumberRange(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min);

@@ -10,4 +10,11 @@ function decodeToken(token: string): Token {
   return JSON.parse(base64Decoded);
 }
 
-export { parseToken, decodeToken };
+function isTokenExpired(token: string): boolean {
+  const decToken = decodeToken(token);
+  const exp = decToken.exp;
+  const now = Math.floor(Date.now() / 1000);
+  return exp <= now;
+}
+
+export { parseToken, decodeToken, isTokenExpired };

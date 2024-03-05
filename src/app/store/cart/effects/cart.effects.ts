@@ -9,6 +9,7 @@ import {
   mergeMap,
   of,
   switchMap,
+  tap,
 } from 'rxjs';
 import {
   onCartError,
@@ -45,10 +46,11 @@ export class CartEffects {
       ofType(onCartInit),
       switchMap(() =>
         this.cartService.getCart().pipe(
-          mergeMap(async cart => {
+          // Merge map nos permite utilizar una funcion async
+          /*    mergeMap(async cart => {
             const products = await this.aggregateProduct(cart.products);
             return { ...cart, products };
-          }),
+          }), */
           map(cart => onCartSuccess({ cart })),
           catchError(error => of(onCartError({ error })))
         )

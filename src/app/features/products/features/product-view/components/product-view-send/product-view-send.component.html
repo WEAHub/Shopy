@@ -1,12 +1,12 @@
-<div class="relative h-min flex flex-col pv-send border-[1px] border-[#ebebeb] rounded-2xl p-5 text-base max-w-[30.1rem] w-full">
+<div class="relative h-min flex flex-col pv-send border-[1px] border-[#ebebeb] rounded-2xl p-5 text-base max-w-[34rem] w-full">
   <app-loading-overlay [loading]="(userLoading$ | async)! || (cartLoading$ | async)!"></app-loading-overlay>
   
   <div class="pv-send__to flex justify-between">
     <span class="font-semibold">Envío a</span>
     <span>
-      {{ (user$ | async)?.address?.street }}, 
-      {{ (user$ | async)?.address?.city }},
-      {{ (user$ | async)?.address?.zipcode }}
+      {{ (user$ | async)?.location?.street }}, 
+      {{ (user$ | async)?.location?.city }},
+      {{ (user$ | async)?.location?.zipcode }}
     </span>
   </div>
   

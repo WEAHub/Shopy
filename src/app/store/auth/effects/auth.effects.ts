@@ -9,16 +9,20 @@ import {
   login,
   onLoginError,
   onLoginSuccess,
+  onRefresh,
+  onRefreshError,
+  onRefreshSuccess,
   onSetUserDetails,
   onSetUserDetailsError,
   onSetUserDetailsSuccess,
 } from '../actions/auth.actions';
-import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { UserService } from '@shared/services/user/user.service';
-import { decodeToken } from '@shared/utils/token.util';
 import { onCartInit } from '@app/store/cart/actions/cart.actions';
 import { Action } from '@ngrx/store';
+import { parseMessage } from '@shared/rx-pipes/backend-parse';
+import { User } from '@shared/interfaces/user/User';
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
@@ -37,33 +41,35 @@ export class AuthEffects implements OnInitEffects {
       ofType(login),
       exhaustMap(({ loginData }) =>
         this.authService.login(loginData).pipe(
-          switchMap(response => {
-            const { sub: userId } = decodeToken(response.token);
-            return this.userService.getUser(userId).pipe(
-              map(user => ({ ...user, ...response })),
-              map(userData => onLoginSuccess({ userData }))
-            );
-          }),
+          switchMap(userData =>
+            of(onLoginSuccess({ userData }), onCartInit())
+          ),
           catchError(error => of(onLoginError({ error })))
         )
       )
     )
   );
 
-  loginSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(onLoginSuccess),
-      map(() => onCartInit())
-    )
-  );
-
   setDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onSetUserDetails),
-      exhaustMap(({ userData }) =>
-        this.userService.updateUser(userData).pipe(
+      exhaustMap(({ id, userData }) =>
+        this.userService.updateUser(id, userData).pipe(
+          parseMessage<User>(),
           map(userData => onSetUserDetailsSuccess({ userData })),
           catchError(error => of(onSetUserDetailsError({ error })))
+        )
+      )
+    )
+  );
+
+  refresh$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(onRefresh),
+      exhaustMap(({ tokens }) =>
+        this.authService.refresh(tokens.refreshToken).pipe(
+          map(tokens => onRefreshSuccess({ tokens })),
+          catchError(error => of(onRefreshError({ error })))
         )
       )
     )

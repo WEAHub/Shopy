@@ -20,9 +20,9 @@
       <a 
         (click)="visible = false"
         [routerLink]="['/products']"
-        [queryParams]="{category}"
+        [queryParams]="{category: category.id}"
       >
-        {{ category | titlecase }}
+        {{ category.name | titlecase }}
       </a>
     }
   </div>

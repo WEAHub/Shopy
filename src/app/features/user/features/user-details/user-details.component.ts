@@ -72,8 +72,8 @@ export class UserDetailsComponent implements OnInit {
   private fillForm(user: User): void {
     this.userForm.patchValue({
       id: user.id,
-      firstName: user.name.firstname,
-      lastName: user.name.lastname,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       phone: user.phone,
     });
@@ -87,15 +87,12 @@ export class UserDetailsComponent implements OnInit {
     const formData = this.userForm.value;
 
     const userUpdate: Partial<User> = {
-      id: formData.id,
-      name: {
-        firstname: formData.firstName,
-        lastname: formData.lastName,
-      },
+      firstName: formData.firstName,
+      lastName: formData.lastName,
       phone: formData.phone,
       email: formData.email,
     };
 
-    this.authFacade.updateUser(userUpdate);
+    this.authFacade.updateUser(formData.id, userUpdate);
   }
 }

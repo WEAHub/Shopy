@@ -11,7 +11,7 @@ export const onInitProductsFeatured = createAction(
 );
 
 export const onGetProductsFeatured = createAction(
-  `${featureHeader}: Get Products`,
+  `${featureHeader}: Get Products Success`,
   props<{ products: Products }>()
 );
 

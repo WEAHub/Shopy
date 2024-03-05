@@ -96,10 +96,9 @@ export class UserChangePasswordComponent implements OnInit {
     const formData = this.userForm.value;
 
     const userUpdate: Partial<User> = {
-      id: formData.id,
       password: formData.newPassword,
     };
 
-    this.authFacade.updateUser(userUpdate);
+    this.authFacade.updateUser(formData.id, userUpdate);
   }
 }

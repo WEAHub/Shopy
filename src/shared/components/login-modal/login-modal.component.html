@@ -5,10 +5,10 @@
       <form [formGroup]="loginForm" class="flex flex-col gap-5 relative">
         <app-loading-overlay [loading]="(isLoading$ | async)!"></app-loading-overlay>
         <div class="flex flex-col gap-2">
-          <label for="username" translate>words.username</label>
-          <input pInputText id="username" aria-describedby="username" formControlName="username" />
-          <small id="username" translate>messages.enteruser</small>
-          <app-input-validator controlPath="username" [form]="loginForm"></app-input-validator>
+          <label for="email" translate>words.username</label>
+          <input pInputText id="email" aria-describedby="email" formControlName="email" />
+          <small id="email" translate>messages.enteruser</small>
+          <app-input-validator controlPath="email" [form]="loginForm"></app-input-validator>
         </div>
         
         <div class="flex flex-col gap-2">

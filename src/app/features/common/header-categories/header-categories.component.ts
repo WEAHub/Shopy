@@ -37,8 +37,7 @@ export class HeaderCategoriesComponent {
     this.categoriesFacade.getCategories$();
 
   activeCategory$: Observable<string> = this.route.queryParams.pipe(
-    map((params: Params) => params['category']),
-    tap(console.log)
+    map((params: Params) => params['category'])
   );
 
   hideCategories$: Observable<boolean> = this.router.events.pipe(

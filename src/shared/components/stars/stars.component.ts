@@ -11,6 +11,4 @@ import { Component, Input } from '@angular/core';
 export class StarsComponent {
   @Input() filledStars: number = 1;
   @Input() maxStars: number = 5;
-
-  constructor() {}
 }
