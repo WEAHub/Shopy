@@ -24,34 +24,43 @@ export const authInterceptor: HttpInterceptorFn = (
   const authFacade = inject(AuthFacade);
   const needToken = !noTokenURIs.find(u => req.url.includes(u));
 
-  return combineLatest([
-    authFacade.isAuthenticated$(),
-    authFacade.getToken$(),
-    authFacade.isLoading$(),
-  ]).pipe(
+  const authData$ = combineLatest({
+    isAuth: authFacade.isAuthenticated$(),
+    tokens: authFacade.getToken$(),
+    isLoading: authFacade.isLoading$(),
+  });
+
+  const refreshingState$ = combineLatest({
+    isLoading: authFacade.isLoading$(),
+    tokens: authFacade.getToken$(),
+  });
+
+  return authData$.pipe(
     take(1),
-    switchMap(([isAuth, { accessToken }, loading]) => {
-      if (isAuth && needToken) {
-        const isExpired = isTokenExpired(accessToken);
-        if (!loading && isExpired) authFacade.refreshToken();
-        return combineLatest([
-          authFacade.isLoading$(),
-          authFacade.getToken$(),
-        ]).pipe(
-          filter(([_loading]) => !_loading),
+    switchMap(authData => {
+      if (authData.isAuth && needToken) {
+        const isExpired = isTokenExpired(authData.tokens.accessToken);
+        if (!authData.isLoading && isExpired) authFacade.refreshToken();
+        return refreshingState$.pipe(
+          filter(refreshState => !refreshState.isLoading),
           take(1),
-          switchMap(([, tokens]) => {
-            return next(
-              req.clone({
-                setHeaders: {
-                  authorization: `Bearer ${tokens.accessToken}`,
-                },
-              })
-            );
-          })
+          switchMap(refreshState =>
+            next(setRequestToken(req, refreshState.tokens.accessToken))
+          )
         );
       }
       return next(req);
     })
   );
 };
+
+function setRequestToken(
+  req: HttpRequest<unknown>,
+  accessToken: string
+): HttpRequest<unknown> {
+  return req.clone({
+    setHeaders: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
