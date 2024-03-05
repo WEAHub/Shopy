@@ -16,7 +16,7 @@ import {
   onSetUserDetailsError,
   onSetUserDetailsSuccess,
 } from '../actions/auth.actions';
-import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { UserService } from '@shared/services/user/user.service';
 import { onCartInit } from '@app/store/cart/actions/cart.actions';
@@ -53,8 +53,8 @@ export class AuthEffects implements OnInitEffects {
   setDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onSetUserDetails),
-      exhaustMap(({ id, userData }) =>
-        this.userService.updateUser(id, userData).pipe(
+      exhaustMap(({ userData }) =>
+        this.userService.updateUser(userData).pipe(
           parseMessage<User>(),
           map(userData => onSetUserDetailsSuccess({ userData })),
           catchError(error => of(onSetUserDetailsError({ error })))

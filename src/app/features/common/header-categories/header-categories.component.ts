@@ -10,7 +10,7 @@ import {
 import { CategoriesFacade } from '@app/store/categories';
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { Categories } from '@shared/interfaces/categories/Category';
-import { Observable, filter, map, tap } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { PipesModule } from '@shared/pipes';

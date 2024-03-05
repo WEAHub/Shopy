@@ -8,7 +8,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Observable, lastValueFrom, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -55,12 +55,13 @@ export class SearchBarComponent {
   public async filterProducts(
     event: AutoCompleteCompleteEvent
   ): Promise<void> {
-    const query = event.query.toLowerCase();
-    /*    this.filteredProducts = await lastValueFrom(
+    /*
+    const query = event.query.toLowerCase();    this.filteredProducts = await lastValueFrom(
       this.productsFacade
         .findProductsByWord$(query)
         .pipe(map(this.truncateNames))
-    ); */
+    ); 
+    */
   }
 
   public truncateNames(products: Products): Products {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, map, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   isLoading,

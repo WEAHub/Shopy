@@ -8,10 +8,9 @@ describe('StockProgressBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StockProgressBarComponent]
-    })
-    .compileComponents();
-    
+      imports: [StockProgressBarComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(StockProgressBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsFacade } from '@app/store/products';
-import { Product, Products } from '@shared/interfaces/products/Product';
+import { Product } from '@shared/interfaces/products/Product';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductPreviewComponent } from '@shared/components/product-preview/product-preview.component';

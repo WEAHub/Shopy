@@ -1,7 +1,3 @@
-import {
-  Product,
-  ProductModifiers,
-} from '@shared/interfaces/products/Product';
 /* 
 export function randomizeProduct(
   product: Product,

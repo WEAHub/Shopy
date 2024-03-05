@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BackendService } from '../backend/backend.service';
 import { ProductsEndpoints } from '@shared/interfaces/backend/product';
 import { ProductsParameters } from '@shared/interfaces/backend/product/ProductsRequest';
