@@ -10,10 +10,11 @@ import { authFeatureFacades } from './facades';
 import { authFeatureEffects } from './effects';
 import { AuthServiceModule } from '@shared/services/auth/auth.service.module';
 import { UserServiceModule } from '@shared/services/user/user.service.module';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [],
-  providers: [...authFeatureFacades],
+  providers: [...authFeatureFacades, MessageService],
   imports: [
     CommonModule,
     AuthServiceModule,

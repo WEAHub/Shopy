@@ -21,6 +21,7 @@ import {
   getUser,
   isAuthenticated,
   isLoading,
+  isRefreshing,
 } from '../selectors/auth.selectors';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -46,6 +47,10 @@ export class AuthFacade {
 
   public getToken$(): Observable<UserTokens> {
     return this.store.select(getToken);
+  }
+
+  public isRefreshing$(): Observable<boolean> {
+    return this.store.select(isRefreshing);
   }
 
   public login(loginData: LoginRequestBody): void {

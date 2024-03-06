@@ -20,6 +20,7 @@ export const initialAuthState: AuthFeatureState = {
   loading: false,
   error: undefined,
   entity: undefined,
+  refreshing: false,
 };
 
 export const authReducer = createRehydrateReducer<AuthFeatureState>(
@@ -64,13 +65,13 @@ export const authReducer = createRehydrateReducer<AuthFeatureState>(
   on(onRefresh, state => {
     return {
       ...state,
-      loading: true,
+      refreshing: true,
     };
   }),
   on(onRefreshSuccess, (state, { tokens }) => {
     return {
       ...state,
-      loading: false,
+      refreshing: false,
       entity: {
         ...state.entity!,
         accessToken: tokens.accessToken,
@@ -81,7 +82,7 @@ export const authReducer = createRehydrateReducer<AuthFeatureState>(
   on(onRefreshError, (state, { error }) => {
     return {
       ...state,
-      loading: false,
+      refreshing: false,
       error,
     };
   })

@@ -6,7 +6,8 @@ import { HeaderCategoriesComponent } from './features/common/header-categories/h
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { environment } from '@environments/environment.base';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { PrimeNGConfig } from 'primeng/api';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,9 @@ import { PrimeNGConfig } from 'primeng/api';
     FooterComponent,
     HeaderCategoriesComponent,
     TranslateModule,
+    PrimeNGModule,
   ],
+  providers: [MessageService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,10 +1,10 @@
 import { ApiResponse } from '@shared/interfaces/backend/response';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 export function parseMessage<T>() {
   return function (source: Observable<ApiResponse<T>>): Observable<T> {
     return new Observable(subscriber => {
-      source.subscribe({
+      source.pipe(take(1)).subscribe({
         next(value) {
           const { status, message, data } = value;
 
@@ -18,12 +18,6 @@ export function parseMessage<T>() {
           //       se puede mostrar una notificacion aprobechando este pipe.
 
           subscriber.next(value?.data);
-        },
-        error(error) {
-          subscriber.error(error);
-        },
-        complete() {
-          subscriber.complete();
         },
       });
     });

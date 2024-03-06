@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { createSelector } from '@ngrx/store';
 import { getAuthFeature } from './get-feature-state';
+import { state } from '@angular/animations';
 
 export const isAuthenticated = createSelector(
   getAuthFeature,
@@ -21,6 +22,11 @@ export const getToken = createSelector(getAuthFeature, state => ({
   accessToken: state.entity?.accessToken!,
   refreshToken: state.entity?.refreshToken!,
 }));
+
+export const isRefreshing = createSelector(
+  getAuthFeature,
+  state => !!state.refreshing
+);
 
 export const getError = createSelector(
   getAuthFeature,

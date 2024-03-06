@@ -9,6 +9,7 @@ import {
   login,
   onLoginError,
   onLoginSuccess,
+  onLogout,
   onRefresh,
   onRefreshError,
   onRefreshSuccess,
@@ -53,7 +54,7 @@ export class AuthEffects implements OnInitEffects {
   setDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onSetUserDetails),
-      exhaustMap(({ userData }) =>
+      switchMap(({ userData }) =>
         this.userService.updateUser(userData).pipe(
           parseMessage<User>(),
           map(userData => onSetUserDetailsSuccess({ userData })),
@@ -72,6 +73,13 @@ export class AuthEffects implements OnInitEffects {
           catchError(error => of(onRefreshError({ error })))
         )
       )
+    )
+  );
+
+  refreshError$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(onRefreshError),
+      map(() => onLogout())
     )
   );
 }
