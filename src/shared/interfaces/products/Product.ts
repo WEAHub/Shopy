@@ -1,16 +1,6 @@
 export type Products = Product[];
 
 export interface Product {
-  /*   
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  categoryId: number;
-  image: string;
-  rating: ProductRating;
-  modifiers?: ProductModifiers; 
-  */
   id?: number;
   name: string;
   image: string;
@@ -25,6 +15,7 @@ export interface Product {
   published?: boolean;
   stars: number;
   visit: number;
+  quantity?: number;
 }
 
 export interface ProductRating {

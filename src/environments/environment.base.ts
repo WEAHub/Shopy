@@ -13,5 +13,6 @@ export const environment = {
     CATEGORIES: 'category/',
     PRODUCTS: 'product/',
     CARTS: 'carts/',
+    CHECKOUT: 'checkout',
   },
 };

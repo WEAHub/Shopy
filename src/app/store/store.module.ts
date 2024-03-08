@@ -7,12 +7,14 @@ import { AuthStoreModule } from './auth/auth-store.module';
 import { CategoriesStoreModule } from './categories/categories-store.module';
 import { ProductsStoreModule } from './products/products-store.module';
 import { CartStoreModule } from './cart/cart-store.module';
+import { CheckoutStoreModule } from './checkout/checkout-store.module';
 
 export const featureStores = [
   CartStoreModule,
   AuthStoreModule,
   CategoriesStoreModule,
   ProductsStoreModule,
+  CheckoutStoreModule,
 ];
 
 @NgModule({

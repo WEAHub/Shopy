@@ -28,7 +28,10 @@ export const getCartTotalPrice = createSelector(
   getCartFeature,
   state =>
     state.entity?.products.reduce(
-      (p, n) => p + n.quantity * (n.product?.price || 0),
+      (p, n) =>
+        p +
+        n.quantity *
+          (n.product?.modifiers?.discountPrice ?? (n.product?.price || 0)),
       0
     ) || 0
 );
