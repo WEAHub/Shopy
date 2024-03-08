@@ -8,6 +8,7 @@ import { environment } from '@environments/environment.base';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
+import { AuthFacade } from './store/auth';
 
 @Component({
   selector: 'app-root',
@@ -30,8 +31,10 @@ export class AppComponent {
 
   constructor(
     private ngConfig: PrimeNGConfig,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authFacade: AuthFacade
   ) {
+    this.authFacade.checkToken();
     this.initTranslations();
   }
 
@@ -54,7 +57,9 @@ export class AppComponent {
   getCurrentLang(): string {
     const { defaultLang } = environment;
     const browserLang = this.translate.getBrowserLang();
-    // prettier-ignore
-    return environment.languages.find(language => language === browserLang) ?? defaultLang;
+    return (
+      environment.languages.find(language => language === browserLang) ??
+      defaultLang
+    );
   }
 }

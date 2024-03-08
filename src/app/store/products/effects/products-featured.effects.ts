@@ -32,7 +32,8 @@ export class ProductsFeaturedEffects implements OnInitEffects {
       switchMap(() =>
         this.productsService
           .getProducts({
-            limit: 6,
+            sortColumn: 'visits',
+            limit: 5,
           })
           .pipe(
             map(products =>

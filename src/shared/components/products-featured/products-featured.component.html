@@ -2,22 +2,21 @@
   <span>Featured products</span>
 </div>
 
-<div class="flex justify-center" >
-  <div class="grow gap-5 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 place-content-around justify-center md:justify-between justify-items-center w-fit">
-    @if((loading | async) === false) {
-  
-      @for (product of (products | async); track product.id) {
-        <app-product-preview [product]="product"/>
-      } 
-      @empty {
-        <h1>No products...</h1>
-      }
-  
+
+<div class="gap-5 grid grid-cols-[repeat(auto-fit,minmax(250px,_1fr))] justify-center md:justify-between">
+  @if((loading | async) === false) {
+
+    @for (product of (products | async); track product.id) {
+      <app-product-preview [product]="product"/>
+    } 
+    @empty {
+      <h1>No products...</h1>
     }
-    @else {
-      <i class="lni lni-spinner-solid animate-spin"></i>
-    }
-  </div>
+
+  }
+  @else {
+    <i class="lni lni-spinner-solid animate-spin"></i>
+  }
 </div>
 
 

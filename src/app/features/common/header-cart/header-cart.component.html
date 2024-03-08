@@ -40,6 +40,8 @@
       styleClass="w-full max-w-[30rem]" 
       label="Checkout"
       [disabled]="(cartProducts$ | async)?.length === 0"
+      [routerLink]="['/checkout']"
+      (click)="op.toggle($event)"
     ></p-button>
 
   </div>

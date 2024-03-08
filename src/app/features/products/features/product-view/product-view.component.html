@@ -6,63 +6,67 @@
     <app-loading-overlay [loading]="(productLoading$ | async)!"></app-loading-overlay>
     @if(_product) {
 
-      <div class="product-view flex flex-wrap gap-8 justify-center">
+      <div class="product-view flex md:flex-nowrap flex-wrap gap-10 justify-center">
         <div class="product-view__image">
           <img
             [src]="_product?.image!"
             [redZoom]="_product?.image!"
             [redZoomLazy]="true"
+            [loading]=""
             redZoomClass="red-zoom--style--overlay"
             alt="Product image"
           >
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex gap-10 flex-wrap grow justify-between ">
           
-          <!-- PRICE -->
-          <span class="product-view__price flex gap-3">
-            @if (_product.modifiers?.discountPercent) {
-              <span>{{ _product.modifiers?.discountPrice }}€</span>
-              <span class="pv-product__last-price">{{ _product.price }}€</span>
-              <span class="pv-product__dicount-percent">{{ _product.modifiers?.discountPercent }}%</span>
-            }
-            @else {
-              <span>{{ _product.price }}€</span>
-            }
-          </span>
-      
-          <span class="product-view__price-details text-[color:var(--gray-500)]">
-            Precio con IVA incluido | 2% de descuento extra
-          </span>
-      
-          <!-- CHOICE -->
-          <div *ngIf="_product.modifiers?.hasChoice" class="product-view__choice flex flex-col gap-3">
-            <img src="assets/images/choice_nobg.webp" alt="Choice"/>
-            <div class="flex flex-col gap-1">
-              <span>· <b>Envío gratis</b> en pedidos +10,00€</span>
-              <span>· <b>Entrega rápida</b> entrega en 7 días</span>
-              <span>· <b>Devoluciones gratis</b>  en los siguientes 15 días, sin preguntas</span>
+          <div class="flex flex-col gap-4">          
+            <!-- PRICE -->
+            <span class="product-view__price flex gap-3">
+              @if (_product.modifiers?.discountPercent) {
+                <span>{{ _product.modifiers?.discountPrice }}€</span>
+                <span class="pv-product__last-price">{{ _product.price }}€</span>
+                <span class="pv-product__dicount-percent">{{ _product.modifiers?.discountPercent }}%</span>
+              }
+              @else {
+                <span>{{ _product.price }}€</span>
+              }
+            </span>
+        
+            <span class="product-view__price-details text-[color:var(--gray-500)]">
+              Precio con IVA incluido | 2% de descuento extra
+            </span>
+        
+            <!-- CHOICE -->
+            <div *ngIf="_product.modifiers?.hasChoice" class="product-view__choice flex flex-col gap-3">
+              <img src="assets/images/choice_nobg.webp" alt="Choice"/>
+              <div class="flex flex-col gap-1">
+                <span>· <b>Envío gratis</b> en pedidos +10,00€</span>
+                <span>· <b>Entrega rápida</b> entrega en 7 días</span>
+                <span>· <b>Devoluciones gratis</b>  en los siguientes 15 días, sin preguntas</span>
+              </div>
             </div>
-          </div>
-      
-          <!-- TITLE -->
-          <div class="product-view__title">
-            <span>{{ _product.name }}</span>
-          </div>
-      
-          <!-- STARS & STATS-->
-          <div class="flex gap-3 items-start">
-            <app-stars [filledStars]="_product?.modifiers?.stars!"></app-stars>
-            <div class="product-view__stats-details">
-              <span>{{ _product?.rating?.count }} Valoraciones</span>
+        
+            <!-- TITLE -->
+            <div class="product-view__title">
+              <span>{{ _product.name }}</span>
             </div>
-            ౹
-            <div class="product-view__stats-details">
-              <span>{{ _product?.modifiers?.stockTotal! - _product?.modifiers?.stock! }} Vendidos</span>
+        
+            <!-- STARS & STATS-->
+            <div class="flex gap-3 items-center">
+              <app-stars [filledStars]="_product?.stars!"></app-stars>
+              <div class="product-view__stats-details">
+                <span>{{ _product?.rating?.count }} Valoraciones</span>
+              </div>
+              ౹
+              <div class="product-view__stats-details">
+                <span>{{ _product?.stockTotal! - _product?.stock! }} Vendidos</span>
+              </div>
             </div>
+        
           </div>
-      
-        </div>
-        <app-product-view-send [product]="_product" class="flex-grow flex justify-center"></app-product-view-send>
+          <app-product-view-send [product]="_product" class="w-full md:max-w-[37rem]"></app-product-view-send>
+
+         </div>
       </div>
     }
   </div>

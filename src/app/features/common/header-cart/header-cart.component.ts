@@ -12,6 +12,7 @@ import { HeaderUserButtonComponent } from '../header-user-button/header-user-but
 import { DirectivesModule } from '@shared/directives/directives.module';
 import { HeaderCartProductComponent } from '../header-cart-product/header-cart-product.component';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header-cart',
@@ -22,6 +23,7 @@ import { LoadingOverlayComponent } from '@shared/components/loading-overlay/load
     DirectivesModule,
     HeaderCartProductComponent,
     LoadingOverlayComponent,
+    RouterModule,
   ],
   templateUrl: './header-cart.component.html',
   styleUrl: './header-cart.component.scss',
@@ -32,6 +34,7 @@ export class HeaderCartComponent {
   op?: OverlayPanel;
 
   cart$: Observable<Cart> = this.cartFacade.getCart$();
+
   cartLoading$: Observable<boolean> = this.cartFacade.isLoading$();
 
   cartProductsCount$: Observable<number> =
@@ -39,6 +42,7 @@ export class HeaderCartComponent {
 
   cartProducts$: Observable<CartProduct[]> =
     this.cartFacade.getCartProducts$();
+
   cartTotalPrice$: Observable<number> =
     this.cartFacade.getCartTotalPrice$();
 

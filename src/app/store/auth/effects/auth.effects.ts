@@ -67,8 +67,8 @@ export class AuthEffects implements OnInitEffects {
   refresh$ = createEffect(() =>
     this.actions$.pipe(
       ofType(onRefresh),
-      exhaustMap(({ tokens }) =>
-        this.authService.refresh(tokens.refreshToken).pipe(
+      exhaustMap(({ refreshToken }) =>
+        this.authService.refresh(refreshToken).pipe(
           map(tokens => onRefreshSuccess({ tokens })),
           catchError(error => of(onRefreshError({ error })))
         )

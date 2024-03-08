@@ -10,9 +10,10 @@ function decodeToken(token: string): Token {
   return JSON.parse(base64Decoded);
 }
 
-function isTokenExpired(token: string): boolean {
+async function isTokenExpired(token: string): Promise<boolean> {
   const decToken = decodeToken(token);
-  const exp = decToken.exp;
+  const fiveMin = 5 * 60;
+  const exp = decToken.exp - fiveMin;
   const now = Math.floor(Date.now() / 1000);
   return exp <= now;
 }

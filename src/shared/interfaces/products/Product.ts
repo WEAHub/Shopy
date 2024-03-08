@@ -24,6 +24,7 @@ export interface Product {
   price: number;
   published?: boolean;
   stars: number;
+  visit: number;
 }
 
 export interface ProductRating {

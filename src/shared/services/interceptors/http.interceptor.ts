@@ -13,26 +13,42 @@ import {
   mergeMap,
   switchMap,
   take,
+  takeLast,
+  tap,
 } from 'rxjs';
 import { inject } from '@angular/core';
 import { AuthFacade } from '@app/store/auth';
 import { isTokenExpired } from '@shared/utils/token.util';
+import { environment } from '@environments/environment';
 
-//REFACTOR DEL FILTRO DE API
+enum HttpMethods {
+  POST = 'POST',
+  GET = 'GET',
+}
+
 const noTokenURIs = [
-  '/auth/refresh',
-  '/auth/login',
-  '/category',
-  '/product',
-  '/assets',
-];
+  [HttpMethods.GET, '/auth/refresh'],
+  [HttpMethods.POST, '/auth/login'],
+  [HttpMethods.GET, '/category'],
+  [HttpMethods.GET, '/product'],
+].map(processApiFilter);
+
+function processApiFilter(endPoint: Array<string>): Array<string> {
+  const [method, path] = endPoint;
+  return [method, `${environment.apiURL}${path}`];
+}
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> => {
   const authFacade = inject(AuthFacade);
-  const needToken = !noTokenURIs.find(u => req.url.includes(u));
+  const isApiRequest = req.url.includes(environment.apiURL);
+  const needToken =
+    isApiRequest &&
+    !noTokenURIs.find(
+      ([method, path]) => req.url.includes(path) && req.method === method
+    );
 
   const authData$ = combineLatest({
     isAuth: authFacade.isAuthenticated$(),
@@ -43,15 +59,17 @@ export const authInterceptor: HttpInterceptorFn = (
   return authData$.pipe(
     take(1),
     mergeMap(async authData => {
-      const { accessToken } = authData.tokens;
+      const { accessToken, refreshToken } = authData.tokens;
       const { isRefreshing, isAuth } = authData;
 
       if (!isAuth || !needToken) return req;
 
-      const isExpired = isTokenExpired(accessToken);
+      const isExpired = await isTokenExpired(accessToken);
 
-      if (!isExpired) return setRequestToken(req, accessToken);
-      if (!isRefreshing) authFacade.refreshToken();
+      if (!isExpired) {
+        return setRequestToken(req, accessToken);
+      }
+      if (!isRefreshing) authFacade.refreshToken(refreshToken);
 
       return await lastValueFrom(
         authData$.pipe(
@@ -63,51 +81,6 @@ export const authInterceptor: HttpInterceptorFn = (
     }),
     switchMap(req => next(req))
   );
-
-  // TRY 2
-  /*
-    return authData$.pipe(
-      take(1),
-      mergeMap(async authData => {
-        const { accessToken } = authData.tokens;
-        const { isRefreshing, isAuth } = authData;
-
-        if (!isAuth || !needToken) return req;
-
-        const isExpired = true; //isTokenExpired(accessToken);
-
-        if (!isExpired) return setRequestToken(req, accessToken);
-        if (!isRefreshing) authFacade.refreshToken();
-
-        return await lastValueFrom(
-          authData$.pipe(
-            filter(({ isRefreshing }) => !isRefreshing),
-            map(({ tokens }) => setRequestToken(req, tokens.accessToken)),
-            take(1)
-          )
-        );
-      }),
-      switchMap(req => next(req))
-    );
-  */
-
-  // TRY 1
-  /*
-    return authData$.pipe(
-      take(1),
-      switchMap(authData => {
-        if (authData.isAuth && needToken) {
-          const isExpired = isTokenExpired(authData.tokens.accessToken);
-          if (!authData.isRefreshing && isExpired) authFacade.refreshToken();
-          return authData$.pipe(
-            filter(p => !p.isRefreshing),
-            switchMap(p => next(setRequestToken(req, p.tokens.accessToken)))
-          );
-        }
-        return next(req);
-      })
-    );
-  */
 };
 
 function setRequestToken(

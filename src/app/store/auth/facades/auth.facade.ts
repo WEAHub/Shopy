@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, take } from 'rxjs';
+import { Observable, lastValueFrom, map, mergeMap, take } from 'rxjs';
 
 // Interfaces
 import { LoginRequestBody } from '@shared/interfaces/backend/auth/LoginRequest';
@@ -24,10 +24,15 @@ import {
   isRefreshing,
 } from '../selectors/auth.selectors';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { isTokenExpired } from '@/shared/utils/token.util';
 
 @Injectable()
 export class AuthFacade {
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private router: Router
+  ) {}
 
   public isAuthenticated$(): Observable<boolean> {
     return this.store.select(isAuthenticated);
@@ -80,9 +85,26 @@ export class AuthFacade {
     this.store.dispatch(onSetUserDetails({ id, userData }));
   }
 
-  public refreshToken(): void {
-    this.getToken$()
-      .pipe(take(1))
-      .subscribe(tokens => this.store.dispatch(onRefresh({ tokens })));
+  public refreshToken(refreshToken: string): void {
+    this.store.dispatch(onRefresh({ refreshToken }));
+  }
+
+  public async checkToken(): Promise<void> {
+    const isAuth: boolean = await lastValueFrom(
+      this.isAuthenticated$().pipe(take(1))
+    );
+
+    if (!isAuth) return;
+
+    const { accessToken, refreshToken } = await lastValueFrom(
+      this.getToken$().pipe(take(1))
+    );
+
+    const isExpired = await isTokenExpired(accessToken);
+
+    if (isExpired) {
+      console.log('expired', accessToken, refreshToken);
+      this.refreshToken(refreshToken);
+    }
   }
 }

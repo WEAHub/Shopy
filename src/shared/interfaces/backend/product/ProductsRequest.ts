@@ -1,5 +1,6 @@
 export interface ProductsParameters {
   limit?: number;
+  sortColumn?: string;
   sort?: ProductsSorts;
 }
 

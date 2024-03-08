@@ -52,6 +52,11 @@ export class CartsService {
     const endpoint =
       this.backendService.generateUrl(CartsEndpoints.CARTS) + `${cart.id}`;
 
-    return this.httpClient.patch<CartResponse>(endpoint, cart);
+    return this.httpClient.put<CartResponse>(endpoint, {
+      products: cart.products.map(({ productId, quantity }) => ({
+        productId,
+        quantity,
+      })),
+    });
   }
 }

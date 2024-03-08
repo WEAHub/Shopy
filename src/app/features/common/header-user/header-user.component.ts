@@ -13,7 +13,7 @@ import { LoadingOverlayComponent } from '@shared/components/loading-overlay/load
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { LoginModalComponent } from '@shared/components/login-modal/login-modal.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header-user',
@@ -48,21 +48,15 @@ export class HeaderUserComponent {
 
   constructor(
     private authFacade: AuthFacade,
-    private router: Router,
-    private translate: TranslateService
+    private router: Router
   ) {}
-
-  login(): void {
-    //this.authFacade.forceLogin();
-    this.loginModal.showModal();
-  }
 
   editProfile(): void {
     this.router.navigateByUrl('/user');
   }
 
-  logout(): void {
-    this.router.navigateByUrl('/landing');
+  async logout(): Promise<void> {
+    await this.router.navigateByUrl('/landing');
     this.authFacade.logout();
   }
 }

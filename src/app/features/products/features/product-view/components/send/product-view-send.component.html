@@ -1,4 +1,4 @@
-<div class="relative h-min flex flex-col pv-send border-[1px] border-[#ebebeb] rounded-2xl p-5 text-base max-w-[34rem] w-full">
+<div class="overflow-hidden relative h-min flex flex-col pv-send border-[1px] border-[#ebebeb] rounded-2xl p-5 text-base w-full">
   <app-loading-overlay [loading]="(userLoading$ | async)! || (cartLoading$ | async)!"></app-loading-overlay>
   
   <div class="pv-send__to flex justify-between">
@@ -52,4 +52,16 @@
     </form>
     
   </div>
+  @if((userAuth$ | async) === false) {
+    <app-overlay-blur>
+      <div class="flex flex-col h-full justify-center">
+        <div class="grid text-center gap-5 bg-[#ffffffb8] p-5">
+          <span class="text-center text-xl font-medium">Para añadir productos a la cesta debes iniciar sesión primero!</span>
+          <p-button (click)="loginModal.showModal()" label="Iniciar sesion"></p-button>
+        </div>
+       
+      </div> 
+    </app-overlay-blur>
+  }
 </div>
+<app-login-modal #loginModal></app-login-modal>

@@ -17,19 +17,13 @@
       </div>
     </app-header-user-button>
 
-    <p-menu 
-      #menu 
-      [model]="userMenuItems"
-      [popup]="true" 
-      appendTo="body"
-    ></p-menu>
 
 
   }
   @else {
     <div class="relative">
       <app-loading-overlay fontSizeRem="1rem" [loading]="(isLoading$ | async)!"></app-loading-overlay>
-      <app-header-user-button (click)="login()">
+      <app-header-user-button (click)="loginModal.showModal()">
   
         <i class="lni lni-user text-4xl"></i>
   
@@ -45,3 +39,10 @@
 </div>
 
 <app-login-modal #loginModal></app-login-modal>
+
+<p-menu 
+  #menu 
+  [model]="userMenuItems"
+  [popup]="true" 
+  appendTo="body"
+></p-menu>

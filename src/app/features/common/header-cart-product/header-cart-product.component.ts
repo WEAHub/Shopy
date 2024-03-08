@@ -20,6 +20,7 @@ import { CartProduct } from '@shared/interfaces/carts/Cart';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
+import { RouterModule } from '@angular/router';
 
 export interface FormQuantity {
   quantity: number;
@@ -35,6 +36,7 @@ export interface FormQuantity {
     FormsModule,
     ReactiveFormsModule,
     LoadingOverlayComponent,
+    RouterModule,
   ],
   templateUrl: './header-cart-product.component.html',
   styleUrl: './header-cart-product.component.scss',

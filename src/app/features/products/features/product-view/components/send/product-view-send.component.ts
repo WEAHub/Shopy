@@ -1,3 +1,5 @@
+import { LoginModalComponent } from '@/shared/components/login-modal/login-modal.component';
+import { OverlayBlurComponent } from '@/shared/components/overlay-blur/overlay-blur.component';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {
@@ -24,6 +26,8 @@ import { combineLatestWith, map } from 'rxjs';
     LoadingOverlayComponent,
     FormsModule,
     ReactiveFormsModule,
+    OverlayBlurComponent,
+    LoginModalComponent,
   ],
   templateUrl: './product-view-send.component.html',
   styleUrl: './product-view-send.component.scss',

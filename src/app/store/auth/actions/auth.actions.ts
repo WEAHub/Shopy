@@ -39,7 +39,7 @@ export const onSetUserDetailsError = createAction(
 
 export const onRefresh = createAction(
   `${featureHeader}: Refresh`,
-  props<{ tokens: UserTokens }>()
+  props<{ refreshToken: string }>()
 );
 
 export const onRefreshError = createAction(

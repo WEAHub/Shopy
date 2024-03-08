@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { createSelector } from '@ngrx/store';
 import { getAuthFeature } from './get-feature-state';
-import { state } from '@angular/animations';
 
 export const isAuthenticated = createSelector(
   getAuthFeature,

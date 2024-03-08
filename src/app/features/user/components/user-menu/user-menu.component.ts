@@ -32,5 +32,10 @@ export class UserMenuComponent {
       title: 'Contraseña',
       icon: 'pi pi-key',
     },
+    {
+      route: 'invoices',
+      title: 'Pedidos',
+      icon: 'pi pi-history',
+    },
   ];
 }

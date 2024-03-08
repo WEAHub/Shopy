@@ -3,15 +3,21 @@
   *ngVar="cartProduct.product as _product"
 >
   <img class="header-cart-product__image" [src]="_product.image" />
-  <span class="header-cart-product__title ellipsis" >{{ _product.title }}</span>
-  <span class="header-cart-product__price" >{{ _product.modifiers.finalPrice }}€</span>
+  <span
+    [routerLink]="['/products', _product.id]"
+    class="header-cart-product__title ellipsis"
+  >{{ _product.name }}</span>
+
+  <span class="header-cart-product__price" >
+    {{ _product.modifiers?.discountPercent ? _product.modifiers?.discountPrice : _product.price }}€
+    </span>
   <form [formGroup]="cartForm">
     <p-inputNumber
       formControlName="quantity"
       [showButtons]="true" 
       [step]="1.0"
       [min]="1"
-      [max]=" _product.modifiers.stock"
+      [max]="_product.modifiers.stock"
       buttonLayout="horizontal" 
       spinnerMode="horizontal" 
       styleClass="input-number"
@@ -20,7 +26,7 @@
       incrementButtonIcon="pi pi-plus text-base" 
       decrementButtonIcon="pi pi-minus text-base"
     ></p-inputNumber>
-    <i (click)='removeFromCart()' class="ml-5 lni lni-trash-can text-xl cursor-pointer text-[color:red]"></i>
+    <i (click)="removeFromCart()" class="ml-5 lni lni-trash-can text-xl cursor-pointer text-[color:red]"></i>
 
   </form>
 </div>
