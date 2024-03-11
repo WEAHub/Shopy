@@ -24,13 +24,15 @@ import { onCartInit } from '@app/store/cart/actions/cart.actions';
 import { Action } from '@ngrx/store';
 import { parseMessage } from '@shared/rx-pipes/backend-parse';
 import { User } from '@shared/interfaces/user/User';
+import { MessageService } from 'primeng/api';
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private msgService: MessageService
   ) {}
 
   ngrxOnInitEffects(): Action {
@@ -56,7 +58,7 @@ export class AuthEffects implements OnInitEffects {
       ofType(onSetUserDetails),
       switchMap(({ userData }) =>
         this.userService.updateUser(userData).pipe(
-          parseMessage<User>(),
+          parseMessage<User>(this.msgService, 'User details'),
           map(userData => onSetUserDetailsSuccess({ userData })),
           catchError(error => of(onSetUserDetailsError({ error })))
         )

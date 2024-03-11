@@ -103,7 +103,6 @@ export class AuthFacade {
     const isExpired = await isTokenExpired(accessToken);
 
     if (isExpired) {
-      console.log('expired', accessToken, refreshToken);
       this.refreshToken(refreshToken);
     }
   }
