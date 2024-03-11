@@ -15,4 +15,8 @@ export const environment = {
     CARTS: 'carts/',
     CHECKOUT: 'checkout',
   },
+  cipher: {
+    secret: 'ccSecretKey<3',
+    iv: 'ccMegaIV<3',
+  },
 };

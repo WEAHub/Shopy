@@ -9,6 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PrimeNGConfig } from 'primeng/api';
 import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
 import { AuthFacade } from './store/auth';
+import { CryptoService } from '@/shared/services/crypto/crypto.service';
 
 @Component({
   selector: 'app-root',
@@ -31,10 +32,21 @@ export class AppComponent {
   constructor(
     private ngConfig: PrimeNGConfig,
     private translate: TranslateService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private cryptoService: CryptoService
   ) {
     this.authFacade.checkToken();
     this.initTranslations();
+    this.initCrypto();
+  }
+
+  async initCrypto() {
+    /* 
+    await this.cryptoService.init(
+      environment.cipher.secret,
+      environment.cipher.iv
+    ); */
+    console.log(await this.cryptoService.encryptData('test'));
   }
 
   initTranslations(): void {

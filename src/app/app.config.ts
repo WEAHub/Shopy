@@ -24,6 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslation } from './config/translate.config';
 import { inMemoryScrollingFeature } from './config/scroll.config';
 import { AppStoreModule } from './store';
+import { CryptoServiceModule } from '@/shared/services/crypto/crypto.module';
+import { environment } from '@/environments/environment.base';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +38,10 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       TranslateModule.forRoot(provideTranslation()),
       AppStoreModule,
+      CryptoServiceModule.forRoot(
+        environment.cipher.secret,
+        environment.cipher.iv
+      ),
     ]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],

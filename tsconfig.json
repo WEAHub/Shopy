@@ -27,7 +27,8 @@
       "@environments/*": ["./environments/*"],
       "@shared/*": ["./shared/*"],
       "@assets/*": ["./assets/*"],
-      "@interfaces/*": ["./shared/interfaces/*"]
+      "@interfaces/*": ["./shared/interfaces/*"],
+      "crypto": ["./node_modules/crypto-browserify"],
     }
   },
   "angularCompilerOptions": {
