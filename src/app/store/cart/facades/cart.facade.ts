@@ -10,7 +10,7 @@ import {
   isLoading,
 } from '../selectors/cart.selectors';
 import { Cart, CartProduct } from '@shared/interfaces/carts/Cart';
-import { onCartUpdate } from '../actions/cart.actions';
+import { onCartInit, onCartUpdate } from '../actions/cart.actions';
 
 @Injectable()
 export class CartFacade {
@@ -37,7 +37,11 @@ export class CartFacade {
   }
 
   public updateCart(cart: Cart): void {
-    return this.store.dispatch(onCartUpdate({ cart }));
+    this.store.dispatch(onCartUpdate({ cart }));
+  }
+
+  public refreshCart(): void {
+    this.store.dispatch(onCartInit());
   }
 
   public deleteProduct(product: CartProduct): void {

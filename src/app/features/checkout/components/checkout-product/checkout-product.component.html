@@ -1,0 +1,39 @@
+<div 
+  class="checkout-product"
+  *ngVar="cartProduct.product as _product"
+>
+  <img class="checkout-product__image" [src]="_product.image" />
+  
+  <div class="flex flex-col">
+    <span
+      [routerLink]="['/products', _product.id]"
+      class="checkout-product__title"
+    >{{ _product.name }}</span>
+    <span
+      class="checkout-product__description"
+    >{{ _product.description }}</span>
+
+  </div>
+
+  <span class="checkout-product__price" >
+    {{ _product.modifiers?.discountPercent ? _product.modifiers?.discountPrice : _product.price }}€
+    </span>
+  <form [formGroup]="cartForm" class="flex flex-nowrap items-center">
+    <p-inputNumber
+      formControlName="quantity"
+      [showButtons]="true" 
+      [step]="1.0"
+      [min]="1"
+      [max]="_product.modifiers.stock"
+      buttonLayout="horizontal" 
+      spinnerMode="horizontal" 
+      styleClass="input-number"
+      decrementButtonClass="input-number__action" 
+      incrementButtonClass="input-number__action" 
+      incrementButtonIcon="pi pi-plus text-base" 
+      decrementButtonIcon="pi pi-minus text-base"
+    ></p-inputNumber>
+    <i (click)="removeFromCart()" class="ml-5 lni lni-trash-can text-xl cursor-pointer text-[color:red]"></i>
+
+  </form>
+</div>

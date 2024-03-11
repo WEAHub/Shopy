@@ -1,7 +1,33 @@
 
 
 <app-base-layout>
-  <div class="relative">
-    test
+  <div class="relative grid">
+    <h1 class="text-4xl mb-8 text-bold">Checkout</h1>
+    
+    <div class="grid">
+      <app-loading-overlay [loading]="(cartLoading$ | async)!"></app-loading-overlay>
+
+      @for(product of (cartProducts$ | async); track product) {
+        <app-checkout-product
+          (productDeleted)="deleteProduct(product)"
+          (quantityChanged)="quantityChanged($event)"
+          [cartProduct]="product"
+        ></app-checkout-product>
+        <p-divider/>
+      }
+      @empty {
+        <p>Cart is empty...</p>
+      }
+      
+    </div>
+    
+    <div class="flex items-center justify-end gap-10">
+      <span class="text-base text-2xl">Total</span>
+      <span class="text-black font-bold text-[3rem]">{{ cartTotalPrice$ | async }}€</span>
+    </div>
+    
+    <div class="flex items-center justify-end">
+      <p-button label="Proceed to payment"></p-button>
+    </div>
   </div>
 </app-base-layout>
