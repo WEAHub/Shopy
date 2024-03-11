@@ -21,13 +21,20 @@
       
     </div>
     
-    <div class="flex items-center justify-end gap-10">
-      <span class="text-base text-2xl">Total</span>
-      <span class="text-black font-bold text-[3rem]">{{ cartTotalPrice$ | async }}€</span>
-    </div>
-    
-    <div class="flex items-center justify-end">
-      <p-button label="Proceed to payment"></p-button>
+    <div class="flex items-center justify-between gap-10 mb-5">
+      <div class="grid text-md" *ngVar="(user$ | async) as _user">
+        <span><b>Nombre</b>: {{ _user?.firstName }} {{ _user?.lastName }}</span>
+        <span><b>Dirección</b>: {{ _user?.location?.address }}</span>
+        <span><b>Tiempo estimado</b>: 3 días</span>
+      </div>
+
+      <div class="flex flex-col">
+        <div class="flex items-center justify-between">
+          <span class="text-base text-[2rem]">Total</span>
+          <span class="text-black font-bold text-[3rem]">{{ cartTotalPrice$ | async }}€</span>
+        </div>
+        <p-button label="Proceed to payment"></p-button>
+      </div>
     </div>
   </div>
 </app-base-layout>

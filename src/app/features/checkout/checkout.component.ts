@@ -1,5 +1,4 @@
 import { CartFacade } from '@/app/store/cart';
-import { CheckoutFacade } from '@/app/store/checkout';
 import { BaseLayoutComponent } from '@/shared/components/base-layout/base-layout.component';
 import { Cart, CartProduct } from '@/shared/interfaces/carts/Cart';
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
@@ -8,6 +7,9 @@ import { CheckoutProductComponent } from './components/checkout-product/checkout
 import { LoadingOverlayComponent } from '@/shared/components/loading-overlay/loading-overlay.component';
 import { CommonModule } from '@angular/common';
 import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
+import { AuthFacade } from '@/app/store/auth';
+import { User } from '@/shared/interfaces/user/User';
+import { DirectivesModule } from '@/shared/directives/directives.module';
 
 @Component({
   selector: 'app-product',
@@ -18,6 +20,7 @@ import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
     LoadingOverlayComponent,
     CommonModule,
     PrimeNGModule,
+    DirectivesModule,
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
@@ -38,9 +41,11 @@ export class CheckoutComponent implements OnInit {
   cartTotalPrice$: Observable<number> =
     this.cartFacade.getCartTotalPrice$();
 
+  user$: Observable<User> = this.authFacade.getUser$();
+
   constructor(
-    private checkoutFacade: CheckoutFacade,
-    private cartFacade: CartFacade
+    private cartFacade: CartFacade,
+    private authFacade: AuthFacade
   ) {}
 
   ngOnInit(): void {
