@@ -36,6 +36,7 @@ export class AutocompletePlacesComponent implements ControlValueAccessor {
 
   address!: string;
 
+  showIcon: boolean = true;
   constructor() {}
 
   private markAsTouched(): void {

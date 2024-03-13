@@ -1,7 +1,14 @@
-<input 
-googlePlaces 
-pInputText
-class="w-full"
-[(ngModel)]="address"
-[value]="address"
-(addressChange)="onAddressChange($event)"/>
+<div 
+  class="relative w-full"
+  [class.map-icon]="showIcon"
+>
+  <input
+    googlePlaces 
+    pInputText
+    class="w-full"
+    [(ngModel)]="address"
+    [value]="address"
+    (addressChange)="onAddressChange($event)"
+  />
+
+</div>
