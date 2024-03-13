@@ -1,23 +1,18 @@
-import { CartFacade } from '@/app/store/cart';
 import { BaseLayoutComponent } from '@/shared/components/base-layout/base-layout.component';
-import { Cart, CartProduct } from '@/shared/interfaces/carts/Cart';
-import { Component, inject, DestroyRef, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LoadingOverlayComponent } from '@/shared/components/loading-overlay/loading-overlay.component';
+import { Component, DestroyRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
-import { AuthFacade } from '@/app/store/auth';
-import { User } from '@/shared/interfaces/user/User';
 import { DirectivesModule } from '@/shared/directives/directives.module';
-import { CartProductComponent } from '@/shared/components/cart-product/cart-product.component';
+import { filter, map, startWith } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Steps } from 'primeng/steps';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-checkout',
   standalone: true,
   imports: [
     BaseLayoutComponent,
-    CartProductComponent,
-    LoadingOverlayComponent,
     CommonModule,
     PrimeNGModule,
     DirectivesModule,
@@ -25,38 +20,60 @@ import { CartProductComponent } from '@/shared/components/cart-product/cart-prod
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent {
   private destroyRef = inject(DestroyRef);
 
-  cart$: Observable<Cart> = this.cartFacade.getCart$();
+  steps = [
+    { label: 'Checkout', link: '/checkout' },
+    { label: 'Delivery', link: '/checkout/delivery' },
+    { label: 'Payment', link: '/checkout/payment' },
+    { label: 'Confirmation', link: '/checkout/confirmation' },
+  ];
 
-  cartLoading$: Observable<boolean> = this.cartFacade.isLoading$();
+  step: number = 0;
 
-  cartProductsCount$: Observable<number> =
-    this.cartFacade.getCartProductsCount$();
-
-  cartProducts$: Observable<CartProduct[]> =
-    this.cartFacade.getCartProducts$();
-
-  cartTotalPrice$: Observable<number> =
-    this.cartFacade.getCartTotalPrice$();
-
-  user$: Observable<User> = this.authFacade.getUser$();
-
-  constructor(
-    private cartFacade: CartFacade,
-    private authFacade: AuthFacade
-  ) {}
-
-  ngOnInit(): void {
-    this.cartFacade.refreshCart();
+  constructor(private router: Router) {
+    this.initRouteChanges();
   }
 
-  deleteProduct(cartProduct: CartProduct): void {
-    this.cartFacade.deleteProduct(cartProduct);
+  onRouteChange(url: string): number {
+    const activeStep = this.getActiveStep(url);
+    this.step = activeStep;
+    this.refreshSteps();
+    return activeStep;
   }
 
-  quantityChanged(product: CartProduct): void {
-    this.cartFacade.updateProduct(product);
+  getActiveStep(url: string): number {
+    const lastPath = url.split('/').at(-1);
+    return this.steps.findIndex(
+      step => step.label.toLocaleLowerCase() === lastPath
+    );
+  }
+
+  changeStep(stepIndex: number): void {
+    const nextStepUrl = this.steps[stepIndex]?.link;
+    if (nextStepUrl) {
+      this.router.navigateByUrl(nextStepUrl);
+      this.step = stepIndex;
+    }
+  }
+
+  refreshSteps(): void {
+    this.steps = this.steps.map((step, stepIndex) => ({
+      ...step,
+      disabled: this.step < stepIndex,
+    }));
+  }
+
+  initRouteChanges(): void {
+    this.router.events
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter(event => event instanceof NavigationEnd),
+        map(event => (event as NavigationEnd).url),
+        map(url => this.onRouteChange(url)),
+        startWith(this.onRouteChange(this.router.url))
+      )
+      .subscribe();
   }
 }

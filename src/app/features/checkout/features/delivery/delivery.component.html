@@ -1,1 +1,89 @@
-<p>delivery works!</p>
+
+<div class="grid justify-center">
+  <h1 class="text-4xl mb-8 text-bold">Delivery</h1>
+  <form [formGroup]="deliveryForm" class="grid max-w-[50rem] gap-5 text-base">
+  
+    <span>Contact information</span>
+  
+    <div class="grid">
+      <input pInputText type="text" class="w-full" placeholder="Email" formControlName="email" />
+      <app-input-validator [form]="deliveryForm" controlPath="email"></app-input-validator>
+    </div>
+  
+    <div class="grid gap-5 grid-cols-2">
+  
+      <div class="grid">
+        <input pInputText type="text" placeholder="First Name" formControlName="firstName" />
+        <app-input-validator [form]="deliveryForm" controlPath="firstName"></app-input-validator>
+      </div>
+  
+      <div class="grid">
+        <input pInputText type="text" placeholder="Last Name" formControlName="lastName" />
+        <app-input-validator [form]="deliveryForm" controlPath="lastName"></app-input-validator>
+      </div>
+  
+    </div>
+  
+    <div class="grid mb-10">
+      <input pInputText type="text" class="w-full" placeholder="Phone" formControlName="phone" />
+      <app-input-validator [form]="deliveryForm" controlPath="phone"></app-input-validator>
+    </div>
+  
+    <span>Shipping</span>
+  
+    <div class="grid">
+      <!-- <input pInputText type="text" class="w-full" placeholder="Address" formControlName="address" /> -->
+      <app-autocomplete-places
+        formControlName="address"
+        (addressChange)="onAddressChange($event)">
+      </app-autocomplete-places>
+      <app-input-validator [form]="deliveryForm" controlPath="address"></app-input-validator>
+    </div>
+  
+    <div class="grid grid-cols-[auto_5rem_8rem] gap-5">
+  
+      <div class="flex flex-col">
+        <input pInputText type="text" class="w-full" placeholder="Street" formControlName="street" />
+        <app-input-validator [form]="deliveryForm" controlPath="street"></app-input-validator>
+      </div>
+  
+      <div class="flex flex-col">
+        <input pInputText type="text" placeholder="Street Number" formControlName="number" />
+        <app-input-validator [form]="deliveryForm" controlPath="number"></app-input-validator>
+      </div>
+  
+      <div class="flex flex-col">
+        <input pInputText type="text" placeholder="Door" formControlName="door" />
+        <app-input-validator [form]="deliveryForm" controlPath="door"></app-input-validator>
+      </div>
+  
+    </div>
+  
+    <div class="grid gap-5 grid-cols-3 mb-5">
+  
+      <div class="flex flex-col">
+        <input pInputText type="text" placeholder="Zip Code" formControlName="zipcode" />
+        <app-input-validator [form]="deliveryForm" controlPath="zipcode"></app-input-validator>
+      </div>
+  
+      <div class="flex flex-col">
+        <input pInputText type="text" placeholder="Province" formControlName="province" />
+        <app-input-validator [form]="deliveryForm" controlPath="province"></app-input-validator>
+      </div>
+  
+      <div class="flex flex-col">
+        <input pInputText type="text" placeholder="City" formControlName="city" />
+        <app-input-validator [form]="deliveryForm" controlPath="city"></app-input-validator>
+      </div>
+    </div>
+    
+    <p-button 
+      label="Go to payment" 
+      styleClass="w-full"
+      [disabled]="deliveryForm.invalid"
+    ></p-button>
+  
+  </form>
+  
+
+</div>

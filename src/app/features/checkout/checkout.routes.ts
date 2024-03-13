@@ -6,13 +6,27 @@ const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./checkout.component').then(m => m.CheckoutComponent),
-  },
-  {
-    path: 'delivery',
-    loadComponent: () =>
-      import('./features/delivery/delivery.component').then(
-        m => m.DeliveryComponent
-      ),
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '',
+      },
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/checkout-cart/checkout-cart.component').then(
+            m => m.CheckoutCartComponent
+          ),
+      },
+      {
+        path: 'delivery',
+        loadComponent: () =>
+          import('./features/delivery/delivery.component').then(
+            m => m.DeliveryComponent
+          ),
+      },
+    ],
   },
 ];
 

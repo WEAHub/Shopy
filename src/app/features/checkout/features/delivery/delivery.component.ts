@@ -1,12 +1,76 @@
-import { Component } from '@angular/core';
+import { AuthFacade } from '@/app/store/auth';
+import { AutocompletePlacesComponent } from '@/shared/components/autocomplete-places/autocomplete-places.component';
+import { BaseLayoutComponent } from '@/shared/components/base-layout/base-layout.component';
+import { InputValidatorComponent } from '@/shared/components/input-validator/input-validator.component';
+import { LoadingOverlayComponent } from '@/shared/components/loading-overlay/loading-overlay.component';
+import { AddressLocation } from '@/shared/interfaces/location/location';
+import { User } from '@/shared/interfaces/user/User';
+import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-delivery',
   standalone: true,
-  imports: [],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    LoadingOverlayComponent,
+    PrimeNGModule,
+    InputValidatorComponent,
+    AutocompletePlacesComponent,
+  ],
   templateUrl: './delivery.component.html',
-  styleUrl: './delivery.component.scss'
+  styleUrl: './delivery.component.scss',
 })
-export class DeliveryComponent {
+export class DeliveryComponent implements OnInit {
+  deliveryForm!: FormGroup;
 
+  user$: Observable<User> = this.authFacade.getUser$();
+
+  constructor(
+    private fb: FormBuilder,
+    private authFacade: AuthFacade
+  ) {}
+
+  ngOnInit(): void {
+    this.prepareForm();
+    this.initUser();
+  }
+
+  prepareForm(): void {
+    this.deliveryForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      address: ['', Validators.required],
+      street: ['', Validators.required],
+      number: ['', Validators.required],
+      door: ['', Validators.required],
+      city: ['', Validators.required],
+      zipcode: ['', Validators.required],
+      email: [
+        '',
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      phone: ['', Validators.required],
+      province: ['', Validators.required],
+    });
+  }
+
+  initUser(): void {
+    this.user$.pipe(take(1)).subscribe(user => {
+      this.deliveryForm.patchValue({ ...user, ...user.location });
+    });
+  }
+
+  onAddressChange(address: AddressLocation): void {
+    this.deliveryForm.patchValue(address);
+  }
 }
