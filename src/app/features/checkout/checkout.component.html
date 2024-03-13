@@ -8,11 +8,12 @@
       <app-loading-overlay [loading]="(cartLoading$ | async)!"></app-loading-overlay>
 
       @for(product of (cartProducts$ | async); track product) {
-        <app-checkout-product
+        <app-cart-product
+          styleClass="checkout-product"
           (productDeleted)="deleteProduct(product)"
           (quantityChanged)="quantityChanged($event)"
           [cartProduct]="product"
-        ></app-checkout-product>
+        ></app-cart-product>
         <p-divider/>
       }
       @empty {
@@ -33,7 +34,7 @@
           <span class="text-base text-[2rem]">Total</span>
           <span class="text-black font-bold text-[3rem]">{{ cartTotalPrice$ | async }}€</span>
         </div>
-        <p-button label="Proceed to payment"></p-button>
+        <p-button [routerLink]="['delivery']" label="Next - Delivery"></p-button>
       </div>
     </div>
   </div>

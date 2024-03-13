@@ -14,8 +14,6 @@ export class CryptoService {
     if (typeof window === 'undefined') return '';
     this.key = await this.keyBuffer(key);
     this.iv = await this.ivBuffer(iv);
-
-    console.log('IV:', this.toHex(this.iv));
     return this;
   }
 
@@ -47,7 +45,6 @@ export class CryptoService {
   private async keyBuffer(secret: string): Promise<CryptoKey> {
     const name = this.bufferAlgo;
     const key = (await this.generateHash(secret)).slice(0, 32);
-    console.log('KEY:', this.toHex(key));
     return window.crypto.subtle.importKey('raw', key, { name }, false, [
       'encrypt',
     ]);
@@ -64,11 +61,5 @@ export class CryptoService {
       this.arrayBuffer(data)
     );
     return new Uint8Array(hashBuffer);
-  }
-
-  toHex(buffer: any) {
-    return Array.prototype.map
-      .call(buffer, x => ('00' + x.toString(16)).slice(-2))
-      .join('');
   }
 }

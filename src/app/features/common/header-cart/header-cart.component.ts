@@ -10,9 +10,9 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable } from 'rxjs';
 import { HeaderUserButtonComponent } from '../header-user-button/header-user-button.component';
 import { DirectivesModule } from '@shared/directives/directives.module';
-import { HeaderCartProductComponent } from '../header-cart-product/header-cart-product.component';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { RouterModule } from '@angular/router';
+import { CartProductComponent } from '@/shared/components/cart-product/cart-product.component';
 
 @Component({
   selector: 'app-header-cart',
@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
     PrimeNGModule,
     HeaderUserButtonComponent,
     DirectivesModule,
-    HeaderCartProductComponent,
+    CartProductComponent,
     LoadingOverlayComponent,
     RouterModule,
   ],

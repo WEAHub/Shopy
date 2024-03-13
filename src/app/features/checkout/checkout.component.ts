@@ -3,20 +3,20 @@ import { BaseLayoutComponent } from '@/shared/components/base-layout/base-layout
 import { Cart, CartProduct } from '@/shared/interfaces/carts/Cart';
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CheckoutProductComponent } from './components/checkout-product/checkout-product.component';
 import { LoadingOverlayComponent } from '@/shared/components/loading-overlay/loading-overlay.component';
 import { CommonModule } from '@angular/common';
 import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
 import { AuthFacade } from '@/app/store/auth';
 import { User } from '@/shared/interfaces/user/User';
 import { DirectivesModule } from '@/shared/directives/directives.module';
+import { CartProductComponent } from '@/shared/components/cart-product/cart-product.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
     BaseLayoutComponent,
-    CheckoutProductComponent,
+    CartProductComponent,
     LoadingOverlayComponent,
     CommonModule,
     PrimeNGModule,

@@ -7,6 +7,13 @@ const routes: Routes = [
     loadComponent: () =>
       import('./checkout.component').then(m => m.CheckoutComponent),
   },
+  {
+    path: 'delivery',
+    loadComponent: () =>
+      import('./features/delivery/delivery.component').then(
+        m => m.DeliveryComponent
+      ),
+  },
 ];
 
 @NgModule({

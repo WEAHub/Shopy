@@ -1,3 +1,7 @@
+import { LoadingOverlayComponent } from '@/shared/components/loading-overlay/loading-overlay.component';
+import { DirectivesModule } from '@/shared/directives/directives.module';
+import { CartProduct } from '@/shared/interfaces/carts/Cart';
+import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -8,18 +12,13 @@ import {
   Output,
   inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-
-import { DirectivesModule } from '@shared/directives/directives.module';
-import { CartProduct } from '@shared/interfaces/carts/Cart';
-import { PrimeNGModule } from '@shared/modules/primeng/primeng.module';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { RouterModule } from '@angular/router';
 
 export interface FormQuantity {
@@ -27,7 +26,7 @@ export interface FormQuantity {
 }
 
 @Component({
-  selector: 'app-header-cart-product',
+  selector: 'app-cart-product',
   standalone: true,
   imports: [
     CommonModule,
@@ -38,10 +37,11 @@ export interface FormQuantity {
     LoadingOverlayComponent,
     RouterModule,
   ],
-  templateUrl: './header-cart-product.component.html',
-  styleUrl: './header-cart-product.component.scss',
+  templateUrl: './cart-product.component.html',
+  styleUrl: './cart-product.component.scss',
 })
-export class HeaderCartProductComponent implements OnInit {
+export class CartProductComponent implements OnInit {
+  @Input() styleClass: string = 'header-cart-product';
   private destroyRef = inject(DestroyRef);
   @Output() quantityChanged = new EventEmitter<CartProduct>();
   @Output() productDeleted = new EventEmitter<CartProduct>();

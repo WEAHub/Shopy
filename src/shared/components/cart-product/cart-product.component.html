@@ -1,17 +1,24 @@
 <div 
-  class="header-cart-product"
+  [class]="styleClass"
   *ngVar="cartProduct.product as _product"
 >
-  <img class="header-cart-product__image" [src]="_product.image" />
-  <span
-    [routerLink]="['/products', _product.id]"
-    class="header-cart-product__title ellipsis"
-  >{{ _product.name }}</span>
+  <img [class]="styleClass + '__image'" [src]="_product.image" />
+  
+  <div class="flex flex-col">
+    <span
+      [routerLink]="['/products', _product.id]"
+      [class]="styleClass + '__title'"
+    >{{ _product.name }}</span>
+    <span
+    [class]="styleClass + '__description'"
+    >{{ _product.description }}</span>
 
-  <span class="header-cart-product__price" >
+  </div>
+
+  <span [class]="styleClass + '__price'" >
     {{ _product.modifiers?.discountPercent ? _product.modifiers?.discountPrice : _product.price }}€
     </span>
-  <form [formGroup]="cartForm">
+  <form [formGroup]="cartForm" class="flex flex-nowrap items-center">
     <p-inputNumber
       formControlName="quantity"
       [showButtons]="true" 

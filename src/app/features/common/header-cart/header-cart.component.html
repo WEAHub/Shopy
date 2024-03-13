@@ -19,11 +19,11 @@
     <app-loading-overlay [loading]="(cartLoading$ | async)!"></app-loading-overlay>
 
     @for(product of (cartProducts$ | async); track product) {
-      <app-header-cart-product
+      <app-cart-product
         (productDeleted)="deleteProduct(product)"
         (quantityChanged)="quantityChanged($event)"
         [cartProduct]="product"
-      ></app-header-cart-product>
+      ></app-cart-product>
     }
     @empty {
       <p>Cart is empty...</p>
