@@ -5,12 +5,13 @@
       <div class="grid col-span-2 gap-2">
         <input 
           pInputText
-          pKeyFilter="alpha" 
+          maxlength="30"
           class="w-full max-h-[4rem]" 
-          placeholder="Full Name" 
-          formControlName="fullName" 
+          placeholder="Card Holder" 
+          formControlName="cardHolder" 
+          [pKeyFilter]="blockNumbersOnly" 
         />
-        <app-input-validator [form]="payForm" controlPath="fullName"></app-input-validator>
+        <app-input-validator [form]="payForm" controlPath="cardHolder"></app-input-validator>
       </div>
       <div class="grid col-span-2 gap-2">
         <input 
@@ -48,6 +49,8 @@
         label="Pay!" 
         class="col-span-2"
         styleClass="w-full"
+        [disabled]="payForm.invalid"
+        (onClick)="doPayment()"
       ></p-button>
     </div>
   </form>

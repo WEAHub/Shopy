@@ -18,6 +18,7 @@ export interface UserAddress {
   long: number;
   province?: string;
   address?: string;
+  door?: string;
 }
 
 export interface UserTokens {

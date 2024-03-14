@@ -56,6 +56,7 @@ export class UserAddressComponent implements OnInit {
       number: ['', Validators.required],
       city: ['', Validators.required],
       zipcode: ['', Validators.required],
+      door: ['', Validators.required],
     });
 
     this.$user
@@ -93,6 +94,7 @@ export class UserAddressComponent implements OnInit {
         province: formData.province,
         lat: Number(formData.lat),
         long: Number(formData.lng),
+        door: formData.door,
       },
     };
     this.authFacade.updateUser(formData.id, userUpdate);

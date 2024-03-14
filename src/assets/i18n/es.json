@@ -8,7 +8,7 @@
     "matching": "Las contraseñas no coinciden",
     "cantMatch": "No pueden ser iguales",
     "luhn": "Numero de tarjeta invalido.",
-    "cardExpiration": "Numero de expiración invalido."
+    "cardExpiration": "Expiración invalida."
   },
   "words": {
     "username": "Nombre de usuario",

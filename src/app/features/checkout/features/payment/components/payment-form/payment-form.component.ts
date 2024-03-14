@@ -2,7 +2,7 @@ import { InputValidatorComponent } from '@/shared/components/input-validator/inp
 import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
 import CreditCardValidator from '@/shared/validators/credit-card.validator';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -25,8 +25,10 @@ import {
   styleUrl: './payment-form.component.scss',
 })
 export class PaymentFormComponent implements OnInit {
+  @Input() invoiceId!: number;
   payForm!: FormGroup;
 
+  blockNumbersOnly: RegExp = /[^0-9]/;
   // RECORDAR DESCOMENTAR EL GUARD checkoutGuard
   constructor(private fb: FormBuilder) {}
 
@@ -36,8 +38,14 @@ export class PaymentFormComponent implements OnInit {
 
   prepareForm(): void {
     this.payForm = this.fb.group({
-      invoiceId: [null, Validators.required],
-      fullName: ['', Validators.required],
+      invoiceId: [this.invoiceId, Validators.required],
+      cardHolder: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(30),
+        ]),
+      ],
       cardNumber: [
         '',
         Validators.compose([
@@ -58,5 +66,10 @@ export class PaymentFormComponent implements OnInit {
         Validators.compose([Validators.required, Validators.maxLength(4)]),
       ],
     });
+  }
+
+  doPayment(): void {
+    const formData = this.payForm.value;
+    console.log(formData);
   }
 }

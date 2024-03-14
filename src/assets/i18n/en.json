@@ -8,7 +8,7 @@
     "matching": "Passwords do not match",
     "cantMatch": "Can't be the same",
     "luhn": "Invalid card number",
-    "cardExpiration": "Card expiration invalid"
+    "cardExpiration": "Expiration invalid"
   },
   "words": {
     "username": "User name",

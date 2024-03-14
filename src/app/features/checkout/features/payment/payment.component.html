@@ -7,7 +7,7 @@
         <app-delivery-resume [delivery]="($delivery | async)!"></app-delivery-resume>
         <app-cart-resume [invoice]="($invoice | async)!"></app-cart-resume>
       </div>
-      <app-payment-form class="order-last md:order-none"></app-payment-form>
+      <app-payment-form [invoiceId]="($invoice | async)!.id!" class="order-last md:order-none"></app-payment-form>
     }
   </div>
 </div>
