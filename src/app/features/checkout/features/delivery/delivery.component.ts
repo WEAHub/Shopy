@@ -1,6 +1,6 @@
 import { AuthFacade } from '@/app/store/auth';
+import { CheckoutDeliveryFacade } from '@/app/store/checkout/facades/checkout-delivery.facade';
 import { AutocompletePlacesComponent } from '@/shared/components/autocomplete-places/autocomplete-places.component';
-import { BaseLayoutComponent } from '@/shared/components/base-layout/base-layout.component';
 import { InputValidatorComponent } from '@/shared/components/input-validator/input-validator.component';
 import { LoadingOverlayComponent } from '@/shared/components/loading-overlay/loading-overlay.component';
 import { AddressLocation } from '@/shared/interfaces/location/location';
@@ -14,6 +14,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 
 @Component({
@@ -37,7 +38,9 @@ export class DeliveryComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private deliveryFacade: CheckoutDeliveryFacade,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -72,5 +75,10 @@ export class DeliveryComponent implements OnInit {
 
   onAddressChange(address: AddressLocation): void {
     this.deliveryForm.patchValue(address);
+  }
+
+  saveDelivery(): void {
+    this.deliveryFacade.setDelivery(this.deliveryForm.value);
+    this.router.navigateByUrl('/checkout/payment');
   }
 }

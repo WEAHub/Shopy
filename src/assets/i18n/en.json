@@ -3,9 +3,12 @@
     "required": "This input is required",
     "email": "Enter a valid email",
     "minlength": "Characters minimum: {{requiredLength}}",
+    "maxlength": "Characters maximum: {{requiredLength}}",
     "passwordStrength": "Minimum 8 characters, including number, capital letter and special character.",
     "matching": "Passwords do not match",
-    "cantMatch": "Can't be the same"
+    "cantMatch": "Can't be the same",
+    "luhn": "Invalid card number",
+    "cardExpiration": "Card expiration invalid"
   },
   "words": {
     "username": "User name",

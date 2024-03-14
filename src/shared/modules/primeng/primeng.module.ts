@@ -88,9 +88,10 @@ import { CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
-
+import { KeyFilterModule } from 'primeng/keyfilter';
 @NgModule({
   exports: [
+    KeyFilterModule,
     AnimateOnScrollModule,
     AvatarModule,
     AccordionModule,

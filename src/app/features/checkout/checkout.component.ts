@@ -1,12 +1,11 @@
 import { BaseLayoutComponent } from '@/shared/components/base-layout/base-layout.component';
-import { Component, DestroyRef, ViewChild, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
 import { DirectivesModule } from '@/shared/directives/directives.module';
 import { filter, map, startWith } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Steps } from 'primeng/steps';
 
 @Component({
   selector: 'app-checkout',

@@ -1,17 +1,22 @@
 import { createSelector } from '@ngrx/store';
 import { getCheckoutFeature } from './get-feature-state';
 
-export const isLoading = createSelector(
+const getCheckoutFeatureStore = createSelector(
   getCheckoutFeature,
+  state => state.invoice
+);
+
+export const isLoading = createSelector(
+  getCheckoutFeatureStore,
   state => state.loading!
 );
 
 export const getInvoice = createSelector(
-  getCheckoutFeature,
+  getCheckoutFeatureStore,
   state => state.entity!
 );
 
 export const getError = createSelector(
-  getCheckoutFeature,
+  getCheckoutFeatureStore,
   state => state.error!
 );

@@ -8,9 +8,10 @@ import {
   onGetCheckoutError,
 } from '../actions/checkout.actions';
 
-export const initialCategoryState: EntityDataState<Invoice> = {};
+export type CheckoutDataState = EntityDataState<Invoice>;
+export const initialCategoryState: CheckoutDataState = {};
 
-export const checkoutReducer = createReducer<EntityDataState<Invoice>>(
+export const checkoutReducer = createReducer<CheckoutDataState>(
   { ...initialCategoryState },
   on(onInitCheckout, state => {
     return {

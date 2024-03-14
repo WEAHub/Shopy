@@ -32,7 +32,7 @@ export class CheckoutFacade {
     return this.store.select(getError);
   }
 
-  public getCheckout(): void {
+  public initInvoice(): void {
     this.store.dispatch(onInitCheckout());
   }
 }

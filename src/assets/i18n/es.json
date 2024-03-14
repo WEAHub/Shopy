@@ -3,9 +3,12 @@
     "required": "Esta entrada es necesaria",
     "email": "Introduzca un correo electrónico válido",
     "minlength": "Mínimo de caracteres: {{requiredLength}}",
+    "maxlength": "Máximo de caracteres: {{requiredLength}}",
     "passwordStrength": "Mínimo 8 caracteres, incluyendo número, mayúscula y carácter especial.",
     "matching": "Las contraseñas no coinciden",
-    "cantMatch": "No pueden ser iguales"
+    "cantMatch": "No pueden ser iguales",
+    "luhn": "Numero de tarjeta invalido.",
+    "cardExpiration": "Numero de expiración invalido."
   },
   "words": {
     "username": "Nombre de usuario",
