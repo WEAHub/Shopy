@@ -13,7 +13,7 @@ export const checkoutGuard: CanActivateFn = (route, state) => {
     map(
       delivery =>
         (!!delivery && !!Object.keys(delivery).length) ||
-        router.createUrlTree(['/checkout/delivery'])
+        router.createUrlTree(['/checkout'])
     )
   );
 };

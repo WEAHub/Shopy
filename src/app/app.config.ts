@@ -19,19 +19,23 @@ import {
 } from '@angular/common/http';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { authInterceptor } from '@shared/services/interceptors/http.interceptor';
+import { authInterceptor } from '@/shared/interceptors/http.interceptor';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslation } from './config/translate.config';
 import { inMemoryScrollingFeature } from './config/scroll.config';
 import { AppStoreModule } from './store';
 import { CryptoServiceModule } from '@/shared/services/crypto/crypto.module';
 import { environment } from '@/environments/environment.base';
+import { errorInterceptor } from '@/shared/interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, inMemoryScrollingFeature),
     provideAnimations(),
-    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([errorInterceptor, authInterceptor])
+    ),
     provideClientHydration(
       withHttpTransferCacheOptions({ includePostRequests: true })
     ),

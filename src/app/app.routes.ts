@@ -15,6 +15,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'offline',
+    loadComponent: () =>
+      import('./features/offline/offline.component').then(
+        m => m.OfflineComponent
+      ),
+  },
+  {
     path: 'products',
     loadChildren: () =>
       import('./features/products/products.routes').then(
