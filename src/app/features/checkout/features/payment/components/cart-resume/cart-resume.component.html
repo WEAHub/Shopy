@@ -1,16 +1,16 @@
 
-<h1 class="text-2xl mb-8 text-bold"><i class="lni lni-package mr-2"></i>Cart resume</h1>
+<h1 class="text-2xl mb-8 text-bold flex items-center"><i class="lni lni-cart mr-2"></i>Cart</h1>
 <div class="grid max-w-[50rem] gap-5 text-base">
   @for(product of invoice.products; track $index) {
     <div class="grid grid-cols-[min-content_auto_10rem] gap-5">
       <span class="font-semibold">x{{ product.quantity }}</span>
       <span>{{ product.name }}</span>
-      <span>{{ (product.modifiers?.discountPrice! || product.price) * product?.quantity! }}€</span>
+      <span class="font-semibold">{{ (product.modifiers?.discountPrice! || product.price) * product?.quantity! }}€</span>
     </div>
   }
   <p-divider></p-divider>
   <div class="flex gap-5 justify-center text-3xl">
-    <span class="font-semibold">Total:</span>
-    <span>{{ invoice.amount }}€</span>
+    <span class="font-semibold">Importe total:</span>
+    <span class="font-bold">{{ invoice.amount }}€</span>
   </div>
 </div>

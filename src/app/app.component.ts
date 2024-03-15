@@ -35,7 +35,6 @@ export class AppComponent {
   ) {
     this.authFacade.checkToken();
     this.initTranslations();
-    this.initCrypto();
   }
 
   async initCrypto() {}

@@ -9,10 +9,11 @@ import { checkoutFeatureReducer } from './reducers';
 import { checkoutFeatureFacades } from './facades';
 import { checkoutFeatureEffects } from './effects';
 import { CheckoutServiceModule } from '@/shared/services/checkout/checkout.service.module';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [],
-  providers: [...checkoutFeatureFacades],
+  providers: [...checkoutFeatureFacades, MessageService],
   imports: [
     CommonModule,
     CheckoutServiceModule,

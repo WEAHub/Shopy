@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   isLoading,
   getError,
   getInvoice,
-} from '../selectors/checkout.selectors';
+} from '../selectors/checkout-payment.selectors';
 import { Invoice } from '@/shared/interfaces/checkout/Invoice';
-import { onInitCheckout } from '../actions/checkout.actions';
+import { InvoicePayment } from '@/shared/interfaces/backend/checkout/CheckoutRequest';
+import { onPayInvoice } from '../actions/checkout-payment.actions';
 
 @Injectable()
-export class CheckoutFacade {
+export class CheckoutPaymentFacade {
   constructor(private store: Store) {}
 
   public isLoading$(): Observable<boolean> {
@@ -27,7 +27,7 @@ export class CheckoutFacade {
     return this.store.select(getError);
   }
 
-  public initInvoice(): void {
-    this.store.dispatch(onInitCheckout());
+  public initPayment(invoice: InvoicePayment): void {
+    this.store.dispatch(onPayInvoice({ invoice }));
   }
 }

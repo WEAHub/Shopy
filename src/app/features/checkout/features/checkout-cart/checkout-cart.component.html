@@ -30,7 +30,11 @@
         <span class="text-base text-[2rem]">Total</span>
         <span class="text-black font-bold text-[3rem]">{{ cartTotalPrice$ | async }}€</span>
       </div>
-      <p-button [routerLink]="['/checkout/delivery']" label="Next - Delivery"></p-button>
+      <p-button
+        [disabled]="(cartProducts$ | async)!.length === 0"
+        [routerLink]="['/checkout/delivery']" 
+        label="Next - Delivery"
+      ></p-button>
     </div>
   </div>
 </div>

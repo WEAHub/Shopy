@@ -1,5 +1,13 @@
-<h1 class="text-2xl mb-8 text-bold"><i class="lni lni-mastercard mr-2"></i>Payment</h1>
-<div class="grid min-w-[15rem] max-w-[50rem] gap-5 text-base">
+<h1 class="text-2xl mb-8 text-bold flex items-center"><i class="lni lni-mastercard mr-2"></i>Payment</h1>
+<div class="grid min-w-[15rem] max-w-[50rem] gap-5 text-base relative">
+  <app-loading-overlay [loading]="($paymentLoading | async)!"></app-loading-overlay>
+  <div class="rounded-lg border-[.1rem] border-[#dab200] p-3 text-sm bg-amber-100 flex gap-5 items-center">
+    <i class="lni lni-warning text-[#dab200] text-4xl"></i>
+    <span class="font-semibold text-[#5f4d00]">
+      Los datos de la tarjeta se encriptarán utilizando el algoritmo AES-256-CBC y se eliminarán una vez se procese el pago.<br/>
+      No se guardará ninguna información de la tarjeta en la base de datos.
+    </span>
+  </div>
   <form [formGroup]="payForm">
     <div class="grid grid-cols-2 gap-5">
       <div class="grid col-span-2 gap-2">
@@ -25,7 +33,8 @@
         <app-input-validator [form]="payForm" controlPath="cardNumber"></app-input-validator>
       </div>
       <div class="grid gap-2">
-        <p-inputMask 
+        <p-inputMask
+          styleClass="w-full"
           pKeyFilter="num" 
           mask="99/99" 
           placeholder="Card Expiration" 

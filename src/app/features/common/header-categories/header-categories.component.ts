@@ -14,6 +14,7 @@ import { Observable, filter, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { PipesModule } from '@shared/pipes';
+import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
 
 @Component({
   selector: 'app-header-categories',
@@ -24,6 +25,7 @@ import { PipesModule } from '@shared/pipes';
     RouterModule,
     TranslateModule,
     PipesModule,
+    PrimeNGModule,
   ],
   templateUrl: './header-categories.component.html',
   styleUrl: './header-categories.component.scss',

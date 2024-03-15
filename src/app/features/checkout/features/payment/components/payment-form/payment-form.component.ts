@@ -1,8 +1,17 @@
+import { CheckoutPaymentFacade } from '@/app/store/checkout';
 import { InputValidatorComponent } from '@/shared/components/input-validator/input-validator.component';
+import { LoadingOverlayComponent } from '@/shared/components/loading-overlay/loading-overlay.component';
 import { PrimeNGModule } from '@/shared/modules/primeng/primeng.module';
+import { CryptoService } from '@/shared/services/crypto/crypto.service';
 import CreditCardValidator from '@/shared/validators/credit-card.validator';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -20,17 +29,24 @@ import {
     CommonModule,
     InputValidatorComponent,
     PrimeNGModule,
+    LoadingOverlayComponent,
   ],
   templateUrl: './payment-form.component.html',
   styleUrl: './payment-form.component.scss',
 })
 export class PaymentFormComponent implements OnInit {
-  @Input() invoiceId!: number;
-  payForm!: FormGroup;
+  @Output() paymentDataSubmit = new EventEmitter<string>();
 
+  $paymentLoading = this.paymentFacade.isLoading$();
+
+  payForm!: FormGroup;
   blockNumbersOnly: RegExp = /[^0-9]/;
   // RECORDAR DESCOMENTAR EL GUARD checkoutGuard
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private cryptoService: CryptoService,
+    private paymentFacade: CheckoutPaymentFacade
+  ) {}
 
   ngOnInit(): void {
     this.prepareForm();
@@ -38,7 +54,6 @@ export class PaymentFormComponent implements OnInit {
 
   prepareForm(): void {
     this.payForm = this.fb.group({
-      invoiceId: [this.invoiceId, Validators.required],
       cardHolder: [
         '',
         Validators.compose([
@@ -68,8 +83,9 @@ export class PaymentFormComponent implements OnInit {
     });
   }
 
-  doPayment(): void {
-    const formData = this.payForm.value;
-    console.log(formData);
+  async doPayment(): Promise<void> {
+    const payFormJson = JSON.stringify(this.payForm.value);
+    const paymentData = await this.cryptoService.encryptData(payFormJson);
+    this.paymentDataSubmit.emit(paymentData);
   }
 }

@@ -6,20 +6,27 @@
     @if((hideCategories$ | async) === false) {
     <div class="header-categories hidden sm:block" *ngVar="(isLoading$ | async) as _loading">
       @if(_loading) {
-        <i class="lni lni-spinner-solid animate-spin"></i>
+        <div class="flex gap-10 mt-3">
+          <p-skeleton height="1.5rem" width="10rem"></p-skeleton>
+          <p-skeleton height="1.5rem" width="10rem"></p-skeleton>
+          <p-skeleton height="1.5rem" width="10rem"></p-skeleton>
+          <p-skeleton height="1.5rem" width="10rem"></p-skeleton>
+        </div>
       }
       @else {
         <div class="flex gap-10" *ngVar="(categories$ | async) as _categories">
-          
-        <div 
-          [routerLink]="['/products']"
-          class="header-categories__category"
- 
-        >
-          <span class="header-categories__category-title">
-            {{ 'words.all' | translate }}
-          </span>
-        </div>
+        
+        @if (!!_categories?.length) {
+
+          <div 
+            [routerLink]="['/products']"
+            class="header-categories__category"
+          >
+            <span class="header-categories__category-title">
+              {{ 'words.all' | translate }}
+            </span>
+          </div>
+        }
           @for(category of _categories; track $index) {
             <div 
               [routerLink]="['/products']"
@@ -31,9 +38,6 @@
                 {{ category.name | categoryPipe | translate }}
               </span>
             </div>
-          }
-          @empty {
-            <span>No categories...</span>
           }
         </div>
       }

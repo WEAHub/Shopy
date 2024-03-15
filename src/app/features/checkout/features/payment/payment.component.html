@@ -3,11 +3,15 @@
   <app-loading-overlay [loading]="($invoiceLoading | async)!"></app-loading-overlay>
   <div class="grid md:grid-cols-2 gap-20">
     @if(($invoiceLoading | async)! === false) {
-      <div class="grid gap-20">
+      <div class="grid gap-20 md:border-r md:border-[#e5e7eb]">
         <app-delivery-resume [delivery]="($delivery | async)!"></app-delivery-resume>
+        <p-divider></p-divider>
         <app-cart-resume [invoice]="($invoice | async)!"></app-cart-resume>
       </div>
-      <app-payment-form [invoiceId]="($invoice | async)!.id!" class="order-last md:order-none"></app-payment-form>
+      <app-payment-form 
+        (paymentDataSubmit)="onPaymentSubmit($event)" 
+        class="order-last md:order-none"
+      ></app-payment-form>
     }
   </div>
 </div>

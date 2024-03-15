@@ -21,6 +21,18 @@ export function parseMessage<T>(
           }
           subscriber.next(value?.data);
         },
+        error(error) {
+          if (msgService) {
+            const _error = {
+              status: error?.error?.status ?? error?.error?.statusCode,
+              message: error?.error?.message,
+            };
+
+            const message: Message = generateMessage<T>(title, _error);
+            msgService.add(message);
+          }
+          subscriber.error(error);
+        },
       });
     });
   };
@@ -36,6 +48,8 @@ function generateMessage<T>(
   const severity = {
       [HttpStatusCode.Ok]: 'success',
       [HttpStatusCode.Forbidden]: 'error',
+      [HttpStatusCode.InternalServerError]: 'error',
+      [HttpStatusCode.BadRequest]: 'error',
     }[status] ?? 'success';
 
   return {

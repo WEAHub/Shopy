@@ -58,9 +58,10 @@ export class CheckoutComponent {
   }
 
   refreshSteps(): void {
+    const lastStep = this.steps.length - 1;
     this.steps = this.steps.map((step, stepIndex) => ({
       ...step,
-      disabled: this.step < stepIndex,
+      disabled: this.step === lastStep && this.step < stepIndex,
     }));
   }
 
